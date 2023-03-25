@@ -1,0 +1,67 @@
+<!-- Modal -->
+{% load static %}
+<div class="modal fade" id="add_branches" tabindex="-1" aria-labelledby="add_branchesLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="plan-title" id="exampleModalLabel" style="margin-bottom: 1rem">Add Branches</p>
+                <div class="row">
+                    <div class="col-12">
+                        <form method="post" action="/add-branch/">
+                            {% csrf_token %}
+                            {#Form#}
+                            {#Name and address#}
+                            <div style="display: flex; justify-content: space-between">
+                                <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                                    <input type="text" class="form-control " id="new_branch_name" name="new_branch_name"
+                                           placeholder="Branch Name" required>
+                                    <label class="floating-input-placeholder" for="new_branch_name">Branch Name</label>
+                                </div>
+                                <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                                    <input type="text" class="form-control " id="new_branch_address" name="new_branch_title"
+                                           placeholder="Title" required>
+                                    <label class="floating-input-placeholder" for="new_branch_address">Titles</label>
+                                </div>
+                            </div>
+
+
+                            <div class="form-floating input-control mt-3" id="input-control">
+                                    <input type="text" class="form-control " id="new_branch_address" name="new_branch_address"
+                                           placeholder="Address" required>
+                                    <label class="floating-input-placeholder" for="new_branch_address">Address</label>
+                                </div>
+
+
+
+                            {#email and phone#}
+                            <div style="display: flex; justify-content: space-between" class="mt-3">
+                                <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                                    <input type="email" class="form-control " id="new_branch_email" name="new_branch_email"
+                                           placeholder="Email" required>
+                                    <label class="floating-input-placeholder" for="new_branch_email">Email</label>
+                                </div>
+                                <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                                    <input type="text" class="form-control" id="new_branch_phone" name="new_branch_phone"
+                                           placeholder="Phone No." pattern="[0-9]{11,11}" required>
+                                    <label class="floating-input-placeholder" for="new_branch_phone">Phone No.</label>
+                                </div>
+                            </div>
+                            {#Manager Email#}
+{#                            <div class="form-floating input-control mt-3" id="input-control">#}
+{#                                <input type="text" class="form-control " id="new_branch_mEmail" name="new_branch_mEmail"#}
+{#                                       placeholder="Manager email" required>#}
+{#                                <label class="floating-input-placeholder" for="new_branch_mEmail">Manager email</label>#}
+{#                            </div>#}
+                            <button type="submit" class="btn mmm-round-btn float-end mt-3" style="width: unset;">Add</button>
+                            {#Form end#}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {#            <div class="modal-footer">#}
+            {#                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
+            {#               <button type="button" class="btn btn-primary">Save changes</button>#}
+            {#            </div>#}
+        </div>
+    </div>
+</div>

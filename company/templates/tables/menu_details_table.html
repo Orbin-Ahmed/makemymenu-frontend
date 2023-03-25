@@ -1,0 +1,36 @@
+{% load static %}
+<table class="table table-striped table-hover table align-middle item-table mb-5">
+    <thead>
+    <tr>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"><span class="body-medium text-muted">Menu Name</span></th>
+        <th scope="col"><span class="body-medium text-muted">Description</span></th>
+        <th scope="col"><span class="body-medium text-muted">Status</span></th>
+        <th scope="col"><span class="body-medium text-muted" style="white-space: nowrap">Price ({{ localization_info.currency }})</span></th>
+        <th scope="col"><span class="body-medium text-muted">Last Updated</span></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for data in  menu_info.item %}
+        <tr>
+            <th scope="row"><input class="form-check-input" type="checkbox" value="{{ data.id }}"
+                                   name="menu_item_delete_button_checkbox"></th>
+            <td><img style="width: 25px;margin-right: 0.5rem" src="
+
+                    {% if data.image %}{{ data.image }}{% else %}{% static 'images/foodPlaceholder.png' %}{% endif %}"
+                     alt=""></td>
+            <td class="branch_settings" style="white-space: nowrap;">
+                <span class="body-large">{{ data.name }}</span>
+            </td>
+            <td class="body-large">{{ data.description }}</td>
+            <td class="body-large">{% if data.status == "Available" %}
+                Available{% elif data.status == "Not Available" %}Not
+                Available{% elif data.status == "Upcoming" %}Upcoming{% else %}Available{% endif %}</td>
+            <td class="body-large">
+                {% if data.discount %}{{ data.discount }}{% else %}{{ data.price }}{% endif %}</td>
+            <td style="white-space: nowrap;">{{ data.updated_at }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

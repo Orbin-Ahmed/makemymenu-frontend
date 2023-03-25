@@ -1,0 +1,43 @@
+{% load static %}
+{#item list view 1#}
+<div id="item_container" style="padding: 0">
+    {% for data in menu_details.item_category %}
+        {% for item in data.items %}
+            <a style="all: unset;cursor: pointer" href="/menu/item-details/{{ item.id }}/{{ menu_id }}/{{ menu_branch_id }}/">
+                <div class="row mobile-item-card p-0 item_class">
+                    <div class="col-3 p-0" style="position: relative">
+                        <img src="
+                            {% if item.image %}https://makemymenu.app{{ item.image }}{% else %}{% static 'images/foodPlaceholder.png' %}{% endif %}"
+                             alt=""
+                             style="border-radius:10px 0 0 10px;width: 100%;height: 100%;" class="img-fluid">
+
+                        {% if item.video_link != "" and item.video_link %}
+                            <a data-bs-target="#item_list_video" data-bs-toggle="modal"
+                               onclick="insert_item_video_link('{{ item.video_link }}','iframe_video_link_item_list');">
+                                <img width="100%" class="video-play-button img-fluid" src="{% static 'images/icons/play-button.svg' %}" alt="" style="border-radius:20px 0 0 20px">
+                            </a>
+                        {% endif %}
+                    </div>
+                    <input class="items_category" value="{{ item.category }}" hidden>
+                    <div class="col-8 d-grid text-start p-2">
+                        <div class="phone-menu-title">
+                            <p class="body-large" style="color: var(--title)">{{ item.name }}</p>
+                            <div class="d-flex align-items-center my-3">
+                                {% if item.discount %}
+                                    <p style="text-decoration: line-through;font-size: 10px;margin-right: 5px;color:var(--price-cross)"
+                                       class="text-end price-small">{{ localization_info.currency }} {{ item.price }}</p>
+                                {% endif %}
+                                <p class="text-end price-large">{{ localization_info.currency }}
+                                    {% if item.discount %}{{ item.discount }}{% else %}{{ item.price }}{% endif %}</p>
+                            </div>
+                            <p class="mobile-body-dark max-lines description-color">
+                                {% if item.description == 'None' or not item.description %}{% else %}
+                                    {{ item.description }}{% endif %}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% include 'user-view/mobile-menu-view/modal/video_modal.html' %}
+        {% endfor %}
+    {% endfor %}
+</div>

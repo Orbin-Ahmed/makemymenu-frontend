@@ -1,0 +1,194 @@
+{% load static %}
+<div class="col-lg-6 col-md-12 items-details" id="add_menu">
+    <div class="row mb-4">
+        <div class="col-lg-4 col-md-12">
+            <P class="menu-header-title" style="margin-bottom: 0;">
+                <a href="/dashboard/" style="all: unset;cursor: pointer;">
+                    <img src="{% static 'images/icons/arrow_choto.svg' %}" alt="">
+                </a>
+                <span class="headline_medium" style="padding: 0.5rem;">Item Details</span>
+            </P>
+        </div>
+    </div>
+    {#Form#}
+    <form method="post" action="/items/{{ item_list.id }}/{{ bid }}/" enctype="multipart/form-data">
+        {% csrf_token %}
+        {#Row 1#}
+        <div style="display: flex; justify-content: space-between">
+            <div class="form-floating input-control" id="input-control" style="width: 32%;">
+                <input type="text" class="form-control " id="item_name_update" name="item_name_update"
+                       value="{{ item_list.name }}"
+                       placeholder="Item Name" required>
+                <label class="floating-input-placeholder" for="item_name_update">Item Name</label>
+                <div class="error"></div>
+            </div>
+            <div class="form-floating input-control" id="input-control" style="width: 32%;">
+                <select type="text" class="form-select" id="item_status" name="item_status"
+                        required>
+                    {% if item_list.status == "Available" %}
+                        <option value="Available" selected>Available</option>
+                        <option value="Not Available">Not Available</option>
+                        <option value="Upcoming">Upcoming</option>
+                    {% elif item_list.status == "Not Available" %}
+                        <option value="Not Available" selected>Not Available</option>
+                        <option value="Available">Available</option>
+                        <option value="Upcoming">Upcoming</option>
+                    {% elif item_list.status == None %}
+                        <option value="Available" selected>Available</option>
+                        <option value="Not Available">Not Available</option>
+                        <option value="Upcoming">Upcoming</option>
+                    {% else %}
+                        <option value="Upcoming" selected>Upcoming</option>
+                        <option value="Available">Available</option>
+                        <option value="Not Available">Not Available</option>
+                    {% endif %}
+                </select>
+                <label class="floating-input-placeholder" for="Status">Status</label>
+                <div class="error"></div>
+            </div>
+            <div class="form-floating input-control" id="input-control" style="width: 32%;">
+                <input type="text" class="form-control" id="item_category_update" name="item_category_update"
+                       value="{{ item_list.category }}"
+                       placeholder="Category" required>
+                <label class="floating-input-placeholder" for="item_category_update">Category</label>
+                <div class="error"></div>
+            </div>
+        </div>
+        {#Row 2#}
+        <div class="d-flex justify-content-space-between">
+            <div class="form-floating input-control item-details-price" id="input-control"
+                 style="{% if item_list.discount %}width: 79%;{% else %}width: 86%;{% endif %}">
+                <input type="text" class="form-control " id="item_price_update" name="item_price_update"
+                       value="{{ item_list.price }}"
+                       placeholder="Enter Price" required>
+                <label class="floating-input-placeholder" for="item_price_update">Enter Price</label>
+            </div>
+            <div class="text-center d-flex justify-content-space-between m-auto discount-span"
+                 style="{% if item_list.discount %}width: 20%;{% else %}width: 10%;{% endif %}">
+                <span class="login-sub-text m-auto"><span>
+                    {% if item_list.discount %}
+                        {{ localization_info.currency }}
+                    <del>{{ item_list.price }}</del>
+                    {% else %}{% endif %}</span></span>
+                {% if item_list.discount %}
+                    <span style="border-left: 1px solid var(--border-color)"></span>
+                {% endif %}
+                <span class="price headline_medium"
+                      style="margin-left: 0.6rem;white-space: nowrap;">{{ localization_info.currency }} <span>{% if item_list.discount %}
+                    {{ item_list.discount }}{% else %}{{ item_list.price }}{% endif %}</span></span>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between" class="mt-3">
+            <div class="form-floating input-control" id="input-control" style="width: 100%;">
+                <input type="text" class="form-control " id="item_rate_update" name="item_rate_update"
+                       placeholder="Enter your discount price" value="{{ item_list.discount }}">
+                <label class="floating-input-placeholder" for="item_rate_update">Enter your discount price</label>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between" class="mt-3">
+            <div class="form-floating input-control" id="input-control" style="width: 100%;">
+                <input type="text" class="form-control " id="video_link_update" name="video_link_update"
+                       placeholder="Youtube Video link" value="{% if item_list.video_link %}{{ item_list.video_link }}{% endif %}">
+                <label class="floating-input-placeholder" for="video_link_update">Youtube Video link</label>
+            </div>
+        </div>
+
+        {#        Row 4#}
+        <div style="display: flex; justify-content: space-between">
+            <div class="form-floating input-control mt-3" id="input-control" style="width: 100%;">
+                <textarea type="text" class="form-control " id="item_description_update" name="item_description_update"
+                          placeholder="Description" style="height: 7rem">{{ item_list.description }}</textarea>
+                <label class="floating-input-placeholder" for="item_description_update">Description</label>
+            </div>
+        </div>
+        <input type="file" id="food_image_upload" style="display:none" accept=".png, .jpg, .jpeg"
+               name="food_image_upload_update">
+        <button type="submit" class="btn mmm-round-btn body-large float-end mt-3" style="width: unset">Submit</button>
+    </form>
+</div>
+{#Item image#}
+<div class="col-lg-4 col-md-12">
+    <div class="row text-center">
+        <P class="menu-header-title headline_medium" style="margin-top: 9rem;">Item Image</P>`
+    </div>
+    <div class="row d-flex justify-content-center text-center">
+        <div class="col-10 mb-3">
+            <img id="food_image_preview" src="
+                    {% if item_list.image %}{{ item_list.image }}{% else %}{% static 'images/foodPlaceholder.png' %}{% endif %}"
+                 alt="" width="225px">
+        </div>
+        <div class="col-lg-6 col-md-12 mb-4">
+            <button id="reset_button" class="btn mmm-round-btn body-large float-start" onclick="location.href='/item-image-remove/{{ item_list.id }}/{{ bid }}/'"
+                    style="transform: none;width: unset; background-color: var(--white)!important;color: var(--mmm-primary)!important;border:1px solid var(--mmm-primary);margin: 0 0.3rem;">
+                Remove
+            </button>
+            <button class="btn mmm-round-btn float-end body-large"
+                    style="transform: none;margin: 0 0.3rem;width: unset;"
+                    onclick="document.getElementById('food_image_upload').click()">Replace
+            </button>
+        </div>
+    </div>
+</div>
+
+
+{#Offcanvas#}
+<div class="offcanvas offcanvas-end" tabindex="-1" id="sides_canvas" aria-labelledby="sides_canvasLabel"
+     data-bs-scroll="true">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Sides List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="row d-flex align-items-baseline">
+            <div class="col-3">
+                <img style="margin-right: 0.5rem;" src="{% static 'images/rice.svg' %}" alt="">
+            </div>
+            <div class="col-4">
+                <p>Pad Thai</p>
+            </div>
+            <div class="col-5">
+                <input class="form-check-input float-end" type="checkbox" value="" id="item1">
+            </div>
+        </div>
+        <p class="mmm-border-bottom"></p>
+        <div class="row d-flex align-items-baseline">
+            <div class="col-3">
+                <img style="margin-right: 0.5rem;" src="{% static 'images/rice.svg' %}" alt="">
+            </div>
+            <div class="col-4">
+                <p>Pad Thai</p>
+            </div>
+            <div class="col-5">
+                <input class="form-check-input float-end" type="checkbox" value="" id="item1">
+            </div>
+        </div>
+        <p class="mmm-border-bottom"></p>
+        <div class="row d-flex align-items-baseline">
+            <div class="col-3">
+                <img style="margin-right: 0.5rem;" src="{% static 'images/rice.svg' %}" alt="">
+            </div>
+            <div class="col-4">
+                <p>Pad Thai</p>
+            </div>
+            <div class="col-5">
+                <input class="form-check-input float-end" type="checkbox" value="" id="item1">
+            </div>
+        </div>
+        <p class="mmm-border-bottom"></p>
+        <div class="row d-flex align-items-baseline">
+            <div class="col-3">
+                <img style="margin-right: 0.5rem;" src="{% static 'images/rice.svg' %}" alt="">
+            </div>
+            <div class="col-4">
+                <p>Pad Thai</p>
+            </div>
+            <div class="col-5">
+                <input class="form-check-input float-end" type="checkbox" value="" id="item1">
+            </div>
+        </div>
+        <p class="mmm-border-bottom"></p>
+        <button class="mmm-tertiary-btn float-end" style="padding: 0.5rem 1.5rem;background-color: var(--white);">Add
+        </button>
+    </div>
+</div>

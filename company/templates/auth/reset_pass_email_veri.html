@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reset</title>
+    {% include 'root/css.html' %}
+</head>
+<body>
+<div class="container-fluid">
+    <div class="sign-in-icon">
+        <a href="/dashboard/"><img src="{% static 'images/icons/Logo1.svg' %}" alt="logo"></a>
+    </div>
+    <div class="row d-flex justify-content-center text-center">
+{#        <P style="color: red">{{ error }}</P>#}
+        <div class="col-md-4">
+            {#    Form#}
+            <form method="post" action="/reset-pass-email/">
+                {% csrf_token %}
+                <p class="display-large mb-5">Please enter your registered email</p>
+
+                <div class="form-floating input-control" id="input-control">
+                    <input type="email" class="form-control " id="reset-pass-email-verification" name="reset-pass-email-verification"
+                           placeholder="Enter Your email" required>
+                    <label class="floating-input-placeholder" for="reset-pass-email-verification">Enter your email</label>
+                    <div class="error"></div>
+                </div>
+
+                <button type="submit" class="btn mmm-primary-btn mb-3" id="reset_pass_email_submit"
+                        data-bs-target="#exampleModalToggle" data-bs-toggle="modal" disabled><span class="body-large">Continue</span>
+                </button>
+                <p class="login-sub-text body-medium">Remember your password?
+                    <a href="/sign-in/" style="text-decoration: none;"><span class="body-medium"
+                            style="color: var(--mmm-primary);">Return to Login</span></a>
+                </p>
+            </form>
+
+
+            <!-- modal content -->
+
+            <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+                 tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-footer justify-content-center">
+                            <p class="mb-4">An email has been sent to your registered mail</p>
+                            <button class="btn reset-pass-modal-btn" data-bs-target="#exampleModalToggle2"
+                                    data-bs-toggle="modal">Okay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+{% include 'root/js.html' %}
+<script>
+    // Check if the parameter is present in the URL
+    if (window.location.search.indexOf('error=') > -1) {
+        // Remove the parameter from the URL
+        let url = window.location.href.split('?')[0];
+        window.history.replaceState({}, '', url);
+    }
+</script>
+</body>
+</html>

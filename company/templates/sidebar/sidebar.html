@@ -1,0 +1,236 @@
+{% load static %}
+
+
+<div class="mmm-sidebar">
+    <div style="margin-left: -0.7rem;">
+        <p class="company-preview-title headline_medium">
+            <img style="width: 25px;border-radius: 50%;height: 25px" src="
+
+
+                    {% if company_info.image %}{{ company_info.image }}{% else %}{% static 'images/imgplaceholder.svg' %}{% endif %}">
+            {{ company_info.name }}
+        </p>
+        <p class="body-medium d-flex align-items-center" style="color: var(--black)"><img style="margin-right: 0.5rem"
+                                                                                          width="24" height="24"
+                                                                                          src="{% static 'images/icons/location_choto.svg' %}"
+                                                                                          alt="">{{ branch_info.address }}
+        </p>
+        <p class="body-medium d-flex align-items-center" style="color: var(--black)"><img style="margin-right: 0.5rem"
+                                                                                          width="24" height="24"
+                                                                                          src="{% static 'images/icons/call_choto.svg' %}"
+                                                                                          alt="">{{ branch_info.phone }}
+        </p>
+        <p class="body-medium d-flex align-items-center" style="color: var(--black)"><img style="margin-right: 0.5rem"
+                                                                                          width="24" height="24"
+                                                                                          src="{% static 'images/icons/mail_choto.svg' %}"
+                                                                                          alt="">{{ branch_info.email }}
+        </p>
+    </div>
+    <div class="sidebar-company-section"></div>
+    <div style="margin-left: -0.7rem;">
+        <img width="24" height="24" src="{% static '/images/icons/touch_app_choto.svg' %}" alt="">
+        <button class="btn mt-2 mb-2 tour label-large sidebar-color " id="start-tour">Take a tour</button>
+    </div>
+    <div class="sidebar-company-section"></div>
+    <div>
+        <ul class="list-unstyled ps-0" style="margin-left: -1.5rem ;position: relative">
+
+
+            <li class="mb-1 mmm-dropdown-item" data-intro="Dashboard - Analytics" style="position: relative">
+                <div class="side-nigga-toggle" id="side-nigga-toggle"></div>
+                <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_dashboard"
+                        onclick="toggle_left_pointer(0);toggle_menu(this.id);">
+                    <img style="margin-right: 0.5rem" width="24" height="24"
+                         src="{% static 'images/icons/dash_choto.svg' %}" alt="">
+                    <span class="label-large sidebar-color">Dashboard</span>
+                </button>
+            </li>
+
+            <li class="mb-1 mmm-dropdown-item" data-intro="Item - Individual dish" style="position: relative">
+                <div class="side-nigga-toggle hidden" id="side-nigga-toggle"></div>
+                <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_items"
+                        onclick="toggle_left_pointer(1);toggle_menu(this.id);">
+                    <img style="margin-right: 0.5rem" width="24" height="24"
+                         src="{% static 'images/icons/category_choto.svg' %}" alt="">
+                    <span class="label-large sidebar-color">Item</span>
+                </button>
+            </li>
+
+            <li class="mb-1 mmm-dropdown-item" data-intro="Group (Combo) - Set meal deal"
+                style="position: relative">
+                <div class="side-nigga-toggle hidden" id="side-nigga-toggle"></div>
+                <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_combo"
+                        onclick="toggle_left_pointer(2);toggle_menu(this.id);">
+                    <img style="margin-right: 0.5rem" width="24" height="24"
+                         src="{% static 'images/icons/group_choto.svg' %}" alt="">
+                    <span class="label-large sidebar-color">Group</span>
+                </button>
+            </li>
+
+            <li class="mb-1 mmm-dropdown-item" data-intro="Menu - List of choices" style="position: relative">
+                <div class="side-nigga-toggle hidden" id="side-nigga-toggle"></div>
+                <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_main"
+                        onclick="toggle_left_pointer(3);toggle_menu(this.id);">
+                    <img style="margin-right: 0.5rem" width="24" height="24"
+                         src="{% static 'images/icons/menu_choto.svg' %}" alt="">
+                    <span class="label-large sidebar-color">Menu</span>
+                </button>
+            </li>
+
+            <li class="mb-1 mmm-dropdown-item" data-intro="QR CODES - Manage QR Codes" style="position: relative">
+                <div class="side-nigga-toggle hidden" id="side-nigga-toggle"></div>
+                <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_qr"
+                        onclick="toggle_left_pointer(4);toggle_menu(this.id);">
+                    <img style="margin-right: 0.5rem" width="24" height="24"
+                         src="{% static 'images/icons/qr_choto.svg' %}" alt="">
+                    <span class="label-large sidebar-color">QR-Code</span>
+                </button>
+            </li>
+
+            {#                <li class="mb-1 mmm-dropdown-item" style="position: relative" data-intro="Lets create a menu">#}
+            {#                    <div id="side-nigga-toggle" class="side-nigga-toggle hidden"></div>#}
+            {#                    <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_main" onclick="toggle_left_pointer(1);toggle_menu(this.id);">#}
+            {#                        <img style="margin-right: 0.5rem" width="30" height="30" src="{% static 'images/icons/menu.svg' %}" alt="">#}
+            {#                        Menu#}
+            {#                    </button>#}
+            {#                    <div id="home-collapse">#}
+            {#                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small mother">#}
+            {#                            <li data-intro="Start with the best! Choose your items first."><a id="toggle_items"#}
+            {#                                                                                              style="text-decoration: none;cursor: pointer;"#}
+            {#                                                                                              onclick="toggle_menu(this.id);toggle_left_pointer(1)"#}
+            {#                                                                                              class="rounded">Items</a>#}
+            {#                            </li>#}
+            {#                            <li data-intro="Get more for your money with our tasty combo options - choose your perfect pairings now!">#}
+            {#                                <a id="toggle_combo" style="text-decoration: none;cursor: pointer;"#}
+            {#                                   onclick="toggle_menu(this.id);toggle_left_pointer(1)" class="rounded">Combo</a></li>#}
+            {#                        </ul>#}
+            {#                    </div>#}
+            {#                </li>#}
+
+            <li class="mb-1 mmm-dropdown-item"
+                style="position: relative; padding: 1rem;">
+                <span class="label-light sidebar-color">Business</span>
+                <div class="sidebar-company-section" style="margin-left: 0"></div>
+            </li>
+            <li class="mb-1 mmm-dropdown-item" style="position: relative"
+                data-intro=" COMPANY - Company Profile Information">
+                <div class="side-nigga-toggle hidden" id="side-nigga-toggle"></div>
+                <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_company"
+                        onclick="toggle_menu(this.id); toggle_left_pointer(5)">
+                    <img style="margin-right: 0.5rem" width="24" height="24"
+                         src="{% static 'images/icons/company_choto.svg' %}" alt="">
+                    <span class="label-large sidebar-color">Company</span>
+                </button>
+
+                {#                    <div id="company-collapse">#}
+                {#                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small mother">#}
+                {#                            <li data-intro="Create a branch"><a id="toggle_branches"#}
+                {#                                                                style="text-decoration: none;cursor: pointer;"#}
+                {#                                                                onclick="toggle_menu(this.id);toggle_left_pointer(4)"#}
+                {#                                                                class="rounded">Branches</a></li>#}
+                {#                        </ul>#}
+                {#                    </div>#}
+            </li>
+
+            <li class="mb-1 mmm-dropdown-item" data-intro="PROFILE - Personal details overview."
+                style="position: relative">
+                <div id="side-nigga-toggle" class="side-nigga-toggle hidden"></div>
+                <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_profile"
+                        onclick="toggle_left_pointer(6);toggle_menu(this.id);">
+                    <img style="margin-right: 0.5rem" width="24" height="24"
+                         src="{% static 'images/icons/person_choto.svg' %}" alt="">
+                    <span class="label-large sidebar-color">Profile</span>
+                </button>
+            </li>
+            <li class="mb-1 mmm-dropdown-item"
+                style="position: relative; padding: 1rem;">
+                <span class="label-light sidebar-color">Essentials</span>
+                <div class="sidebar-company-section" style="margin-left: 0"></div>
+            </li>
+
+            {#                <li class="mb-1 mmm-dropdown-item" data-intro="PACKAGES - Manage Subscription Packages" style="position: relative">#}
+            {#                    <div id="side-nigga-toggle" class="side-nigga-toggle hidden"></div>#}
+            {#                    <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_packages"#}
+            {#                            onclick="toggle_left_pointer(7);toggle_menu(this.id);">#}
+            {#                        <img style="margin-right: 0.5rem" width="24" height="24"#}
+            {#                             src="{% static 'images/icons/package.svg' %}" alt="">#}
+            {#                        Packages#}
+            {#                    </button>#}
+            {#                </li>#}
+
+            <li class="mb-1 mmm-dropdown-item" data-intro="SETTINGS - Account and App Settings"
+                style="position: relative">
+                <div id="side-nigga-toggle" class="side-nigga-toggle hidden"></div>
+                <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_settings"
+                        onclick="toggle_left_pointer(7);toggle_menu(this.id);">
+                    <img style="margin-right: 0.5rem" width="24" height="24"
+                         src="{% static 'images/icons/settings_choto.svg' %}" alt="">
+                    <span class="label-large sidebar-color">Settings</span>
+                </button>
+            </li>
+            <li class="mb-1 mmm-dropdown-item"
+                style="position: relative; padding: 1rem;">
+                <span class="label-light sidebar-color">Help</span>
+                <div class="sidebar-company-section" style="margin-left: 0"></div>
+            </li>
+            <li class="mb-1 mmm-dropdown-item"
+                data-intro="ABOUT US - About Company Information"
+                style="position: relative">
+                <div id="side-nigga-toggle" class="side-nigga-toggle hidden"></div>
+                <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_about_us"
+                        onclick="toggle_left_pointer(8);toggle_menu(this.id);">
+                    <img style="margin-right: 0.5rem" width="24" height="24"
+                         src="{% static 'images/icons/aboutus_choto.svg' %}" alt="">
+                    <span class="label-large sidebar-color">About Us</span>
+                </button>
+            </li>
+
+            <li class="mb-1 mmm-dropdown-item"
+                data-intro="FAQ - Frequently Asked Questions"
+                style="position: relative">
+                <div id="side-nigga-toggle" class="side-nigga-toggle hidden"></div>
+                <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_mmm_faq"
+                        onclick="toggle_left_pointer(9);toggle_menu(this.id);">
+                    <img style="margin-right: 0.5rem" width="24" height="24"
+                         src="{% static 'images/icons/quiz_choto.svg' %}" alt="">
+                    <span class="label-large sidebar-color">FAQ</span>
+                </button>
+            </li>
+
+            <li class="mb-1 mmm-dropdown-item"
+                data-intro="TERMS - Terms and Conditions Policy"
+                style="position: relative">
+                <div id="side-nigga-toggle" class="side-nigga-toggle hidden"></div>
+                <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_terms_condition"
+                        onclick="toggle_left_pointer(10);toggle_menu(this.id);">
+                    <img style="margin-right: 0.5rem" width="24" height="24"
+                         src="{% static 'images/icons/terms_choto.svg' %}" alt="">
+                    <span class="label-large sidebar-color">Terms & Conditions</span>
+                </button>
+            </li>
+
+            <li class="mb-1 mmm-dropdown-item"
+                data-intro="PRIVACY - Privacy Policy Statement"
+                style="position: relative">
+                <div id="side-nigga-toggle" class="side-nigga-toggle hidden"></div>
+                <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_privacy_policy"
+                        onclick="toggle_left_pointer(11);toggle_menu(this.id);">
+                    <img style="margin-right: 0.5rem" width="24" height="24"
+                         src="{% static 'images/icons/privacy_choto.svg' %}" alt="">
+                    <span class="label-large sidebar-color">Privacy Policy</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+    <span class="label-light sidebar-color">Warning</span>
+    <div class="sidebar-company-section" style="margin-left: 0"></div>
+    <div class="row">
+        <div class="col-5" style="padding:0;">
+            <img width="30" height="30" src="{% static '/images/icons/logout_choto.svg' %}">
+            <a style="all: unset;" href="/logout/">
+                <button class="btn mt-2 mb-2 logout label-large sidebar-color " id="start-tour">Logout</button>
+            </a>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,135 @@
+
+
+{% load static %}
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="create_menu_canvas" aria-labelledby="offcanvasRightLabel"
+     data-bs-scroll="true">
+
+    <div class="offcanvas-header">
+        <p class="offcanvas-title headline_medium" id="offcanvasRightLabel"
+           style="margin-top: 0;color: var(--primary-text-color);">Add Menu</p>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body">
+        <form method="post" action="/create-menu/" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-floating input-control mb-3" id="input-control">
+                <input type="text" class="form-control " id="menu_name" name="menu_name"
+                       placeholder="Menu name" required>
+                <label class="floating-input-placeholder" for="menu_name">Menu name</label>
+            </div>
+
+            <div class="form-floating input-control mb-3" id="input-control">
+                <input type="file" class="form-control" id="menu_image" name="menu_image"
+                       placeholder="Choose image">
+                <label class="floating-input-placeholder" for="menu_image">Choose image</label>
+            </div>
+
+            <div class="form-floating input-control mb-3" id="input-control">
+            <textarea type="text" class="form-control " id="menu_description" name="menu_description"
+                      placeholder="Description" style="height: 5rem"></textarea>
+                <label class="floating-input-placeholder" for="menu_description">Description</label>
+            </div>
+            {#        #}
+            {#        Item start#}
+            {#        #}
+            <div class="row d-flex align-items-baseline justify-content-evenly items_row">
+                <div class="col-6 items_name">
+                    <p class="sides-value mt-3 title-large">Items</p>
+                </div>
+                <div class="col-5">
+                    <input onclick="select_all('menu_items_checkbox', 'select_all_menu_item');item_combo_add_button(true);"
+                           class="form-check-input checkbox-item float-end"
+                           type="checkbox" id="select_all_menu_item">
+                </div>
+            </div>
+            <div class="form-floating input-control mb-4" id="input-control">
+                <input type="text" class="form-control " id="search_item_menu_canvas" name="search_item_menu_canvas"
+                       placeholder="Search">
+                <label class="floating-input-placeholder" for="search_item_menu_canvas">Search</label>
+            </div>
+            <div style="max-height: 20rem;overflow-y: auto;overflow-x: clip;" id="item_menu_list_container">
+                {% if item_list|length == 0 %}
+                    <p class="body-large" style="color: #B00020">You do not have any item, Please add some item in the
+                        item
+                        tab.</p> {% endif %}
+                {% for data in item_list %}
+                    <div class="row d-flex align-items-baseline items_row">
+                        <div class="col-2">
+                            <img style="margin-right: 0.5rem;width: 25px;" src="
+
+
+
+                                    {% if data.image %}{{ data.image }}{% else %}{% static 'images/foodPlaceholder.png' %}{% endif %}"
+                                 alt="">
+                        </div>
+                        <div class="col-8 items_name">
+                            <p>{{ data.name }}</p>
+                        </div>
+                        <div class="col-2">
+                            <input style="margin-right: 0.5rem;" onclick="item_combo_add_button(true)"
+                                   class="form-check-input float-end"
+                                   type="checkbox"
+                                   value="{{ data.id }}" id="menu_item_checkbox_{{ data.id }}"
+                                   name="menu_items_checkbox">
+                        </div>
+                        <p class="mmm-border-bottom"></p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {#        #}
+            {#        Combo start#}
+            {#        #}
+            <div class="row d-flex align-items-baseline justify-content-evenly items_row">
+                <div class="col-6 items_name">
+                    <p class="sides-value mt-3 title-large">Group</p>
+                </div>
+                <div class="col-5">
+                    <input onclick="select_all('menu_meals_checkbox', 'select_all_menu_group');item_combo_add_button(true)"
+                           class="form-check-input checkbox-item float-end"
+                           type="checkbox" id="select_all_menu_group">
+                </div>
+            </div>
+            <div class="form-floating input-control mb-4" id="input-control">
+                <input type="text" class="form-control " id="search_group_menu_canvas" name="search_group_menu_canvas"
+                       placeholder="Search">
+                <label class="floating-input-placeholder" for="search_group_menu_canvas">Search</label>
+            </div>
+            <input value="{% for data in combo_info %}{{ data.id }},{% endfor %}" hidden id="combo_total_list">
+            <div style="max-height: 20rem;overflow-y: auto;overflow-x: clip;" id="combo_menu_list_container">
+                {% if combo_info|length == 0 %}
+                    <p class="body-large" style="color: #B00020">You do not have any combo, Please add some combo in the
+                        combo
+                        tab.</p> {% endif %}
+                {% for data in combo_info %}
+                    <div class="row d-flex align-items-baseline items_row">
+                        <div class="col-2">
+                            <img style="margin-right: 0.5rem;width: 25px;" src="
+
+
+
+                                    {% if data.image %}{{ data.image }}{% else %}{% static 'images/foodPlaceholder.png' %}{% endif %}"
+                                 alt="">
+                        </div>
+                        <div class="col-8 items_name">
+                            <p>{{ data.name }}</p>
+                        </div>
+                        <div class="col-2">
+                            <input style="margin-right: 0.5rem;" onclick="item_combo_add_button(true)"
+                                   class="form-check-input float-end"
+                                   type="checkbox"
+                                   value="{{ data.id }}" id="menu_combo_checkbox_{{ data.id }}"
+                                   name="menu_meals_checkbox">
+                        </div>
+                        <p class="mmm-border-bottom"></p>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="mmm-tertiary-btn float-end mt-3 body-large" id="menu_add_button"
+                    style="padding: 0.5rem 1.5rem;background-color: var(--white);width: unset;" disabled>Add
+            </button>
+        </form>
+    </div>
+</div>

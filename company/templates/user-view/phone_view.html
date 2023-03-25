@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Menu</title>
+    {% include 'root/css.html' %}
+    {% load static %}
+</head>
+<body>
+<div class="container-fluid text-center" style="background-color: var(--background);">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-auto mt-4 mb-4">
+            <img src="{% static 'images/icons/Logo1.svg' %}" alt="">
+        </div>
+        {#        start for#}
+        <div class="row d-flex justify-content-start">
+            <div class="col-12 col-md-6">
+                <p class="main_menu_phone mt-4">Item</p>
+            </div>
+        </div>
+
+        {% for data in menu_info.item %}
+            <div class="row d-flex justify-content-evenly mt-3 card-d">
+                <div class="col-2">
+                    <p><img style="width: 25px;" alt=""
+                            src="{% if data.image %}https://makemymenu.app{{ data.image }}{% else %}
+                                {% static 'images/foodPlaceholder.png' %}{% endif %}" class="mt-4"></p>
+                </div>
+                <div class="col-6">
+                    <p class="beef mt-4">{{ data.name }}</p>
+                    <p class="beef_subtext mt-4">{{ data.description }}</p>
+                </div>
+                <div class="col-2">
+                    <p class="rate_beef mt-4">{% if data.status == "Available" %}
+                        Available{% elif data.status == "Not Available" %}Not
+                        Available{% elif data.status == "Upcoming" %}Upcoming{% else %}Available{% endif %}</p>
+                </div>
+                <div class="col-2">
+                    <p class="rate_beef mt-4">
+                        {% if data.discount %}{{ data.discount }}{% else %}{{ data.price }}{% endif %}</p>
+                </div>
+            </div>
+        {% endfor %}
+        {#        Endfor#}
+
+        <div class="row d-flex justify-content-start">
+            <div class="col-12 col-md-6">
+                <p class="main_menu_phone mt-4">Group</p>
+            </div>
+        </div>
+        {% for data in menu_info.group %}
+            <div class="row d-flex justify-content-evenly mb-3 card-d">
+                <div class="col-2">
+                    <p><img style="width: 25px;"
+                            src="{% if data.image %}https://makemymenu.app{{ data.image }}{% else %}
+                                {% static 'images/foodPlaceholder.png' %}{% endif %}" class="mt-4" alt=""></p>
+                </div>
+                <div class="col-6">
+                    <p class="beef mt-4">{{ data.name }}</p>
+                    <p class="beef_subtext mt-4">{{ data.description }}</p>
+                </div>
+                <div class="col-2">
+                    <p class="rate_beef mt-4">{% if data.status == "Available" %}
+                        Available{% elif data.status == "Not Available" %}Not
+                        Available{% elif data.status == "Upcoming" %}Upcoming{% else %}Available{% endif %}</p>
+                </div>
+                <div class="col-2">
+                    <p class="rate_beef mt-4">{{ data.price }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {#    <div class="row d-flex justify-content-evenly mt-3 card-d">#}
+    {#        <div class="col-2">#}
+    {#            <p><img src="{% static '/images/icons/phone_food_2.svg' %}" class="mt-4"></p>#}
+    {#        </div>#}
+    {#        <div class="col-6">#}
+    {#            <p class="beef mt-4">Chicken Tikka Masala</p>#}
+    {#            <p class="beef_subtext mt-4">Grilled Salmon with Lemon Butter Sauce, Creamy ,Garlic Mashed Potatoes, Roasted#}
+    {#                Asparagus</p>#}
+    {#        </div>#}
+    {#        <div class="col-4">#}
+    {#            <p class="rate_beef mt-4">$601.13</p>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#    <div class="row d-flex justify-content-evenly mt-3 card-d">#}
+    {#        <div class="col-2">#}
+    {#            <p><img src="{% static '/images/icons/phone_food_3.svg' %}" class="mt-4"></p>#}
+    {#        </div>#}
+    {#        <div class="col-6">#}
+    {#            <p class="beef mt-4">Caesar Salad</p>#}
+    {#            <p class="beef_subtext mt-4">Grilled Salmon with Lemon Butter Sauce, Creamy ,Garlic Mashed Potatoes, Roasted#}
+    {#                Asparagus</p>#}
+    {#        </div>#}
+    {#        <div class="col-4">#}
+    {#            <p class="rate_beef mt-4">$473.85</p>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#    <div class="row d-flex justify-content-start">#}
+    {#        <div class="col-12 col-md-6">#}
+    {#            <p class="main_menu_phone mt-4" style="padding: 1rem;">Appetizers</p>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#    <div class="row d-flex justify-content-evenly mt-3 card-d">#}
+    {#        <div class="col-2">#}
+    {#            <p><img src="{% static '/images/icons/phone_food_4.svg' %}" class="mt-4"></p>#}
+    {#        </div>#}
+    {#        <div class="col-6">#}
+    {#            <p class="beef mt-4">Spinach and Artichoke Dip</p>#}
+    {#            <p class="beef_subtext mt-4">Grilled Salmon with Lemon Butter Sauce, Creamy ,Garlic Mashed Potatoes, Roasted#}
+    {#                Asparagus</p>#}
+    {#        </div>#}
+    {#        <div class="col-4">#}
+    {#            <p class="rate_beef mt-4">$589.99</p>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#    <div class="row d-flex justify-content-evenly mt-3 card-d">#}
+    {#        <div class="col-2">#}
+    {#            <p><img src="{% static '/images/icons/phone_food_5.svg' %}" class="mt-4"></p>#}
+    {#        </div>#}
+    {#        <div class="col-6">#}
+    {#            <p class="beef mt-4">Lobster Bisque</p>#}
+    {#            <p class="beef_subtext mt-4">Grilled Salmon with Lemon Butter Sauce, Creamy ,Garlic Mashed Potatoes, Roasted#}
+    {#                Asparagus</p>#}
+    {#        </div>#}
+    {#        <div class="col-4">#}
+    {#            <p class="rate_beef mt-4">$782.01</p>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#    <div class="row d-flex justify-content-start">#}
+    {#        <div class="col-12 col-md-6">#}
+    {#            <p class="main_menu_phone mt-4" style="padding: 1rem;">Dessert</p>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#    <div class="row d-flex justify-content-evenly mt-3 card-d">#}
+    {#        <div class="col-2">#}
+    {#            <p><img src="{% static '/images/icons/phone_food_5.svg' %}" class="mt-4"></p>#}
+    {#        </div>#}
+    {#        <div class="col-6">#}
+    {#            <p class="beef mt-4">Lobster Bisque</p>#}
+    {#            <p class="beef_subtext mt-4">Grilled Salmon with Lemon Butter Sauce, Creamy ,Garlic Mashed Potatoes, Roasted#}
+    {#                Asparagus</p>#}
+    {#        </div>#}
+    {#        <div class="col-4">#}
+    {#            <p class="rate_beef mt-4">$782.01</p>#}
+    {#        </div>#}
+    {#    </div>#}
+</div>
+</body>
+</html>

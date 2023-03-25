@@ -1,0 +1,113 @@
+{% load static %}
+{% load mathfilters %}
+
+
+<div class="col-lg-8 col-md-12 mb-4 mt-5 items-details hide" id="company">
+    {#Top image#}
+    <img class="mt-3 make-my-menu-logo" src="{% static 'images/icons/Logo1.svg' %}" alt="">
+    <p class="menu-header-title headline_medium">Company</p>
+    {% if not manager_status %}
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-12" style="background: white; text-align: end; cursor: pointer; padding: 1rem 2rem">
+                <img src="{% static '/images/icons/edit_pencil.svg' %}" class="mt-2" data-bs-toggle="modal"
+                     data-bs-target="#edit_company">
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center card-d p-3">
+            <div class="col-12">
+                <div class="row g-0">
+                    <div class="col-md-8 col-sm-12">
+
+                        <div class="company-card">
+                            <div class="card" style="margin: 0.5rem; padding: 1rem;">
+                                <p class="my_company_name mb-4 title-large">{{ company_info.name }}</p>
+                                <p class="my_company_subtext body-medium mb-2">Owner: <span
+                                        class="name_owner body-large">{{ company_info.owner.first_name }} {{ company_info.owner.last_name }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="company-card">
+                            <div class="card" style="margin: 0.5rem; padding: 0.2rem;">
+                                <div class="row">
+                                    <div class="col" style="border-right: 2px solid var(--border-color);">
+                                        <p class="company_branches body-medium mb-3 mt-4" style="margin: 0.5rem"> Total Branches</p>
+                                        <p class="branches_number title-large mb-4"  style="margin: 0.5rem">1</p>
+
+                                    </div>
+                                    <div class="col">
+                                        <p class="company_branches mt-4 mb-3 body-medium"> Total Price</p>
+                                        <p class="branches_number title-large mb-4">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-0">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="company-card">
+                            <div class="card" style="margin: 0.5rem; padding: 1rem;">
+                                <p class="my_company_email body-large mb-3"> Email</p>
+                                <p class="company_email title-large">{{ branch_info.email }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="company-card">
+                            <div class="card" style="margin: 0.5rem; padding: 1rem;">
+                                <p class="my_company_email mb-3 body-large">Phone</p>
+                                <p class="company_email title-large">
+                                    {% if branch_info.phone %}{{ branch_info.phone }}{% else %}_ _ _ _ _ _ _ _ _
+                                        _{% endif %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="company-card">
+                            <div class="card" style="margin: 0.5rem; padding: 1rem;">
+                                <p class="my_company_email mb-3 body-large">Address</p>
+                                <p class="company_email title-large">
+                                    {% if branch_info.address %}{{ branch_info.address }}{% else %}_ _ _ _ _ _ _ _ _
+                                        _{% endif %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+        <p style="color: red">You are not authorized to view company information.</p>
+    {% endif %}
+
+    {#Top image#}
+    <div class="row ">
+        <div class="col-3 p-0">
+            <p class="menu-header-title headline_medium" style="white-space: nowrap">Default Branch</p>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-start gap-4">
+        <div class="col-md-3 col-sm-12 qr-card text-center mt-3 p-3" style="min-width: 25.1rem; cursor: pointer;"
+             data-bs-toggle="modal"
+             data-bs-target="#edit_branches"
+             onclick="edit_branch_set('{{ branch_info.name }}', '{{ branch_info.title }}' , '{{ branch_info.phone }}', '{{ branch_info.address }}', '{{ branch_info.id }}')">
+            <p class="branch-name title-large ">{{ branch_info.name }} ({% if branch_info.title %}{{ branch_info.title }}{% else %}
+                Title{% endif %})</p>
+            <p class="login-sub-text body-large"
+               style="margin-top: 1rem;text-align: left;">{{ branch_info.address }}</p>
+            <p class="login-sub-text body-large" style="margin-top: 1rem;text-align: left;">{{ branch_info.email }}</p>
+            <p class="login-sub-text body-large" style="margin-top: 1rem;text-align: left;">{{ branch_info.phone }}</p>
+            <p class="login-sub-text body-large" style="margin-top: 1rem;text-align: right;">Total QR-Code
+                scaned:<span><b> {{ branch_info.QR_counter }}</b></span>
+            </p>
+        </div>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<!-- Modal -->
+{% load static %}
+<div class="modal fade" id="confirm_owner_transfer" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div>
+
+                                <div class="form-floating input-control" id="input-control" style="width: 100%;">
+                                    <input type="text" class="form-control " id="owner_transfer_modal_input" name="owner_transfer_modal_input"
+                                           placeholder="Branch Name">
+                                    <label class="floating-input-placeholder" for="owner_transfer_modal_input">Type TRANSFER</label>
+
+                                </div>
+
+                            </div>
+
+                            <button onclick="ownership_transfer('owner_transfer_input')" type="button" class="btn mmm-round-btn float-center mt-4" id="owner_transfer_modal_button" data-bs-dismiss="modal" aria-label="Close"  style="width: 50%" disabled>Update</button>
+                            {#Form end#}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

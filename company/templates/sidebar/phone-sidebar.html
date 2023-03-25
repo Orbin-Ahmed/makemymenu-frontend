@@ -1,0 +1,280 @@
+{% load static %}
+
+<div class="row phone-menu d-flex">
+    <nav class="navbar bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"> <img class="mt-3" src="{% static 'images/icons/Logo1.svg' %}" alt=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDarkNavbar"
+                 aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+
+
+                            {#Sidebar Starts#}
+
+                            <div class="mmm-sidebar">
+                                <div>
+                                    <p class="company-preview-title headline_medium">
+                                        <img style="width: 25px;border-radius: 50%;height: 25px"  alt="" src="
+
+
+
+
+
+
+                                                {% if company_info.image %}{{ company_info.image }}{% else %}{% static 'images/imgplaceholder.svg' %}{% endif %}">
+                                        {{ company_info.name }}
+                                    </p>
+                                    <p class="body-medium d-flex align-items-center" style="color: var(--black)"><img
+                                            style="margin-right: 0.5rem" width="24" height="24"
+                                            src="{% static 'images/icons/location_choto.svg' %}"
+                                            alt="">{{ branch_info.address }}
+                                    </p>
+                                    <p class="body-medium d-flex align-items-center" style="color: var(--black)"><img
+                                            style="margin-right: 0.5rem" width="24" height="24"
+                                            src="{% static 'images/icons/call_choto.svg' %}"
+                                            alt="">{{ branch_info.phone }}</p>
+                                    <p class="body-medium d-flex align-items-center" style="color: var(--black)"><img
+                                            style="margin-right: 0.5rem" width="24" height="24"
+                                            src="{% static 'images/icons/mail_choto.svg' %}"
+                                            alt="">{{ branch_info.email }}</p>
+                                </div>
+                                <div class="sidebar-company-section"></div>
+{#                                <img width="24" height="24" src="{% static '/images/icons/touch_app_choto.svg' %}"#}
+{#                                     alt="">#}
+{#                                <button class="btn mt-2 mb-2 tour label-large sidebar-color " id="start-tour-phone">Take a#}
+{#                                    tour#}
+{#                                </button>#}
+{#                                <div class="sidebar-company-section"></div>#}
+                                <div>
+                                    <ul class="list-unstyled ps-0" style="margin-left: -1.5rem ;position: relative">
+
+
+                                        <li class="mb-1 mmm-dropdown-item"
+                                            style="position: relative">
+                                            <div class="side-nigga-toggle" id="side-nigga-toggle-phone"></div>
+                                            <button class="btn btn-toggle align-items-center rounded d-flex"
+                                                    id="toggle_dashboard"
+                                                    onclick="toggle_left_pointer_phone(0);toggle_menu(this.id);">
+                                                <img style="margin-right: 0.5rem" width="24" height="24"
+                                                     src="{% static 'images/icons/dash_choto.svg' %}" alt="">
+                                                <span class="label-large sidebar-color">Dashboard</span>
+                                            </button>
+                                        </li>
+
+                                        <li class="mb-1 mmm-dropdown-item"
+                                            style="position: relative">
+                                            <div class="side-nigga-toggle hidden" id="side-nigga-toggle-phone"></div>
+                                            <button class="btn btn-toggle align-items-center rounded d-flex"
+                                                    id="toggle_items"
+                                                    onclick="toggle_left_pointer_phone(1);toggle_menu(this.id);">
+                                                <img style="margin-right: 0.5rem" width="24" height="24"
+                                                     src="{% static 'images/icons/category_choto.svg' %}" alt="">
+                                                <span class="label-large sidebar-color">Item</span>
+                                            </button>
+                                        </li>
+
+                                        <li class="mb-1 mmm-dropdown-item"
+                                            style="position: relative">
+                                            <div class="side-nigga-toggle hidden" id="side-nigga-toggle-phone"></div>
+                                            <button class="btn btn-toggle align-items-center rounded d-flex"
+                                                    id="toggle_combo"
+                                                    onclick="toggle_left_pointer_phone(2);toggle_menu(this.id);">
+                                                <img style="margin-right: 0.5rem" width="24" height="24"
+                                                     src="{% static 'images/icons/group_choto.svg' %}" alt="">
+                                                <span class="label-large sidebar-color">Group</span>
+                                            </button>
+                                        </li>
+
+                                        <li class="mb-1 mmm-dropdown-item"
+                                            style="position: relative">
+                                            <div class="side-nigga-toggle hidden" id="side-nigga-toggle-phone"></div>
+                                            <button class="btn btn-toggle align-items-center rounded d-flex"
+                                                    id="toggle_main"
+                                                    onclick="toggle_left_pointer_phone(3);toggle_menu(this.id);">
+                                                <img style="margin-right: 0.5rem" width="24" height="24"
+                                                     src="{% static 'images/icons/menu_choto.svg' %}" alt="">
+                                                <span class="label-large sidebar-color">Menu</span>
+                                            </button>
+                                        </li>
+
+                                        <li class="mb-1 mmm-dropdown-item"
+                                            style="position: relative">
+                                            <div class="side-nigga-toggle hidden" id="side-nigga-toggle-phone"></div>
+                                            <button class="btn btn-toggle align-items-center rounded d-flex"
+                                                    id="toggle_qr"
+                                                    onclick="toggle_left_pointer_phone(4);toggle_menu(this.id);">
+                                                <img style="margin-right: 0.5rem" width="24" height="24"
+                                                     src="{% static 'images/icons/qr_choto.svg' %}" alt="">
+                                                <span class="label-large sidebar-color">QR-Code</span>
+                                            </button>
+                                        </li>
+
+                                        {#                <li class="mb-1 mmm-dropdown-item" style="position: relative" data-intro="Lets create a menu">#}
+                                        {#                    <div id="side-nigga-toggle" class="side-nigga-toggle hidden"></div>#}
+                                        {#                    <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_main" onclick="toggle_left_pointer_phone(1);toggle_menu(this.id);">#}
+                                        {#                        <img style="margin-right: 0.5rem" width="30" height="30" src="{% static 'images/icons/menu.svg' %}" alt="">#}
+                                        {#                        Menu#}
+                                        {#                    </button>#}
+                                        {#                    <div id="home-collapse">#}
+                                        {#                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small mother">#}
+                                        {#                            <li data-intro="Start with the best! Choose your items first."><a id="toggle_items"#}
+                                        {#                                                                                              style="text-decoration: none;cursor: pointer;"#}
+                                        {#                                                                                              onclick="toggle_menu(this.id);toggle_left_pointer_phone(1)"#}
+                                        {#                                                                                              class="rounded">Items</a>#}
+                                        {#                            </li>#}
+                                        {#                            <li data-intro="Get more for your money with our tasty combo options - choose your perfect pairings now!">#}
+                                        {#                                <a id="toggle_combo" style="text-decoration: none;cursor: pointer;"#}
+                                        {#                                   onclick="toggle_menu(this.id);toggle_left_pointer_phone(1)" class="rounded">Combo</a></li>#}
+                                        {#                        </ul>#}
+                                        {#                    </div>#}
+                                        {#                </li>#}
+
+                                        <li class="mb-1 mmm-dropdown-item"
+                                            style="position: relative; padding: 1rem;">
+                                            <span class="label-light sidebar-color">Business</span>
+                                            <div class="sidebar-company-section" style="margin-left: 0"></div>
+                                        </li>
+                                        <li class="mb-1 mmm-dropdown-item" style="position: relative">
+                                            <div class="side-nigga-toggle hidden" id="side-nigga-toggle-phone"></div>
+                                            <button class="btn btn-toggle align-items-center rounded d-flex"
+                                                    id="toggle_company"
+                                                    onclick="toggle_menu(this.id); toggle_left_pointer_phone(5)">
+                                                <img style="margin-right: 0.5rem" width="24" height="24"
+                                                     src="{% static 'images/icons/company_choto.svg' %}" alt="">
+                                                <span class="label-large sidebar-color">Company</span>
+                                            </button>
+
+                                            {#                    <div id="company-collapse">#}
+                                            {#                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small mother">#}
+                                            {#                            <li data-intro="Create a branch"><a id="toggle_branches"#}
+                                            {#                                                                style="text-decoration: none;cursor: pointer;"#}
+                                            {#                                                                onclick="toggle_menu(this.id);toggle_left_pointer_phone(4)"#}
+                                            {#                                                                class="rounded">Branches</a></li>#}
+                                            {#                        </ul>#}
+                                            {#                    </div>#}
+                                        </li>
+
+                                        <li class="mb-1 mmm-dropdown-item"
+                                            style="position: relative">
+                                            <div id="side-nigga-toggle-phone" class="side-nigga-toggle hidden"></div>
+                                            <button class="btn btn-toggle align-items-center rounded d-flex"
+                                                    id="toggle_profile"
+                                                    onclick="toggle_left_pointer_phone(6);toggle_menu(this.id);">
+                                                <img style="margin-right: 0.5rem" width="24" height="24"
+                                                     src="{% static 'images/icons/person_choto.svg' %}" alt="">
+                                                <span class="label-large sidebar-color">Profile</span>
+                                            </button>
+                                        </li>
+                                        <li class="mb-1 mmm-dropdown-item"
+                                            style="position: relative; padding: 1rem;">
+                                            <span class="label-light sidebar-color">Essentials</span>
+                                            <div class="sidebar-company-section" style="margin-left: 0"></div>
+                                        </li>
+
+                                        {#                <li class="mb-1 mmm-dropdown-item" data-intro="PACKAGES - Manage Subscription Packages" style="position: relative">#}
+                                        {#                    <div id="side-nigga-toggle" class="side-nigga-toggle hidden"></div>#}
+                                        {#                    <button class="btn btn-toggle align-items-center rounded d-flex" id="toggle_packages"#}
+                                        {#                            onclick="toggle_left_pointer_phone(7);toggle_menu(this.id);">#}
+                                        {#                        <img style="margin-right: 0.5rem" width="24" height="24"#}
+                                        {#                             src="{% static 'images/icons/package.svg' %}" alt="">#}
+                                        {#                        Packages#}
+                                        {#                    </button>#}
+                                        {#                </li>#}
+
+                                        <li class="mb-1 mmm-dropdown-item"
+                                            style="position: relative">
+                                            <div id="side-nigga-toggle-phone" class="side-nigga-toggle hidden"></div>
+                                            <button class="btn btn-toggle align-items-center rounded d-flex"
+                                                    id="toggle_settings"
+                                                    onclick="toggle_left_pointer_phone(7);toggle_menu(this.id);">
+                                                <img style="margin-right: 0.5rem" width="24" height="24"
+                                                     src="{% static 'images/icons/settings_choto.svg' %}" alt="">
+                                                <span class="label-large sidebar-color">Settings</span>
+                                            </button>
+                                        </li>
+                                        <li class="mb-1 mmm-dropdown-item"
+                                            style="position: relative; padding: 1rem;">
+                                            <span class="label-light sidebar-color">Help</span>
+                                            <div class="sidebar-company-section" style="margin-left: 0"></div>
+                                        </li>
+                                        <li class="mb-1 mmm-dropdown-item"
+                                            style="position: relative">
+                                            <div id="side-nigga-toggle-phone" class="side-nigga-toggle hidden"></div>
+                                            <button class="btn btn-toggle align-items-center rounded d-flex"
+                                                    id="toggle_about_us"
+                                                    onclick="toggle_left_pointer_phone(8);toggle_menu(this.id);">
+                                                <img style="margin-right: 0.5rem" width="24" height="24"
+                                                     src="{% static 'images/icons/aboutus_choto.svg' %}" alt="">
+                                                <span class="label-large sidebar-color">About Us</span>
+                                            </button>
+                                        </li>
+
+                                        <li class="mb-1 mmm-dropdown-item"
+                                            style="position: relative">
+                                            <div id="side-nigga-toggle-phone" class="side-nigga-toggle hidden"></div>
+                                            <button class="btn btn-toggle align-items-center rounded d-flex"
+                                                    id="toggle_mmm_faq"
+                                                    onclick="toggle_left_pointer_phone(9);toggle_menu(this.id);">
+                                                <img style="margin-right: 0.5rem" width="24" height="24"
+                                                     src="{% static 'images/icons/quiz_choto.svg' %}" alt="">
+                                                <span class="label-large sidebar-color">FAQ</span>
+                                            </button>
+                                        </li>
+
+                                        <li class="mb-1 mmm-dropdown-item"
+                                            style="position: relative">
+                                            <div id="side-nigga-toggle-phone" class="side-nigga-toggle hidden"></div>
+                                            <button class="btn btn-toggle align-items-center rounded d-flex"
+                                                    id="toggle_terms_condition"
+                                                    onclick="toggle_left_pointer_phone(10);toggle_menu(this.id);">
+                                                <img style="margin-right: 0.5rem" width="24" height="24"
+                                                     src="{% static 'images/icons/terms_choto.svg' %}" alt="">
+                                                <span class="label-large sidebar-color">Terms & Conditions</span>
+                                            </button>
+                                        </li>
+
+                                        <li class="mb-1 mmm-dropdown-item"
+                                            style="position: relative">
+                                            <div id="side-nigga-toggle-phone" class="side-nigga-toggle hidden"></div>
+                                            <button class="btn btn-toggle align-items-center rounded d-flex"
+                                                    id="toggle_privacy_policy"
+                                                    onclick="toggle_left_pointer_phone(11);toggle_menu(this.id);">
+                                                <img style="margin-right: 0.5rem" width="24" height="24"
+                                                     src="{% static 'images/icons/privacy_choto.svg' %}" alt="">
+                                                <span class="label-large sidebar-color">Privacy Policy</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <span class="label-light sidebar-color">Warning</span>
+                                <div class="sidebar-company-section" style="margin-left: 0"></div>
+                                <div class="row">
+                                    <div class="col-5" style="padding:0;">
+                                        <img width="30" height="30" src="{% static '/images/icons/logout_choto.svg' %}">
+                                        <a style="all: unset;" href="/logout/">
+                                            <button class="btn mt-2 mb-2 logout label-large sidebar-color">Logout</button>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {#Side bar ends#}
+
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

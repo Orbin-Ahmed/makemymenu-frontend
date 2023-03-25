@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign In</title>
+    {% include 'root/css.html' %}
+</head>
+<body>
+<div class="container-fluid">
+    <div class="sign-in-icon">
+        <a href="/dashboard/"><img src="{% static 'images/icons/Logo1.svg' %}" alt="logo"></a>
+    </div>
+    <div class="row d-flex justify-content-evenly align-items-center text-center">
+        <P style="color: red">{{ error }}</P>
+
+        <div class="col-md-4 signin-illustration" style="padding-right: 20px">
+            <img class="img-fluid" src="{% static 'images/sign-in.svg'%}">
+        </div>
+{##}
+{#        <div class="col-1 signin-illustration">#}
+{#d#}
+{#        </div>#}
+
+        <div class="col-md-4">
+            {#    Form#}
+{#            onsubmit="return sigInvalidateInputs();"#}
+            <form novalidate method="post" action="/sign-in/" onsubmit="return sigInvalidateInputs()">
+                {% csrf_token %}
+{#                <p class="display-large mb-5" style="color:var(--mmm-primary)">Welcome back</p>#}
+
+                <div class="form-floating input-control" id="input-control">
+                    <input type="email" class="form-control" id="signIn_email" name="signIn_email"
+                           placeholder="Email address" required>
+                    <label class="floating-input-placeholder" for="signIn_email">Email address<span
+                            style="color:black">*</span></label>
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-floating input-control" id="input-control">
+                    <input type="password" class="form-control " id="signIn_password" name="signIn_password"
+                           placeholder="Password" required>
+                    <label class="floating-input-placeholder" for="signIn_password">Password<span
+                            style="color:black">*</span></label>
+                    <div class="error"></div>
+                </div>
+
+                <p class="text-start body-medium" style="padding: 0;">Forget password?<a
+                        style="all: unset;cursor: pointer; color:var(--mmm-primary);" href="/reset-pass-email/"> Click here</a></p>
+                <button type="submit" class="btn mmm-primary-btn body-large mb-3"><span>Continue</span></button>
+                <p class="login-sub-text body-medium">Don't have an account?
+                    <a href="/sign-up/" style="text-decoration: none;"><span class="body-medium"
+                            style="color: var(--mmm-primary);">Sign up</span></a>
+                </p>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% include 'footer/footer.html' %}
+{% include 'root/js.html' %}
+<script>
+    // Check if the parameter is present in the URL
+    if (window.location.search.indexOf('error=') > -1) {
+        // Remove the parameter from the URL
+        let url = window.location.href.split('?')[0];
+        window.history.replaceState({}, '', url);
+    }
+</script>
+</body>
+</html>

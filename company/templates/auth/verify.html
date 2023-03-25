@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Verify</title>
+    {% include 'root/css.html' %}
+</head>
+<body>
+<div class="container-fluid">
+    <div class="sign-in-icon">
+        <a href="/dashboard/"><img src="{% static 'images/icons/Logo1.svg' %}" alt="logo"></a>
+    </div>
+    <div class="row d-flex justify-content-center text-center mt-5">
+        <P style="color: red">{{ error }}</P>
+        <div class="col-md-4">
+            {#    Form#}
+            <div>
+                <p class="display-large">Verify Account</p>
+                <p class="text body-medium" style="color: var(--black)">You have to enter 6 digit OTP code which is sent to your
+                    email.</p>
+                {#OTP#}
+                <form method="post" class="text-center">
+                    {% csrf_token %}
+                    <div class="otp-input-field mb-3 mt-5 d-flex gap-2 justify-content-center">
+                        <input name="token1" class="otp-input-field-value" type="text" maxlength="1" size="2" pattern="[0-9]{1}" inputmode="numeric"/>
+                        <input name="token2" class="otp-input-field-value" type="text" maxlength="1" size="2" pattern="[0-9]{1}" inputmode="numeric"/>
+                        <input name="token3" class="otp-input-field-value" type="text" maxlength="1" size="2" pattern="[0-9]{1}" inputmode="numeric"/>
+                        <input name="token4" class="otp-input-field-value" type="text" maxlength="1" size="2" pattern="[0-9]{1}" inputmode="numeric"/>
+                        <input name="token5" class="otp-input-field-value" type="text" maxlength="1" size="2" pattern="[0-9]{1}" inputmode="numeric"/>
+                        <input name="token6" class="otp-input-field-value" type="text" maxlength="1" size="2" pattern="[0-9]{1}" inputmode="numeric"/>
+                    </div>
+                    {#OTP end#}
+                    <button type="submit" class="btn mmm-primary-btn body-large"><span>Verify</span></button>
+                </form>
+                <p class="verify_code body-medium mt-3">Didn't get your verification code?<span class="resent_code body-medium"> <a href="/resend/?email={{ user_email }}" style="all: unset;cursor: pointer">Resent Code</a></span></p>
+            </div>
+            {#    Form end#}
+        </div>
+    </div>
+</div>
+{% include 'footer/footer.html' %}
+{% include 'root/js.html' %}
+</body>
+</html>

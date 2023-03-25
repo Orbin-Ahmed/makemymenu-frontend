@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    {% include 'root/css.html' %}
+</head>
+<body>
+<div class="container-fluid" style="background-color: var(--background);">
+
+
+    <div class="row">
+        <div class="col-3 desktop-menu" style="min-height: 60rem;background-color: var(--white);margin-right: 2rem">
+            {% include 'sidebar/sidebar.html' %}
+        </div>
+ <!-- mobile navbar -->
+    {% include 'sidebar/phone-sidebar.html' %}
+
+        {#Toggle those#}
+        {% include 'dashboard-content/dashboard-dashboard.html' %}
+        {% include 'dashboard-content/menu/menu.html' %}
+        {% include 'dashboard-content/menu/items.html' %}
+        {% include 'dashboard-content/profile/profile.html' %}
+        {% include 'dashboard-content/menu/combo.html' %}
+        {% include 'dashboard-content/about_us.html' %}
+        {% include 'dashboard-content/packages.html' %}
+        {% include 'dashboard-content/qr-code.html' %}
+        {% include 'dashboard-content/settings.html' %}
+        {% include 'dashboard-content/company/company.html' %}
+        {% include 'dashboard-content/company/branches.html' %}
+        {% include 'dashboard-content/faq.html' %}
+        {% include 'dashboard-content/terms_condition.html' %}
+        {% include 'dashboard-content/privacy_policy.html' %}
+        {#Toogle end#}
+    </div>
+</div>
+{#Modal#}
+{% include 'modal/qr_create.html' %}
+{% include 'modal/add_item.html' %}
+{% include 'modal/edit_profile.html' %}
+{% include 'modal/company_info.html' %}
+{% include 'modal/add_branch.html' %}
+{% include 'modal/edit_branch.html' %}
+{% include 'modal/settings_owener_transer.html' %}
+{% include 'modal/item-download-modal.html' %}
+{% include 'modal/combo_download_modal.html' %}
+{% include 'modal/item_import_modal.html' %}
+{% include 'modal/multiple_modal.html' %}
+{% include 'modal/item_quick_Update.html' %}
+{% include 'modal/menu_quick_update.html' %}
+{% include 'modal/group_quick_update.html' %}
+{#Canvas#}
+{% include 'canvas/menu-item-canvas.html' %}
+{% include 'canvas/combo-canvas.html' %}
+{% include 'root/js.html' %}
+<script>
+    // Check if the parameter is present in the URL
+    if (window.location.search.indexOf('error=') > -1) {
+        // Remove the parameter from the URL
+        let url = window.location.href.split('?')[0];
+        window.history.replaceState({}, '', url);
+    }
+</script>
+<script>
+    function printDiv(id) {
+        // Get the content of the div
+        let content = document.getElementById(id).innerHTML;
+        let win = window.open();
+        win.document.write('<html><head><title>QR</title>');
+        win.document.write('<style>body {height: 100%; display: flex; align-items: center; justify-content: center;transform: scale(3);}</style>');
+        win.document.write('</head><body>');
+        win.document.write(content);
+        win.document.write('</body></html>');
+        setTimeout(function () {
+            win.print();
+            win.close();
+        }, 1000);
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>

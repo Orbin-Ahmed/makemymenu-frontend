@@ -1,0 +1,51 @@
+<!-- Modal -->
+{% load static %}
+<div class="modal fade" id="group_update_modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form method="post" action="/insert-items/" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="row gap-4">
+
+                                <h4 class="text-start title-large">Quick Updates</h4>
+                                <div class="col-12">
+                                    <div class="form-floating input-control" id="input-control">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="group_status_update_combo" name="group_status_update_combo"
+                                                    aria-label="Floating label select example">
+                                                <option selected value="Available">Available</option>
+                                                <option value="Not Available">Not Available</option>
+                                                <option value="Upcoming">Upcoming</option>
+                                            </select>
+                                            <label for="group_status_update_combo">Status</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12">
+                                    <div class="form-floating input-control" id="input-control">
+                                        <input class="form-control" type="text" placeholder="Write Here" id="group_category_update_combo"
+                                               name="group_category_update_combo">
+                                        <label class="floating-input-placeholder"
+                                               for="group_category_update">Category</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="update_multiple_combo('group_status_update_combo','group_category_update_combo');" type="button"
+                            class="btn mmm-round-btn float-center float-end mt-4 body-large"
+                            id="group_download_modal" data-bs-dismiss="modal" aria-label="Close" style="width: 30%">
+                        Submit
+                    </button>
+                    {#Form end#}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

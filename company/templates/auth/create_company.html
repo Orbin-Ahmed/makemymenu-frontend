@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create Company</title>
+    {% include 'root/css.html' %}
+</head>
+<body>
+<div class="container-fluid">
+    <div class="sign-in-icon">
+        <a href="/dashboard/"><img src="{% static 'images/icons/Logo1.svg' %}" alt="logo"></a>
+    </div>
+    <div class="row d-flex justify-content-center text-center" style="margin-top: 4rem">
+        <P style="color: red">{{ error }}</P>
+        <div class="col-md-4">
+            <p style="color: red">{{ error }}</p>
+            {#    Form#}
+            <form method="post" action="/create-company/" onsubmit="return create_company();">
+                {% csrf_token %}
+                <p class="display-large">Create Company</p>
+                <p class="text mb-5 body-medium" style="color: var(--black)">Please enter all the required information to create
+                    your
+                    company.</p>
+                <div class="form-floating input-control" id="input-control">
+                    <input type="text" class="form-control " id="create_company_name" name="create_company_name"
+                           placeholder="Name">
+                    <label class="floating-input-placeholder" for="create_company_name">Name</label>
+                    <div class="error"></div>
+                </div>
+                <input id="user_category_input" value="Restaurants" name="user_category_input" hidden>
+                <p class="body-large" style="text-align: left;color: var(--black);">Select your company category</p>
+
+                <div class="filter-content mt-3 mb-3" style="text-align: left">
+                    <p id="filter-all" class="current-filter label-light" onclick="change_filter(this.id);">Restaurants</p>
+                    <p id="filter-1" class="label-light" onclick="change_filter(this.id);">Catering services</p>
+                    <p id="filter-2" class="label-light" onclick="change_filter(this.id);">Coffee shops</p>
+{#                    <p id="filter-3" class="label-light" onclick="change_filter(this.id);">Gift shops</p>#}
+                    <p id="filter-4" class="label-light" onclick="change_filter(this.id);">Supermarkets</p>
+{#                    <p id="filter-5" class="label-light" onclick="change_filter(this.id);">Bookstores</p>#}
+{#                    <p id="other" class="label-light" onclick="change_filter(this.id);">Others</p>#}
+                </div>
+
+                <div class="form-floating input-control mb-3" id="category-input-control" style="display: none;">
+                    <input type="text" class="form-control " id="category_name" name="category_name"
+                           placeholder="Category Name">
+                    <label class="floating-input-placeholder" for="category_name">Category Name</label>
+                </div>
+
+                <button type="submit" class="btn mmm-primary-btn body-large"><span>Create</span></button>
+            </form>
+            {#Form end#}
+        </div>
+    </div>
+</div>
+{% include 'footer/footer.html' %}
+{% include 'root/js.html' %}
+<script>
+    // Check if the parameter is present in the URL
+    if (window.location.search.indexOf('error=') > -1) {
+        // Remove the parameter from the URL
+        let url = window.location.href.split('?')[0];
+        window.history.replaceState({}, '', url);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% load static %}
+{#Filter Area#}
+<div class="category-section">
+    <div class="row">
+        <div class="category-list">
+            <ul class="d-flex gap-2 mt-3" style="list-style: none; padding-left: 0;overflow: auto"
+                id="phone_category_filter">
+                <li id="All_combo" class="menu-category activate_2 label-large"
+                    onclick="change_filter_2(this.id)"><p>
+                    All</p></li>
+                {% for filter in menu_details.group_category %}
+                    <li id="combo_{{ filter.category }}" class="menu-category label-large"
+                        onclick="change_filter_2(this.id)"><p>
+                        {{ filter.category }}</p></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{#Filter Area end#}
+<!-- combo list view -->
+<div class="row view-toggle" id="combo_list_view">
+    {% include 'user-view/mobile-menu-view/combo/combo-list-view.html' %}
+</div>
+
+<!-- combo grid view -->
+<div class="row text-start view-toggle close" style="display: grid; justify-items: center" id="combo_grid_view">
+    {% include 'user-view/mobile-menu-view/combo/combo-grid-view.html' %}
+</div>

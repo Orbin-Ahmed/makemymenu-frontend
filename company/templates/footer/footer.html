@@ -1,0 +1,38 @@
+{% load static %}
+<footer class="footer" style="background: var(--mmm-primary)">
+    <div class="container-fluid mt-5">
+        <div class="row d-flex justify-content-evenly" style="border-bottom: 1px solid white">
+            <div class="col-10">
+                <p class="bar copyright body-medium">Copyright ©2023 All rights reserved <span
+                        style="padding: 0.5rem">|</span>
+                    <span class="body-medium" style="padding:0.5rem;">Proudly designed and developed by</span> <a
+                            href="https://incrementsinc.com/" target="_blank" style="all:unset"><span class="body-large"
+                                                                                                      style="cursor: pointer">Increments Inc.</span></a>
+                </p>
+            </div>
+            <div class="col-2 d-flex">
+                <a href="/privacy-policies/" style="all : unset; cursor: pointer">
+                    <p class="bar copyright body-large">Privacy Policy
+                        <span style="padding: 0.5rem"></span>
+                    </p>
+                </a>
+                <a href="/contact-us/" style="all : unset; cursor: pointer">
+                    <p class="bar copyright body-large">Contact Us
+                        <span style="padding: 0.5rem"></span>
+                    </p>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100090692627938" target="_blank">
+                    <img src="{% static '/images/icons/fb_nigga.svg' %}" class="fb-icon" style="cursor: pointer;"
+                         alt="">
+                </a>
+                <span style="padding-left:0;padding-right: 0.4rem;cursor:pointer;">
+                    <img src="{% static '/images/icons/insta_nigga.svg' %}" class="fb-icon" alt="">
+                </span>
+                <span>
+                    <img src="{% static '/images/icons/in_nigga.svg' %}" class="fb-icon" style="cursor: pointer;"
+                         alt="">
+                </span>
+            </div>
+        </div>
+    </div>
+</footer>

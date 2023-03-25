@@ -1,0 +1,242 @@
+p, h1, h4 {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --mmm-primary: #44A08D;
+    --mmm-primary-ash: #337363;
+    --white: #ffffff;
+    --top-section-white: #ffffff;
+    --black: #242424;
+    --background-color: #CBE9E4;
+    --title: #295647;
+    --description: #295647;
+    --paragraph-ash: #5A5A5A;
+    --gre-background: linear-gradient(180deg, #E7FFFB 0%, #EBEBEB 100%);
+    --price-cross: #708E88;
+    --company-name: #49454F;
+    --border-bottom-light: #c7dbd7;
+}
+
+.top-bar {
+    background: var(--top-section-white);
+}
+
+.material-symbols-outlined {
+    color: var(--black);
+}
+
+h1 {
+    color: var(--black);
+}
+
+h4 {
+    color: var(--mmm-primary);
+}
+
+.mobile-item-card {
+    margin: 1rem 0;
+    background: var(--white);
+    border-radius: 10px;
+}
+
+.content-top {
+    height: fit-content;
+}
+
+.item-section {
+    height: 100vh;
+    padding: 1rem;
+    background: var(--gre-background);
+    overflow: auto;
+}
+
+.phone-menu-title h2 {
+    color: var(--title);
+}
+
+.phone-menu-title p {
+    color: var(--mmm-primary);
+}
+
+.category-list li {
+    color: var(--mmm-primary);
+    border: 1px solid var(--mmm-primary);
+    padding: 6px 12px;
+    white-space: nowrap;
+    border-radius: 8px;
+}
+
+.menu-category.activate_1 {
+    background: var(--mmm-primary);
+    color: var(--white);
+}
+
+.menu-category.activate_2 {
+    background: var(--mmm-primary);
+    color: var(--white);
+}
+
+.video-play-button {
+    position: absolute;
+    width: 30px;
+    bottom: -3px;
+    right: 3px;
+    cursor: pointer;
+}
+
+.video-play-button-grid {
+    position: absolute;
+    width: 50px;
+    cursor: pointer;
+    right: 0;
+    bottom: -30px;
+}
+
+
+.nav-tabs {
+    border: none;
+}
+
+.nav-tabs .nav-link {
+    color: var(--mmm-primary);
+    background-color: transparent;
+    border: none;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: var(--mmm-primary-ash);
+    background-color: transparent;
+    border-bottom: 4px solid var(--mmm-primary);
+    border-radius: 4px;
+}
+
+.close {
+    display: none !important;
+}
+
+.mobile-body-dark {
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.03125rem;
+}
+
+.mobile-header {
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.009375rem;
+    color: var(--company-name);
+}
+
+.body-medium {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.015625rem;
+}
+
+.body-large {
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.03125rem;
+
+}
+
+.label-light {
+    font-weight: 300;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.03125rem;
+}
+
+.title-large {
+    font-weight: 400;
+    font-size: 1.375rem;
+    line-height: 1.75rem;
+}
+
+.label-large {
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.00625rem;
+}
+
+.headline_medium {
+    font-weight: 400;
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+}
+
+.display-large {
+    font-weight: 400;
+    font-size: 3.5625rem;
+    line-height: 4rem;
+}
+
+.price-large {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1rem;
+}
+
+.price-small {
+    font-weight: 400;
+    font-size: 0.625rem;
+    line-height: 0.75rem;
+}
+
+#phone_category_filter::-webkit-scrollbar {
+    display: none;
+}
+
+.item_class.stash {
+    display: none!important;
+}
+
+.item_class.showStash {
+    display: flex;
+}
+
+.combo_class.stash {
+    display: none!important;
+}
+
+.combo_class.showStash {
+    display: flex;
+}
+
+
+.item_class.display_flex {
+    display: flex;
+}
+
+.item_class.display_block {
+    display: block;
+}
+
+.combo_class.display_flex {
+    display: flex;
+}
+
+.combo_class.display_block {
+    display: block;
+}
+
+.promo_cross-btn {
+    float: right;
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 0.5rem;
+}
+
+.description-color {
+    color: var(--description) !important;
+}

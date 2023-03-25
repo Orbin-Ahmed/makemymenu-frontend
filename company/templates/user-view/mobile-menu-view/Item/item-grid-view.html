@@ -1,0 +1,96 @@
+{% load static %}
+{% load mathfilters %}
+<div class="row d-flex justify-content-center gap-3" id="item_container_1" style="padding: 0">
+    {#item Grid view 1#}
+    {% for data in menu_details.item_category %}
+        {% for item in data.items %}
+            {% if forloop.counter0|mod:2 == 0 %}
+                <div class="col-5 mobile-item-card item_class" style="margin: 0">
+                    <a style="all: unset;cursor: pointer"
+                       href="/menu/item-details/{{ item.id }}/{{ menu_id }}/{{ menu_branch_id }}/">
+                        <div class="row">
+                            <div class="p-0" style="position: relative;">
+                                <img width="100%" class="img-fluid"
+                                     src="{% if item.image %}https://makemymenu.app{{ item.image }}{% else %}{% static 'images/foodPlaceholder.png' %}{% endif %}"
+                                     alt=""
+                                     style="border-radius: 10px 10px 0 0; padding: 0;">
+                                {% if item.video_link %}
+                                    <a data-bs-target="#item_grid_video" data-bs-toggle="modal"
+                                       onclick="insert_item_video_link('{{ item.video_link }}', 'iframe_video_link_item_grid');">
+                                        <img
+                                                width="100%"
+                                                class="video-play-button-grid img-fluid"
+                                                src="{% static 'images/icons/play-button-grid.svg' %}"
+                                                alt=""
+                                                style="border-radius:20px 0 0 20px"></a>{% endif %}
+                            </div>
+                        </div>
+                        <input class="items_category" value="{{ item.category }}" hidden>
+                        <div class="row p-3 gap-3">
+                            <div class="phone-menu-title">
+                                <p class="body-large mb-2" style="color: var(--title)">{{ item.name }}</p>
+                                <p class="mobile-body-dark max-lines description-color">
+                                    {% if item.description == 'None' or not item.description %}{% else %}
+                                        {{ item.description }}{% endif %}</p>
+                            </div>
+                            <div class="card-price">
+                                <span class="price-large mb-2"
+                                      style="color: var(--mmm-primary)">{{ localization_info.currency }}
+                                    {% if item.discount %}
+                                        {{ item.discount }}{% else %}{{ item.price }}{% endif %}</span>
+                                {% if item.discount %}
+                                    <span class="price-small"
+                                          style="color:var(--paragraph-ash); text-decoration:line-through">{{ localization_info.currency }}
+                                        {{ item.price }}</span>{% endif %}
+                            </div>
+                        </div>
+                    </a>
+                    {% include 'user-view/mobile-menu-view/modal/video_moda_1.html' %}
+                </div>
+            {% else %}
+                {#item Grid view 2#}
+                <div class="col-5 mobile-item-card item_class" style="margin: 0">
+                    <a style="all: unset;cursor: pointer"
+                       href="/menu/item-details/{{ item.id }}/{{ menu_id }}/{{ menu_branch_id }}/">
+                        <div class="row">
+                            <div class="p-0" style="position: relative;">
+                                <img width="100%" class="img-fluid"
+                                     src="{% if item.image %}https://makemymenu.app{{ item.image }}{% else %}{% static 'images/foodPlaceholder.png' %}{% endif %}"
+                                     alt=""
+                                     style="border-radius: 10px 10px 0 0; padding: 0;">
+                                {% if item.video_link %}
+                                    <a data-bs-target="#item_grid_video" data-bs-toggle="modal"
+                                       onclick="insert_item_video_link('{{ item.video_link }}', 'iframe_video_link_item_grid');">
+                                        <img width="100%"
+                                             class="video-play-button-grid img-fluid"
+                                             src="{% static 'images/icons/play-button-grid.svg' %}"
+                                             alt=""
+                                             style="border-radius:10px 0 0 10px"></a>{% endif %}
+                            </div>
+                        </div>
+                        <input class="items_category" value="{{ item.category }}" hidden>
+                        <div class="row p-3 gap-3">
+                            <div class="phone-menu-title">
+                                <p class="body-large mb-2" style="color: var(--title)">{{ item.name }}</p>
+                                <p class="mobile-body-dark max-lines description-color">
+                                    {% if item.description == 'None' or not item.description %}{% else %}
+                                        {{ item.description }}{% endif %}</p>
+                            </div>
+                            <div class="card-price">
+                                <span class="price-large mb-2"
+                                      style="color: var(--mmm-primary)">{{ localization_info.currency }}
+                                    {% if item.discount %}
+                                        {{ item.discount }}{% else %}{{ item.price }}{% endif %}</span>
+                                {% if item.discount %}
+                                    <span class="price-small"
+                                          style="color:var(--paragraph-ash); text-decoration:line-through">{{ localization_info.currency }}
+                                        {{ item.price }}</span>{% endif %}
+                            </div>
+                        </div>
+                    </a>
+                    {% include 'user-view/mobile-menu-view/modal/video_moda_1.html' %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+</div>

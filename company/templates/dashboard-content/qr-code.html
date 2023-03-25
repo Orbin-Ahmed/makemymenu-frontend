@@ -1,0 +1,133 @@
+{% load static %}
+<div class="col-lg-8 col-md-12 mt-5 items-details hide" id="qr-code">
+    <img class="mt-3 make-my-menu-logo" src="{% static 'images/icons/Logo1.svg' %}" alt="">
+    {#Qr Section#}
+    <p class="menu-header-title headline_medium mb-5">QR-Code</p>
+    <div class="row d-flex p-2 mb-5" style="gap:20px">
+        <p class="p-0 m-0 body-large" style="color: var(--mmm-primary);">{{ branch_info.name }}</p>
+        <div class="col qr-card text-center p-3 pt-3">
+            <p class="qr-code-title title-large">
+                Primary Menu
+                {% if branch_info.QR %}
+                    <button style="all: unset;cursor: pointer;float: right;margin-right: 0.5rem;" class="btn"
+                            onclick="printDiv('menu_qr_print_area_{{ branch_info.id }}')"
+                            id="download-menu-qr"><img
+                            src="{% static 'images/icons/no-border-download.svg' %}" alt=""></button>{% endif %}
+            </p>
+            <div id="menu_qr_print_area_{{ branch_info.id }}">
+                <img style="cursor: pointer;padding: 0.5rem;{% if branch_info.QR %}border: 3px solid var(--black);{% endif %}"
+                     src="
+
+
+
+
+
+
+
+
+
+
+
+                             {% if branch_info.QR %}{{ branch_info.QR }}{% else %}{% static 'images/icons/cross-colorful.svg' %}{% endif %}"
+                     alt=""
+                     id="menu_qr_{{ branch_info.id }}"
+                     data-bs-toggle="modal" data-bs-target="#qr_modal"
+                     onclick="set_qr_id('https://makemymenu.io/primary-menu/{{ branch_info.id }}/', '{{ branch_info.company }}')">
+            </div>
+            <input value="https://makemymenu.io/{{ branch_info.id }}/" id="qr_{{ branch_info.id }}" hidden>
+            <p class="sides mt-2 title-large">Total scan: <span><b>{{ branch_info.QR_counter }}</b></span></p>
+        </div>
+
+
+        {#Wifi Qr#}
+        <div class="col qr-card text-center p-3 pt-3">
+            <p class="qr-code-title title-large">
+                WIFI QR
+                {% if branch_info.Wifi %}
+                    <button style="all: unset;cursor: pointer;float: right;margin-right: 0.5rem;" class="btn"
+                            onclick="printDiv('wifi_qr_print_area_{{ branch_info.id }}')"
+                            id="download-offer-qr"><img
+                            src="{% static 'images/icons/no-border-download.svg' %}" alt=""></button>{% endif %}
+            </p>
+            <div>
+                <div id="wifi_qr_print_area_{{ branch_info.id }}">
+                    <img style="cursor: pointer;padding: 0.5rem;{% if branch_info.Wifi %}border: 3px solid var(--black);{% endif %}"
+                         src="
+
+
+
+
+
+
+
+
+
+
+
+                                 {% if branch_info.Wifi %}{{ branch_info.Wifi }}{% else %}{% static 'images/icons/cross-colorful.svg' %}{% endif %}"
+                         alt="" data-bs-toggle="modal"
+                         data-bs-target="#qr_wifi_modal" id="wifi_qr_{{ branch_info.id }}"
+                         onclick="set_qr_id_1('https://makemymenu.io/{{ branch_info.id }}/', '{{ branch_info.company }}')">
+                </div>
+                <p class="sides mt-2 title-large">Wifi QR</p>
+            </div>
+        </div>
+        {#Wifi Qr End#}
+    </div>
+    {#Promotion section#}
+    <form method="post" action="/add-promo/" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="d-flex justify-content-between align-items-center"
+             style="margin: 5rem 0 2rem 0; color: var(--warning)">
+            <p class="menu-header-title headline_medium" style="margin: 0">Self promotion</p>
+        </div>
+
+        <input value="{{ branch_info.id }}" name="branch_id" hidden>
+        <div class="form-floating input-control mb-4" id="input-control">
+            <input type="text" class="form-control " id="promo_name" name="promo_name"
+                   placeholder="Promotion name" required>
+            <label class="floating-input-placeholder d-flex align-items-center"
+                   for="promo_name">Promotion name</label>
+        </div>
+        <div style="display: flex; justify-content: space-between">
+            <div class="form-floating input-control mb-4" id="input-control" style="width: 49%">
+                <input type="file" class="form-control " id="promo_image" name="promo_image"
+                       placeholder="Promotion image" accept="image/png, image/gif, image/jpeg, image/jpg">
+                <label class="floating-input-placeholder d-flex align-items-center"
+                       for="promo_image">Promotion image</label>
+            </div>
+            <div class="form-floating input-control mb-4" id="input-control" style="width: 49%">
+                <input type="text" class="form-control " id="promo_vid" name="promo_vid"
+                       placeholder="Promotional video">
+                <label class="floating-input-placeholder d-flex align-items-center"
+                       for="promo_vid">Promotional video</label>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-between">
+            {% if promotion.promo_name %}
+                <div class="col-5 card">
+                    <div class="d-flex justify-content-between mb-3">
+                        <p class="title-large">{{ promotion.promo_name }}</p>
+                        <a href="/remove-promo/{{ branch_info.id }}/"
+                           style="all: unset;cursor: pointer;"><img src="{% static 'images/icons/dustbin.svg' %}"
+                                                                    alt=""></a>
+                    </div>
+                    {% if promotion.promo_vid %}
+                        <iframe width="100%" height="100%" src="{{ promotion.promo_vid }}"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
+                    {% else %}
+                        <img src="https://makemymenu.app{{ promotion.promo_image }}" alt="">
+                    {% endif %}
+                </div>
+            {% endif %}
+            <div class="col">
+                <button type="submit" class="btn mmm-primary-btn float-end" style="width: unset">Save
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

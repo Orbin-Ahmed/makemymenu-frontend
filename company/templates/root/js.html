@@ -1,0 +1,950 @@
+{% load static %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/4.1.0/intro.min.js"></script>
+<script src="{% static 'js/qrcode-with-logo.js' %}"></script>
+<script src="{% static 'js/qr.js' %}"></script>
+<script src="{% static 'js/validation.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script>
+    $(document).ready(function () {
+        $(".table tr[data-href]").click(function () {
+            window.location.href = $(this).data("href");
+        });
+    });
+</script>
+<script>
+    function edit_branch_set(name, title, phone, address, id) {
+        document.getElementById("branch_update_name").value = name;
+        document.getElementById("branch_update_address").value = address;
+        document.getElementById("branch_update_title").value = title;
+        document.getElementById("branch_update_phone").value = phone;
+        document.getElementById("edit_branch_id").value = id;
+    }
+
+    function delete_branch_id(id) {
+        let temp = document.getElementById(id).value;
+        location.href = "/delete-branch/" + temp + '/'
+    }
+
+    function ownership_transfer(id) {
+        let email = document.getElementById(id).value;
+        location.href = "/transfer-owner/" + email + '/'
+    }
+</script>
+
+
+<script>
+
+    function toggle_left_pointer(index) {
+        let elements = document.querySelectorAll('[id="side-nigga-toggle"]');
+        let eachElement = Array.from(elements);
+
+        for (let i = 0; i < eachElement.length; i++) {
+            if (index === i) {
+                eachElement[i].classList.remove('hidden');
+                eachElement[i].classList.add('active');
+            } else {
+                eachElement[i].classList.remove('active');
+                eachElement[i].classList.add('hidden');
+            }
+
+        }
+
+    }
+
+    function toggle_left_pointer_phone(index) {
+
+        let moreElements = document.querySelectorAll('[id="side-nigga-toggle-phone"]');
+        let moreEachElement = Array.from(moreElements);
+
+        for (let i = 0; i < moreEachElement.length; i++) {
+            if (index === i) {
+                moreEachElement[i].classList.remove('hidden');
+                moreEachElement[i].classList.add('active');
+            } else {
+                moreEachElement[i].classList.remove('active');
+                moreEachElement[i].classList.add('hidden');
+            }
+
+        }
+
+    }
+
+</script>
+
+
+<script>
+    function toggle_menu(id) {
+        let current = document.querySelector(".shown");
+        current.classList.remove('shown');
+        current.classList.add('hide');
+        if (id === "toggle_main") {
+            document.getElementById('main_menu').classList.add('shown');
+            document.getElementById('main_menu').classList.remove('hide');
+        } else if (id === "toggle_combo") {
+            document.getElementById('add_combo').classList.add('shown');
+            document.getElementById('add_combo').classList.remove('hide');
+        } else if (id === "toggle_dashboard") {
+            document.getElementById('dashboard').classList.add('shown');
+            document.getElementById('dashboard').classList.remove('hide');
+        } else if (id === "toggle_contact_us") {
+            document.getElementById('contact_us').classList.add('shown');
+            document.getElementById('contact_us').classList.remove('hide');
+        } else if (id === "toggle_profile") {
+            document.getElementById('profile').classList.add('shown');
+            document.getElementById('profile').classList.remove('hide');
+        } else if (id === "toggle_company") {
+            document.getElementById('company').classList.add('shown');
+            document.getElementById('company').classList.remove('hide');
+        } else if (id === "toggle_items") {
+            document.getElementById('items').classList.add('shown');
+            document.getElementById('items').classList.remove('hide');
+        } else if (id === "toggle_qr") {
+            document.getElementById('qr-code').classList.add('shown');
+            document.getElementById('qr-code').classList.remove('hide');
+        } else if (id === "toggle_packages") {
+            document.getElementById('packages').classList.add('shown');
+            document.getElementById('packages').classList.remove('hide');
+        } else if (id === "toggle_settings") {
+            document.getElementById('settings').classList.add('shown');
+            document.getElementById('settings').classList.remove('hide');
+        } else if (id === "toggle_about_us") {
+            document.getElementById('about_us').classList.add('shown');
+            document.getElementById('about_us').classList.remove('hide');
+
+        } else if (id === "toggle_mmm_faq") {
+            document.getElementById('mmm_faq').classList.add('shown');
+            document.getElementById('mmm_faq').classList.remove('hide');
+
+        } else if (id === "toggle_terms_condition") {
+            document.getElementById('terms_condition').classList.add('shown');
+            document.getElementById('terms_condition').classList.remove('hide');
+
+        } else if (id === "toggle_privacy_policy") {
+            document.getElementById('privacy_policy').classList.add('shown');
+            document.getElementById('privacy_policy').classList.remove('hide');
+
+        } else if (id === "toggle_branches") {
+            document.getElementById('branch').classList.add('shown');
+            document.getElementById('branch').classList.remove('hide');
+        } else {
+            document.getElementById('add_menu').classList.add('shown');
+            document.getElementById('add_menu').classList.remove('hide');
+        }
+    }
+
+    // {#Image Preview and upload#}
+    $("#imageUpload").change(function () {
+        readURL(this);
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                $('#imagePreview').hide();
+                $('#imagePreview').fadeIn(650);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function increment(id) {
+        let current_value = document.getElementById('side-value').innerHTML;
+        let currentValue = parseInt(current_value);
+        document.getElementById('side-value').innerHTML = currentValue + 1;
+    }
+
+    function decrement(id) {
+        let current_value = document.getElementById('side-value').innerHTML;
+        let currentValue = parseInt(current_value);
+        if (currentValue > 0) {
+            document.getElementById('side-value').innerHTML = currentValue - 1;
+        }
+    }
+
+    const fileInput = document.getElementById('food_image_upload');
+    const preview = document.getElementById('food_image_preview');
+    const resetButton = document.getElementById('reset_button');
+
+    try {
+        fileInput.addEventListener('change', () => {
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.addEventListener('load', () => {
+                preview.src = reader.result;
+            });
+
+            reader.readAsDataURL(file);
+        });
+    } catch (e) {
+    }
+    try {
+        resetButton.addEventListener('click', function () {
+            preview.src = '{% static 'images/foodPlaceholder.png' %}';
+            fileInput.value = '';
+        });
+    } catch (err) {
+
+    }
+</script>
+
+<script>
+
+    introJs().addHints();
+    let buttonId = document.getElementById('start-tour')
+    let tour = introJs();
+    try {
+        buttonId.addEventListener('click', function () {
+            tour.start();
+        });
+    } catch (e) {
+
+    }
+
+
+</script>
+
+<script>
+
+
+    const isValidEmail = email => {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    let ownerTransferInput = document.getElementById('owner_transfer_input');
+    let ownerTransferButton = document.getElementById('owner_transfer_confirm');
+
+    let resetVerificationButton = document.getElementById('reset_pass_email_submit');
+    let resetPassInput = document.getElementById('reset-pass-email-verification');
+
+    let ownerTransferModalInput = document.getElementById('owner_transfer_modal_input');
+    let ownerTransferModalButton = document.getElementById('owner_transfer_modal_button');
+
+    try {
+        ownerTransferInput.addEventListener('input', function () {
+            ownerTransferButton.disabled = !(ownerTransferInput.value.trim() !== '' && isValidEmail(ownerTransferInput.value.trim()));
+        });
+    } catch (err) {
+    }
+
+    try {
+        ownerTransferInput.addEventListener('change', function () {
+            ownerTransferButton.disabled = !(ownerTransferInput.value.trim() !== '' && isValidEmail(ownerTransferInput.value.trim()));
+        });
+    } catch (err) {
+    }
+
+
+    try {
+        resetPassInput.addEventListener('input', function () {
+            resetVerificationButton.disabled = !(resetPassInput.value.trim() !== '' && isValidEmail(resetPassInput.value.trim()));
+        });
+    } catch (err) {
+
+    }
+
+    try {
+        resetPassInput.addEventListener('change', function () {
+            resetVerificationButton.disabled = !(resetPassInput.value.trim() !== '' && isValidEmail(resetPassInput.value.trim()));
+        });
+    } catch (err) {
+    }
+
+
+    try {
+        ownerTransferModalInput.addEventListener('input', function () {
+            ownerTransferModalButton.disabled = !(ownerTransferModalInput.value.trim() !== '' && ownerTransferModalInput.value.trim() === 'TRANSFER');
+        });
+    } catch (err) {
+    }
+
+    try {
+        ownerTransferModalInput.addEventListener('change', function () {
+            ownerTransferModalButton.disabled = !(ownerTransferModalInput.value.trim() !== '' && ownerTransferModalInput.value.trim() === 'TRANSFER');
+        });
+    } catch (err) {
+    }
+
+
+</script>
+
+
+<script>
+    var card = document.querySelector('#branch_edit');
+
+    // Add a click event listener to the card
+    try {
+        card.addEventListener('click', function () {
+            // Show the modal
+            let modal = document.querySelector('#add_branches');
+            modal.style.display = 'block';
+        });
+    } catch (err) {
+
+    }
+
+</script>
+
+<script>
+    function postCanvas() {
+        let qrcodeDiv = document.getElementById("qrcode");
+        let canvas = qrcodeDiv.getElementsByTagName("canvas")[0];
+        let dataURL = canvas.toDataURL();
+        let csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+        console.log(dataURL);
+        // Send dataURL to Django view via AJAX
+        $.ajax({
+            type: "POST",
+            url: "/qr-create/",
+            data: {
+                'csrfmiddlewaretoken': csrf_token,
+                'canvas_data': dataURL
+            },
+            success: function (response) {
+                location.href = '/dashboard/'
+            }
+        });
+    }
+</script>
+
+<script>
+    function postCanvas_1() {
+        let qrcodeDiv = document.getElementById("qrcode_1");
+        let canvas = qrcodeDiv.getElementsByTagName("canvas")[0];
+        let dataURL = canvas.toDataURL();
+        let csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+        // Send dataURL to Django view via AJAX
+        $.ajax({
+            type: "POST",
+            url: "/qr-wifi-create/",
+            data: {
+                'csrfmiddlewaretoken': csrf_token,
+                'canvas_data': dataURL
+            },
+            success: function (response) {
+                location.href = '/dashboard/'
+            }
+        });
+    }
+</script>
+
+
+<script>
+    // package switch button toggle
+
+    function buttonEnable(current, index) {
+        console.log(index);
+        console.log(current);
+
+        document.getElementById('package_confirm_button').disabled = index <= current;
+
+    }
+
+
+</script>
+
+
+<script>
+
+    // menu , item and combo check validation
+
+    let combo_add_button = document.getElementById('combo_canvas_add_button');
+    let menu_add_button = document.getElementById('menu_add_button');
+
+    function item_combo_add_button(isForMenu) {
+        let item_total_string = document.getElementById('item_total_list').value;
+        let item_list = item_total_string.split(',');
+        let combo_total_string = document.getElementById('combo_total_list').value;
+        let combo_list = combo_total_string.split(',');
+        let atLeastOneCheckedMenu = false;
+        let atLeastOneCheckedCombo = false;
+
+        for (let i = 0; i < item_list.length - 1; i++) {
+
+            let inputs = document.getElementById(isForMenu ? 'menu_item_checkbox_' + item_list[i] : 'combo_checkbox_' + item_list[i]);
+            if (inputs.checked) {
+                isForMenu ? atLeastOneCheckedMenu = true : atLeastOneCheckedCombo = true;
+                break;
+            }
+        }
+
+        if (isForMenu === true && atLeastOneCheckedMenu === false) {
+            for (let i = 0; i < combo_list.length - 1; i++) {
+                let inputs = document.getElementById('menu_combo_checkbox_' + combo_list[i]);
+                if (inputs.checked) {
+                    atLeastOneCheckedMenu = true;
+                    break;
+                }
+            }
+        }
+        combo_add_button.disabled = !atLeastOneCheckedCombo;
+        menu_add_button.disabled = !atLeastOneCheckedMenu;
+    }
+
+
+</script>
+
+<script>
+    const otpInputs = document.querySelectorAll('.otp-input-field-value');
+
+    try {
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', (event) => {
+                const target = event.target;
+                const inputLength = target.value.length;
+                if (inputLength === 1) {
+                    if (index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    } else {
+                        otpInputs[index].blur();
+                    }
+                } else if (inputLength === 0) {
+                    if (index > 0) {
+                        otpInputs[index - 1].focus();
+                    }
+                }
+            });
+        });
+    } catch (e) {
+
+    }
+</script>
+
+{#validation starts#}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(function () {
+        $('#terms-checkbox').change(function () {
+            if ($(this).is(':checked')) {
+                $('#next-button').prop('disabled', false);
+            } else {
+                $('#next-button').prop('disabled', true);
+            }
+        });
+    });
+</script>
+
+<script>
+    const phoneNumberInput = document.getElementById('phone-number');
+    const trade_license_Input = document.getElementById('trade-license');
+    try {
+        phoneNumberInput.addEventListener('input', function () {
+            const phoneNumber = phoneNumberInput.value.replace(/\D/g, ''); // Remove any non-numeric characters from the input
+            const validPhoneNumberRegex = /^\d{11}$/; // A regular expression that matches exactly 11 digits
+
+            if (validPhoneNumberRegex.test(phoneNumber)) {
+                phoneNumberInput.setCustomValidity('');
+            } else {
+                phoneNumberInput.setCustomValidity('Please enter a valid phone number with 11 digits');
+            }
+        });
+    } catch (e) {
+    }
+    try {
+        phoneNumberInput.addEventListener('keypress', function (event) {
+            const charCode = event.which ? event.which : event.keyCode;
+            if (charCode < 48 || charCode > 57) {
+                event.preventDefault();
+            }
+        });
+    } catch (e) {
+    }
+    try {
+        trade_license_Input.addEventListener('input', function () {
+            const licenseNumber = trade_license_Input.value.replace(/\D/g, ''); // Remove any non-numeric characters from the input
+            const validationsNumberRegex = /^\d{7}$/; // A regular expression that matches exactly 11 digits
+
+            if (validationsNumberRegex.test(licenseNumber)) {
+                trade_license_Input.setCustomValidity('');
+            } else {
+                trade_license_Input.setCustomValidity('Please enter a valid License Number');
+            }
+        });
+    } catch (e) {
+    }
+
+    try {
+        trade_license_Input.addEventListener('keypress', function (event) {
+            const charCode = event.which ? event.which : event.keyCode;
+            if (charCode < 48 || charCode > 57) {
+                event.preventDefault();
+            }
+        });
+    } catch (e) {
+    }
+
+</script>
+
+<script>
+    const tradeLicenseInput = document.getElementById('trade-license');
+    const workingFromHomeCheckbox = document.getElementById('working-from-home');
+
+    try {
+        workingFromHomeCheckbox.addEventListener('change', function () {
+            if (workingFromHomeCheckbox.checked) {
+                tradeLicenseInput.disabled = true;
+                tradeLicenseInput.value = '';
+            } else {
+                tradeLicenseInput.disabled = false;
+            }
+        });
+    } catch (e) {
+    }
+</script>
+
+<script>
+    const branchEmailInput = document.getElementById('branch-manager-email');
+    const branchEmailCheckbox = document.getElementById('no-branch-manager');
+
+    try {
+        branchEmailCheckbox.addEventListener('change', function () {
+            if (branchEmailCheckbox.checked) {
+                branchEmailInput.disabled = true;
+                branchEmailInput.value = '';
+            } else {
+                branchEmailInput.disabled = false;
+            }
+        });
+    } catch (e) {
+
+    }
+</script>
+<script>
+    // Define the initial chart data and options
+    let chartData = {
+        labels: ['day 1', 'day 2', 'day 3', 'day 4', 'day 5', 'day 6', 'day 7'],
+        datasets: [{
+            label: 'No. of QR Scanned',
+            data: [0, 0, 0, 0, 0, 0, 0],
+            fill: true,
+            tension: 0.5,
+            borderColor: 'linear-gradient(180deg, #000000 -252.93%, rgba(0, 0, 0, 0) 134.36%);',
+            backgroundColor: '#9CD5CB',
+            borderWidth: 0.3,
+            pointBackgroundColor: '#9CD5CB',
+        }]
+    };
+    let chartOptions = {};
+
+    // Get the select element and chart canvas
+
+    let dataSelect = document.getElementById("data-select-stat");
+    // Add an event listener to the select element
+
+    dataSelect.addEventListener("change", function () {
+        // Get the selected value from the select element
+        let selectedValue = dataSelect.value;
+        update_chart(selectedValue);
+        // Update the chart data and options based on the selected value
+
+    });
+
+
+    let chartCanvas = document.getElementById("myChart");
+
+    // Create a new chart object with the initial data and options
+    let myChart = new Chart(chartCanvas, {
+        type: 'line',
+        data: chartData,
+        options: chartOptions
+    });
+
+</script>
+<script>
+    function update_chart(selectedValue) {
+        let company_id = document.getElementById("company_id_stat").value;
+        $.ajax({
+            url: "/get-stat-data/",
+            method: "GET",
+            data: {stat_type: selectedValue, company_id: company_id},
+            success: function (response) {
+                let label_list = []
+                let data_list = []
+                for (let key in response["day"]) {
+                    label_list.push(key)
+                    data_list.push(response["day"][key])
+                }
+                let data_list_1 = []
+                let my_obj = [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                ]
+                for (let key in response["month"]) {
+                    data_list_1.push(response["month"][key])
+                    my_obj[parseInt(key) - 1] = response["month"][key]
+                }
+                if (selectedValue === "1") {
+                    myChart.data.labels = label_list
+                    myChart.data.datasets[0].label = "No. of QR Scanned";
+                    myChart.data.datasets[0].data = data_list;
+                } else if (selectedValue === "2") {
+                    myChart.data.labels = label_list
+                    myChart.data.datasets[0].label = "No. of QR Scanned";
+                    myChart.data.datasets[0].data = data_list;
+                } else if (selectedValue === "3") {
+                    myChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                    myChart.data.datasets[0].label = "No. of QR Scanned";
+                    myChart.data.datasets[0].data = my_obj;
+                }
+                myChart.update();
+            },
+            error: function (xhr, status, error) {
+                console.log("Error:", error);
+            }
+        });
+    }
+</script>
+<script>
+    // Get the URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Check if "error" parameter is present
+    if (urlParams.has("error")) {
+        // Call handleSubmit() function
+        handleSubmit();
+    }
+
+    function handleSubmit() {
+        const searchParams = new URLSearchParams(window.location.search);
+        const errorVal = searchParams.get('error');
+        if (errorVal) {
+            Toastify({
+                text: `Error: ${errorVal}`,
+                backgroundColor: '#B00020',
+                duration: 3000,
+                position: "right",
+                gravity: "bottom",
+                stopOnFocus: true,
+            }).showToast();
+            console.log("hello")
+        }
+    }
+</script>
+<script>
+    let fileInput_1 = document.getElementById('combo_image_upload_update');
+    let preview_1 = document.getElementById('combo_image_preview');
+    let resetButton_1 = document.getElementById('combo_reset_button');
+
+    try {
+        fileInput_1.addEventListener('change', () => {
+            console.log("bolo")
+            let file = fileInput_1.files[0];
+            let reader = new FileReader();
+
+            reader.addEventListener('load', () => {
+                preview_1.src = reader.result;
+            });
+            reader.readAsDataURL(file);
+        });
+    } catch (e) {
+    }
+    try {
+        resetButton_1.addEventListener('click', function () {
+            preview_1.src = '{% static 'images/foodPlaceholder.png' %}';
+            fileInput_1.value = '';
+        });
+    } catch (err) {
+    }
+</script>
+<script>
+    function downloadTableAsCSV(tableId, Name) {
+        // Get the table element
+        let table = document.getElementById(tableId);
+        console.log(tableId)
+        let fileName = document.getElementById(Name).value;
+        if (fileName === '') {
+            if (tableId === "combo_table_id") {
+                fileName = "Groups"
+            } else {
+                fileName = "Items"
+            }
+        }
+
+        // Create an array to hold the CSV rows
+        let rows = [];
+
+        // Loop over each row in the table
+        for (let i = 0; i < table.rows.length; i++) {
+            let row = [];
+
+            // Loop over each cell in the row
+            for (let j = 0; j < table.rows[i].cells.length; j++) {
+                // Add the cell value to the row array
+                row.push(table.rows[i].cells[j].innerText);
+            }
+
+            // Add the row to the CSV rows array
+            rows.push(row.join(','));
+        }
+
+        // Create a CSV string from the rows array
+        let csvString = rows.join('\n');
+
+        // Create a link element to download the CSV file
+        let link = document.createElement('a');
+        link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvString));
+        link.setAttribute('download', fileName);
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
+<script>
+    function myprintDiv(tableId) {
+        let printContents = document.getElementById(tableId).outerHTML;
+        let originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
+<script>
+    function update_multiple_item(status, category) {
+        let status_value = document.getElementById(status).value;
+        let category_value = document.getElementById(category).value;
+        let items = []
+        const checkboxes = document.getElementsByName("item_delete_button");
+        let csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                items.push(checkboxes[i].value);
+            }
+        }
+        $.ajax({
+            url: "/update-multiple-item/",
+            method: "POST",
+            data: {
+                'items': items,
+                'csrfmiddlewaretoken': csrf_token,
+                'status': status_value,
+                'category': category_value
+            },
+            success: function (response) {
+                console.log("Success:", response.message);
+                location.href = '/dashboard/';
+            },
+            error: function (xhr, status, error) {
+                location.href = '/dashboard/?error=' + xhr.responseJSON.error;
+            }
+        });
+    }
+</script>
+<script>
+    function update_multiple_combo(status, category) {
+        let status_value = document.getElementById(status).value;
+        let category_value = document.getElementById(category).value;
+        let combos = []
+        const checkboxes = document.getElementsByName("combo_delete_button");
+        let csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                combos.push(checkboxes[i].value);
+            }
+        }
+        $.ajax({
+            url: "/update-multiple-combo/",
+            method: "POST",
+            data: {
+                'combos': combos,
+                'csrfmiddlewaretoken': csrf_token,
+                'status': status_value,
+                'category': category_value
+            },
+            success: function (response) {
+                console.log("Success:", response.message);
+                location.href = '/dashboard/';
+            },
+            error: function (xhr, status, error) {
+                location.href = '/dashboard/?error=' + xhr.responseJSON.error;
+            }
+        });
+    }
+</script>
+<script>
+    let item_count = 0;
+    let combo_count = 0;
+
+    function counter(name, id) {
+        if (name === "item_delete_button") {
+            let item_checkboxes = document.getElementsByName(name);
+            item_count = 0;
+            for (let i = 0; i < item_checkboxes.length; i++) {
+                if (item_checkboxes[i].checked) {
+                    item_count++;
+                }
+            }
+            document.getElementById(id).innerHTML = item_count;
+        } else {
+            let combo_checkboxes = document.getElementsByName(name);
+            combo_count = 0;
+            for (let i = 0; i < combo_checkboxes.length; i++) {
+                if (combo_checkboxes[i].checked) {
+                    combo_count++;
+                }
+            }
+            document.getElementById(id).innerHTML = combo_count;
+        }
+    }
+</script>
+<script>
+    function select_all(name, id) {
+        let checkbox_button = document.getElementById(id).checked;
+        let checkboxes = document.getElementsByName(name);
+        for (let i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = checkbox_button === true;
+        }
+    }
+
+    function updateItemCount(name, id) {
+        let checkboxes = document.getElementsByName(name);
+        let count = 0;
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                count++;
+            }
+        }
+        document.getElementById(id).innerHTML = count;
+    }
+
+</script>
+<script>
+    function change_filter(id) {
+        let current_filter = document.querySelector('.current-filter');
+        current_filter.classList.remove('current-filter');
+        if (id === 'other') {
+            document.getElementById(id).classList.add('current-filter');
+            document.getElementById('category-input-control').style.display = "block";
+            document.getElementById('user_category_input').value = document.getElementById('category_name').value;
+        } else {
+            document.getElementById('category-input-control').style.display = "none";
+            document.getElementById(id).classList.add('current-filter');
+            document.getElementById('user_category_input').value = document.getElementById(id).innerHTML;
+        }
+    }
+</script>
+<script>
+    let searchInput = document.getElementById('search_item_canvas');
+    let itemContainer = document.getElementById('item_list_container');
+    let items_name = itemContainer.querySelectorAll('.items_name');
+
+    try {
+        searchInput.addEventListener('input', (event) => {
+            let searchQuery = event.target.value.toLowerCase();
+            items_name.forEach((item) => {
+                let itemName = item.querySelector('p').textContent.toLowerCase();
+                let itemRow = item.closest('.items_row');
+                if (itemName.includes(searchQuery)) {
+                    itemRow.classList.remove('stash')
+                    itemRow.classList.add('showStash')
+                } else {
+                    itemRow.classList.remove('showStash')
+                    itemRow.classList.add('stash')
+                }
+            });
+        });
+    } catch (e) {
+
+    }
+</script>
+<script>
+    let searchInput_1 = document.getElementById('search_item_menu_canvas');
+    let itemContainer_1 = document.getElementById('item_menu_list_container');
+    let items_name_1 = itemContainer_1.querySelectorAll('.items_name');
+
+    try {
+        searchInput_1.addEventListener('input', (event) => {
+            let searchQuery = event.target.value.toLowerCase();
+            items_name_1.forEach((item) => {
+                let itemName = item.querySelector('p').textContent.toLowerCase();
+                let itemRow = item.closest('.items_row');
+                if (itemName.includes(searchQuery)) {
+                    itemRow.classList.remove('stash')
+                    itemRow.classList.add('showStash')
+                } else {
+                    itemRow.classList.remove('showStash')
+                    itemRow.classList.add('stash')
+                }
+            });
+        });
+    } catch (e) {
+
+    }
+</script>
+<script>
+    let searchInput_2 = document.getElementById('search_group_menu_canvas');
+    let itemContainer_2 = document.getElementById('combo_menu_list_container');
+    let items_name_2 = itemContainer_2.querySelectorAll('.items_name');
+
+    try {
+        searchInput_2.addEventListener('input', (event) => {
+            let searchQuery = event.target.value.toLowerCase();
+            items_name_2.forEach((item) => {
+                let itemName = item.querySelector('p').textContent.toLowerCase();
+                let itemRow = item.closest('.items_row');
+                if (itemName.includes(searchQuery)) {
+                    itemRow.classList.remove('stash')
+                    itemRow.classList.add('showStash')
+                } else {
+                    itemRow.classList.remove('showStash')
+                    itemRow.classList.add('stash')
+                }
+            });
+        });
+    } catch (e) {
+
+    }
+</script>
+<script>
+    function handleCheckboxChange(id) {
+        let isChecked = $("#" + id).is(":checked");
+        let branch_id = document.getElementById('default_branch_id').value;
+        if (id === "system_update_checkbox") {
+            $.ajax({
+                type: "GET",
+                url: "/settings-system-update/",
+                data: {'system_update': isChecked, 'branch_id': branch_id},
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        } else {
+            $.ajax({
+                type: "GET",
+                url: "/settings-change-log/",
+                data: {'change_log': isChecked, 'branch_id': branch_id},
+                success: function (data) {
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        }
+    }
+
+</script>

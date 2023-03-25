@@ -1,0 +1,25 @@
+<!-- Modal -->
+{% load static %}
+<div class="modal fade" id="promo_modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                {% if menu_info_id.promo_vid %}
+                    <iframe width="100%" height="315" src="{{ menu_info_id.promo_vid }}"
+                            title="YouTube video player" id="iframe_video_link_item_grid"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                {% else %}
+                    <button type="button" class="btn-close promo_cross-btn" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    <img style="width: 100%"
+                         src="https://makemymenu.app{{ menu_info_id.promo_image }}"
+                         alt="">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

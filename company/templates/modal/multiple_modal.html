@@ -1,0 +1,47 @@
+{#Modal#}
+<div class="modal fade" id="update_multiple_items" tabindex="-1" aria-labelledby="add_itemsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            {#            <div class="modal-header">#}
+            {#                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>#}
+            {#                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+            {#            </div>#}
+            <div class="modal-body">
+                <p class="plan-title" id="exampleModalLabel" style="margin-bottom: 1rem">Update Multiple Items</p>
+                <div class="row">
+                    <div class="col-12">
+                        <form method="post" action="/add-item/" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="d-flex justify-content-space-between">
+                                <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                                    <select type="text" class="form-select" id="item_status" name="item_status"
+                                            required>
+                                        <option value="Available" selected>Available</option>
+                                        <option value="Not Available">Not Available</option>
+                                        <option value="Upcoming">Upcoming</option>
+                                    </select>
+                                    <label class="floating-input-placeholder" for="Status">Status</label>
+                                    <div class="error"></div>
+                                </div>
+                                <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                                    <input type="text" class="form-control" id="item_category_update"
+                                           name="item_category_update"
+                                           value="{{ item_list.category }}"
+                                           placeholder="Category" required>
+                                    <label class="floating-input-placeholder"
+                                           for="item_category_update">Category</label>
+                                    <div class="error"></div>
+                                </div>
+                            </div>
+                            <button onclick="" type="submit" class="btn mmm-round-btn float-center float-end mt-4"
+                                    id="item_download_modal" data-bs-dismiss="modal" aria-label="Close"
+                                    style="width: 30%">
+                                Save
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

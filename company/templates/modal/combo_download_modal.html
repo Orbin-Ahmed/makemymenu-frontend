@@ -1,0 +1,48 @@
+<!-- Modal -->
+{% load static %}
+<div class="modal fade" id="combo_download_modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="row">
+                                <p class="text-start">To download all of your combo in one go, please select the file
+                                    format you
+                                    prefer:</p>
+                                <div class="col">
+                                    <div class="form-floating input-control" id="input-control">
+                                        <input type="text" class="form-control " id="combo_download_filename"
+                                               name="combo_download_filename"
+                                               placeholder="e.g my file">
+                                        <label class="floating-input-placeholder" for="combo_download_modal">File
+                                            Name</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating input-control" id="input-control">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="floatingSelect"
+                                                    aria-label="Floating label select example">
+                                                <option selected>CVS</option>
+                                            </select>
+                                            <label for="floatingSelect">Format</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="downloadTableAsCSV('combo_table_id','combo_download_filename');" type="button" class="btn mmm-round-btn float-center float-end mt-4"
+                            id="combo_download_modal" data-bs-dismiss="modal" aria-label="Close" style="width: 30%">
+                        Download
+                    </button>
+                </form>
+                {#Form end#}
+            </div>
+        </div>
+
+    </div>
+</div>

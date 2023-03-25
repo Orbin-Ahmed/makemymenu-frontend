@@ -1,0 +1,62 @@
+<!-- Modal -->
+{% load static %}
+<div class="modal fade" id="item_update_modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form method="post" action="/insert-items/" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="row gap-4">
+                               <p class="text-start title-large">Quick Updates</p>
+                                <div class="col-12">
+
+                                    <div class="form-floating input-control" id="input-control">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="item_status_update_select" name="item_status_update"
+                                                    aria-label="Floating label select example">
+                                                <option selected value="Available">Available</option>
+                                                <option value="Not Available">Not Available</option>
+                                                <option value="Upcoming">Upcoming</option>
+                                            </select>
+                                            <label for="item_status_update">Status</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+{#                                <div class="col-12">#}
+{#                                    <div class="form-floating input-control" id="input-control">#}
+{#                                        <div class="form-floating">#}
+{#                                            <select class="form-select" id="floatingSelect" name="item_branch_update"#}
+{#                                                    aria-label="Floating label select example">#}
+{#                                                <option selected value="0">Xls</option>#}
+{#                                                <option selected value="1">Branch 1</option>#}
+{#                                                <option selected value="1">Branch 2</option>#}
+{#                                            </select>#}
+{#                                            <label for="item_branch_update">Branch</label>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+                                <div class="col-12">
+
+                                    <div class="form-floating input-control" id="input-control">
+                                        <input class="form-control" type="text" placeholder="Write Here" name="item_category_update" id="item_category_update_select">
+                                        <label class="floating-input-placeholder" for="item_category_update_select">Category</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="update_multiple_item('item_status_update_select', 'item_category_update_select');" type="button" class="btn mmm-round-btn float-center float-end mt-4 body-large"
+                            id="item_download_modal" data-bs-dismiss="modal" aria-label="Close" style="width: 30%">
+                        Submit
+                    </button>
+                    {#Form end#}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Menu</title>
+    {% include 'root/css.html' %}
+    <link rel="stylesheet" href="{% static 'css/phone.css' %}">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+
+</head>
+<body>
+<div class="container-fluid text-center">
+    <div class="row d-flex justify-content-center">
+
+        <!-- Top bar--->
+        <div class="top-bar" style="padding: 1rem;">
+            <div class="row">
+                <div class="col-9 d-flex align-items-center text-start">
+                    <a style="all: unset;cursor: pointer" onclick="history.back()"><span
+                            class="material-symbols-outlined">arrow_back</span></a>
+                </div>
+                {#                <div class="col-3 d-flex gap-3 align-items-center text-end justify-content-end">#}
+                {#                    <img src="{% static 'images/icons/promotion_color_icon.svg' %}" alt="">#}
+                {#                    <img class="dark-mode-toggle" id="dark-mode-icon" onclick="ThemeToggle()"#}
+                {#                         src="{% static 'images/icons/dark_mode.svg' %}" alt="">#}
+                {#                    <img class="dark-mode-toggle close" id="light-mode-icon" onclick="ThemeToggle()"#}
+                {#                         src="{% static 'images/icons/light_mode.svg' %}" alt="">#}
+                {#                </div>#}
+            </div>
+        </div>
+
+        <!-- items bar--->
+        <div class="col">
+            <div class="row">
+                <div class="p-0" style="position: relative;">
+                    <img width="100%" src="
+
+
+                            {% if item_details.image %}{{ item_details.image }}{% else %}{% static 'images/foodPlaceholder.png' %}{% endif %}"
+                         alt="">
+                </div>
+                <div class="item-details-content p-4" style="background: var(--gre-background);">
+                    <div class="row" style="padding: 1rem 0.7rem">
+                        <div class="col-7 text-start phone-menu-title p-0">
+                            <p class="title-large" style="color: var(--title)">{{ item_details.name }}</p>
+                        </div>
+                        <div class="col-5 text-end card-price{% if not item_details.discount %} d-flex align-items-center justify-content-end {% endif %}">
+
+                            <p class="price-large mb-2"
+                               style="color: var(--mmm-primary)">{{ localization_info.currency }}
+                                {% if item_details.discount %}{{ item_details.discount }}{% else %}
+                                    {{ item_details.price }}{% endif %}</p>
+                            {% if item_details.discount %}
+                                <p class="price-small"
+                                   style="color:var(--paragraph-ash); text-decoration:line-through">{{ localization_info.currency }}
+                                    {{ item_details.price }}</p>{% endif %}
+                        </div>
+                    </div>
+                    <div class=" row text-start phone-menu-title mb-4">
+                        <p class="mobile-body-dark" style="color: var(--title)">
+                            {% if item_details.description %}{{ item_details.description }}{% endif %}</p>
+                    </div>
+
+                    {#                Suggestion start#}
+                    <p class="text-start mobile-header body-medium">suggestions</p>
+                    {% for item in suggestions %}
+                        <div class="row mobile-item-card">
+                            <div class="col-2 p-0" style="position: relative;">
+                                <img width="100%" height="100%" src="
+
+
+                                        {% if item.image %}https://makemymenu.app{{ item.image }}{% else %}{% static 'images/foodPlaceholder.png' %}{% endif %}"
+                                     alt=""
+                                     style="border-radius:10px 0 0 10px;float: left;">
+                            </div>
+                            <div class="col-10 d-grid align-items-center p-4">
+                                <div class="phone-menu-title d-flex align-items-center justify-content-between">
+                                    <p class="body-large" style="text-align: left;color: var(--title);">{{ item.name }}</p>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        {% if item.discount %}
+                                            <h4 style="text-decoration: line-through;font-size: 10px;margin-right: 5px;color:var(--paragraph-ash)"
+                                                class="text-end price-small">{{ localization_info.currency }}
+                                                {{ item.price }}</h4>{% endif %}
+                                        <h4 class="text-end price-large">{{ localization_info.currency }}
+                                            {% if item.discount %}{{ item.discount }}{% else %}
+                                                {{ item.price }}{% endif %}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {#                Suggestion end#}
+                </div>
+            </div>
+        </div>
+        <!-- items bar end--->
+    </div>
+</div>
+{% include 'user-view/mobile-menu-view/modal/video_modal.html' %}
+{% include 'root/js.html' %}
+<script src="{% static 'js/phone.js' %}"></script>
+</body>
+</html>

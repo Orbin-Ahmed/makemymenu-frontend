@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Plan</title>
+    {% include 'root/css.html' %}
+</head>
+<body style="background-color: var(--background)">
+<div class="container-fluid">
+    <div class="sign-in-icon">
+        <a href="/dashboard/"><img src="{% static 'images/icons/Logo1.svg' %}" alt="logo"></a>
+    </div>
+    <p class="display-large text-center">Choose Your Plan</p>
+    <p class="text body-medium text-center mb-5">Please choose a plan which is more suitable for your business</p>
+    <div class="row d-flex justify-content-center">
+        <P style="color: red">{{ error }}</P>
+        {#plan area#}
+        <div class="col-2">
+            <div class="card mb-4" style="padding: 0;margin: 0;">
+                <form method="post" action="/plans/">
+                    {% csrf_token %}
+                    <div class="card-body plan-card">
+                        <p class="plan-title body-large mb-4">Easy Menu</p>
+                        <p class="plan-price mb-4">$0.99</p>
+                        <p class="plan-description mb-4">
+                            It is a long established fact that a reader will be distracted by the readable content of a
+                            page
+                            when looking at its layout. The point of using Lorem
+                        </p>
+                        <ul class="mt-3 mb-4 plan-facilities">
+                            <li class="features"><span>Unlimited QR-Code Generation</span></li>
+                            <li>Custom QR-Code</li>
+                            <li>Branch Facilities</li>
+                            <li>Analytics</li>
+                            <li>AI Booster</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer text-center" style="padding: 1rem 0">
+                        <button type="submit" class="btn plan-button" value="1" name="plans_level">Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="card mb-4" style="padding: 0;margin: 0;">
+                <form method="post" action="/plans/">
+                    {% csrf_token %}
+                    <div class="card-body plan-card">
+                        <p class="plan-title  body-large mb-4">Creator Pro</p>
+                        <p class="plan-price mb-4">$9.99</p>
+                        <p class="plan-description mb-4">
+                            It is a long-established fact that a reader will be distracted by the readable content of a
+                            page
+                            when looking at its layout. The point of using Lorem
+                        </p>
+                        <ul class="mt-3 mb-4 plan-facilities">
+                            <li class="features"><span>Unlimited QR-Code Generation</span></li>
+                            <li class="features"><span>Custom QR-Code</span></li>
+                            <li>Branch Facilities</li>
+                            <li>Analytics</li>
+                            <li>AI Booster</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer text-center" style="padding: 1rem 0">
+                        <button type="submit" class="btn plan-button" value="2" name="plans_level">Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-2" style="margin-top: -0.75rem">
+            <div class="card mb-4" style="padding: 0;margin: 0;">
+                <form method="post" action="/plans/">
+                    {% csrf_token %}
+                    <div class="card-header mmm-card-header label-light">
+                        Recommended
+                    </div>
+                    <div class="card-body plan-card">
+                        <p class="plan-title  body-large mb-4">Business Booster</p>
+                        <p class="plan-price mb-4">$19.99</p>
+                        <p class="plan-description mb-4">
+                            It is a long established fact that a reader will be distracted by the readable content of a
+                            page
+                            when looking at its layout. The point of using Lorem
+                        </p>
+                        <ul class="mt-3 mb-4 plan-facilities">
+                            <li class="features"><span>Unlimited QR-Code Generation</span></li>
+                            <li class="features"><span>Custom QR-Code</span></li>
+                            <li class="features"><span>Branch Facilities</span></li>
+                            <li class="features"><span>Analytics</span></li>
+                            <li>AI Booster</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer text-center" style="padding: 1rem 0;background-color: var(--black);">
+                        <button type="submit" class="btn body-large" style="color: var(--white)" value="3"
+                                name="plans_level">Get started today
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="card mb-4" style="padding: 0;margin: 0;">
+                <form method="post" action="/plans/">
+                    {% csrf_token %}
+                    <div class="card-body plan-card">
+                        <p class="plan-title  body-large mb-4">Enterprise Excel</p>
+                        <p class="plan-price mb-4">$49.99</p>
+                        <p class="plan-description mb-4">
+                            It is a long established fact that a reader will be distracted by the readable content of a
+                            page
+                            when looking at its layout. The point of using Lorem
+                        </p>
+                        <ul class="mt-3 mb-4 plan-facilities">
+                            <li class="features"><span>Unlimited QR-Code Generation</span></li>
+                            <li class="features"><span>Custom QR-Code</span></li>
+                            <li class="features"><span>Branch Facilities</span></li>
+                            <li class="features"><span>Analytics</span></li>
+                            <li class="features"><span>AI Booster</span></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer text-center" style="padding: 1rem 0">
+                        <button type="submit" class="btn plan-button" value="4" name="plans_level">Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="card mb-4" style="padding: 0;margin: 0;">
+                <form method="post" action="/plans/">
+                    {% csrf_token %}
+                    <div class="card-body plan-card">
+                        <p class="plan-title  body-large mb-4">Custom</p>
+                        <p class="plan-price mb-4">Get the price</p>
+                        <p class="plan-description mb-4">
+                            It is a long established fact that a reader will be distracted by the readable content of a
+                            page
+                            when looking at its layout. The point of using Lorem
+                        </p>
+                        <ul class="mt-3 mb-4 plan-facilities">
+                            <li class="features"><span>Unlimited QR-Code Generation</span></li>
+                            <li class="features"><span>Custom QR-Code</span></li>
+                            <li class="features"><span>Branch Facilities</span></li>
+                            <li class="features"><span>Analytics</span></li>
+                            <li class="features"><span>AI Booster</span></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer text-center" style="padding: 1rem 0">
+                        <button type="submit" class="btn plan-button" value="5" name="plans_level">Contact Us</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {#plan area end#}
+    </div>
+</div>
+{% include 'root/js.html' %}
+<script>
+    // Check if the parameter is present in the URL
+    if (window.location.search.indexOf('error=') > -1) {
+        // Remove the parameter from the URL
+        let url = window.location.href.split('?')[0];
+        window.history.replaceState({}, '', url);
+    }
+</script>
+</body>
+</html>

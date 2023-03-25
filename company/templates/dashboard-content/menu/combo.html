@@ -1,0 +1,132 @@
+{% load static %}
+<div class="col-lg-8 col-md-12 mt-5 items-details hide" id="add_combo">
+    {#Top image#}
+    <img class="mt-3 make-my-menu-logo" src="{% static 'images/icons/Logo1.svg' %}" alt="">
+    <form method="post" action="/delete-combo/">
+        {% csrf_token %}
+        <div class="row mb-4">
+            <div class="col-3">
+                <P class="menu-header-title headline_medium" style="margin-bottom: 0;">Group</P>
+            </div>
+
+            <div class="col-9 d-flex justify-content-end align-items-end quick-action">
+
+            <!--Action dropdown-->
+                <div class="dropdown" style="margin-right: 10px">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                     <span class="body-large">Actions</span>
+                    </button>
+                    <ul class="dropdown-menu body-medium">
+                        <li><a class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#create_combo_canvas" href="#">Create</a></li>
+                        <li ><a data-bs-toggle="modal" data-bs-target="#combo_download_modal" class="dropdown-item" href="#">Download</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="myprintDiv('combo_table_id');">Print</a></li>
+                    </ul>
+                </div>
+
+                <!--Action dropdown-->
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu body-medium">
+{#                        <li><a class="dropdown-item" href="#">Quick Update</a></li>#}
+                        <li><a class="dropdown-item" href="#" ><button style="all: unset;cursor: pointer;" type="submit">Delete</button></a></li>
+                       <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#group_update_modal"><button style="all:unset; cursor:pointer;">Quick Updates</button></a></li>
+                    </ul>
+                </div>
+
+
+{#            <div class="col-9 d-flex justify-content-end align-items-end quick-action">#}
+{#                <button type="button" style="all: unset;cursor:pointer;" data-bs-toggle="offcanvas"#}
+{#                        data-bs-target="#create_combo_canvas"#}
+{#                        aria-controls="create_combo_canvas"><img src="{% static 'images/icons/Combo.svg' %}" alt=""#}
+{#                                                                 width="40px">#}
+{#                </button>#}
+{#                <button type="submit" style="all: unset;cursor: pointer;"><img#}
+{#                        src="{% static 'images/icons/Delete.svg' %}" alt=""#}
+{#                        width="40px"></button>#}
+{#            </div>#}
+
+            </div>
+        </div>
+        {#Table#}
+        <div class="container" style="height: 42rem;overflow: auto">
+            {% if combo_info|length != 0 %}
+                {% include 'tables/combo_tables.html' %}
+            {% endif %}
+            {% if combo_info|length == 0 %}
+                <div class="row d-flex p-2 mb-5" style="gap:20px">
+                    <div class="col qr-card text-center p-3 pt-3">
+                        <div>
+                            <img style="cursor: pointer;"
+                                 src="{% static 'images/icons/cross-colorful.svg' %}" class="pt-3 pb-3"
+                                 alt=""
+                                 data-bs-target="#create_combo_canvas"
+                                 data-bs-toggle="offcanvas">
+                        </div>
+                        <p class="mt-2 title-large">Please add Combo for this Menu</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+
+{#Modal#}
+<div class="modal fade" id="add_add_on" tabindex="-1" aria-labelledby="add_add_onLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            {#            <div class="modal-header">#}
+            {#                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>#}
+            {#                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+            {#            </div>#}
+            <div class="modal-body">
+                <p class="plan-title" id="exampleModalLabel" style="margin-bottom: 1rem">Add Add-ons</p>
+                <div class="row">
+                    <div class="col-12">
+                        {#Form#}
+                        {#Name#}
+                        <div class="form-floating input-control" id="input-control">
+                            <input type="text" class="form-control " id="item_name" name="item_name"
+                                   placeholder="Name" required>
+                            <label class="floating-input-placeholder" for="item_name">Name<span
+                                    style="color:black">*</span></label>
+                            <div class="error"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between">
+                            <div class="form-floating input-control" id="input-control" style="width: 29%;">
+                                <input type="text" class="form-control " id="item_price" name="item_price"
+                                       placeholder="Price" required>
+                                <label class="floating-input-placeholder" for="item_price">Price<span
+                                        style="color:black">*</span></label>
+                                <div class="error"></div>
+                            </div>
+                            <div class="form-floating input-control" id="input-control" style="width: 69%;">
+                                <input type="file" class="form-control " id="item_file" name="item_file"
+                                       placeholder="Logo file" accept=".png, .jpg, .jpeg" required>
+                                <label class="floating-input-placeholder" for="item_file">Logo file<span
+                                        style="color:black">*</span></label>
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                        {#Nid#}
+                        <div class="form-floating input-control" id="input-control">
+                            <textarea type="text" class="form-control" style="height: 5rem" id="item_description"
+                                      name="item_description"
+                                      placeholder="Description" required></textarea>
+                            <label class="floating-input-placeholder" for="item_description">Description<span
+                                    style="color:black">*</span></label>
+                            <div class="error"></div>
+                        </div>
+                        <button class="btn mmm-round-btn float-end">Add</button>
+                        {#Form end#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

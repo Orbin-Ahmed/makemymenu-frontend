@@ -1,0 +1,413 @@
+{% load static %}
+<div class="col-lg-8 col-md-12 mt-5 items-details hide" id="settings">
+    <img class="mt-3 make-my-menu-logo" src="{% static 'images/icons/Logo1.svg' %}" alt="">
+    <p class="menu-header-title headline_medium" style="margin-left: 1rem">Settings</p>
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12">
+                <div class="accordion d-grid gap-2" id="accordionExample">
+                    {#                    <div class="accordion-item">#}
+                    {##}
+                    {#                        <h2 class="accordion-header" id="headingOne">#}
+                    {#                            <button class="accordion-button" type="button" data-bs-toggle="collapse"#}
+                    {#                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">#}
+                    {#                                Theme#}
+                    {#                            </button>#}
+                    {#                        </h2>#}
+
+                    {#                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"#}
+                    {#                             data-bs-parent="#accordionExample">#}
+                    {#                            <div class="accordion-body">#}
+                    {#                                <div class="row">#}
+                    {#                                    <div class="col-6">#}
+                    {#                                        <p class="theme">Dark Theme </p>#}
+                    {#                                        <p class="theme_toogle">Toggle switch to enable dark theme</p>#}
+                    {#                                    </div>#}
+                    {##}
+                    {#                                    <div class="col-6 d-flex justify-content-end">#}
+                    {#                                        <label class="switch mt-2">#}
+                    {#                                            <input type="checkbox">#}
+                    {#                                            <span class="slider round"></span>#}
+                    {#                                        </label>#}
+                    {#                                    </div>#}
+                    {#                                </div>#}
+                    {##}
+                    {#                            </div>#}
+                    {#                        </div>#}
+
+                    {#                    </div>#}
+                    {#                    <div class="accordion-item">#}
+                    {#                        <h2 class="accordion-header" id="headingTwo">#}
+                    {#                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"#}
+                    {#                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">#}
+                    {#                                Language#}
+                    {#                            </button>#}
+                    {#                        </h2>#}
+                    {#                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"#}
+                    {#                             data-bs-parent="#accordionExample">#}
+                    {#                            <div class="accordion-body">#}
+                    {#                                <div class="form-floating input-control" id="input-control" style="width: 49%;">#}
+                    {#                                    <input type="text" class="form-control d-flex" id="signUp_email" name="signUp_email"#}
+                    {#                                           placeholder="Email" required>#}
+                    {#                                    <label class="floating-input-placeholder d-flex align-items-center" style="margin-top: 5px" for="signUp_email">Select language<span#}
+                    {#                                            style="color:black"></span>#}
+                    {#                                    </label>#}
+                    {##}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {#                    <div class="accordion-item">#}
+                    {#                        <h2 class="accordion-header" id="headingThree">#}
+                    {#                            <button class="accordion-button" type="button" data-bs-toggle="collapse"#}
+                    {#                                    data-bs-target="#collapseThree" aria-expanded="true"#}
+                    {#                                    aria-controls="collapseThree">#}
+                    {#                                Branch#}
+                    {#                            </button>#}
+                    {#                        </h2>#}
+                    {#                        <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree"#}
+                    {#                             data-bs-parent="#accordionExample">#}
+                    {#                            <div class="accordion-body">#}
+                    {#                                <table class="table table-hover table-responsive">#}
+                    {#                                    <thead>#}
+                    {#                                    <tr>#}
+                    {#                                        <th scope="col" class="branch-name_settings text-muted">Branch name</th>#}
+                    {#                                        <th scope="col" class="branch-name_settings text-muted">Branch manager name</th>#}
+                    {#                                        <th scope="col" class="branch-name_settings text-muted">{% if data.manager_email %}Branch Manager Email{% else %}#}
+                    {#                                                   Branch Email{% endif %}#}
+                    {#                                        </th>#}
+                    {#                                    </tr>#}
+                    {#                                    </thead>#}
+                    {#                                    <tbody>#}
+                    {#                                    {% for data in branch_info %}#}
+                    {#                                        <tr>#}
+                    {#                                            <td class="branch_settings">{{ data.name }}</td>#}
+                    {#                                            <td class="branch_settings">{% if data.manager_name %}#}
+                    {#                                                {{ data.manager_name }}{% else %}Manager sign-up pending{% endif %}#}
+                    {#                                            </td>#}
+                    {#                                            <td class="branch_settings">#}
+                    {#                                                {% if data.manager_email %}{{ data.manager_email }}{% else %}#}
+                    {#                                                    {{ data.email }}{% endif %}</td>#}
+                    {#                                        </tr>#}
+                    {#                                    {% endfor %}#}
+                    {#                                    </tbody>#}
+                    {#                                </table>#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+
+                    {# Owner transfer field#}
+                    {% if user_info.designation == 'Owner' %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFour" aria-expanded="false"
+                                        aria-controls="collapseFour">
+                                    <img src="{% static 'images/icons/transfer_color.svg' %}" style="padding: 0.5rem;"
+                                         alt=""><span class="title-large"> Transfer of Ownership</span>
+                                </button>
+
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse show"
+                                 aria-labelledby="headingFour"
+                                 data-bs-parent="#accordionExample">
+                                <div class="accordion-body settings-input d-flex justify-content-between align-items-center">
+
+                                    <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                                        <input type="email" class="form-control " id="owner_transfer_input"
+                                               name="owner_transfer_input"
+                                               placeholder="Email" required>
+                                        <label class="floating-input-placeholder d-flex align-items-center"
+                                               for="owner_transfer_input">Email</label>
+                                    </div>
+
+                                    <a>
+                                        <button data-bs-toggle="modal" data-bs-target="#confirm_owner_transfer"
+                                                type="button" id="owner_transfer_confirm"
+                                                class="btn mmm-round-btn float-end" style="width: unset;" disabled>
+                                            <span class="body-large">Invite</span>
+                                        </button>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {#Owner transfer field end#}
+
+                    {#give feedback field#}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                <img src="{% static 'images/icons/givefeed_color.svg' %}" style="padding: 0.5rem;"
+                                     alt=""><span class="title-large">Give feedback</span>
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <form method="post" action="/post-feedback/">
+                                    {% csrf_token %}
+                                    <div class="mt-3 settings-input">
+                                        <div class="form-floating input-control mb-4" id="input-control">
+                                            <input type="text" class="form-control " id="f_name" name="feedback_subject"
+                                                   placeholder="First Name" required>
+                                            <label class="floating-input-placeholder d-flex align-items-center"
+                                                   for="feedback_subject">Subject</label>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 settings-input">
+
+                                        <div class="form-floating input-control setting_description_form"
+                                             id="input-control">
+                                        <textarea class="form-control " id="f_name" name="feedback_description"
+                                                  placeholder="Description" style="height: 11rem;" required></textarea>
+                                            <label class="floating-input-placeholder"
+                                                   for="feedback_description">Description</label>
+                                        </div>
+
+                                    </div>
+
+                                    <button type="submit" class="btn mmm-round-btn float-end mt-3 mb-3 body-medium"
+                                            style="width: unset">Send
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {#give feedback field end#}
+
+                    {#Date and Number field#}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSix">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                <img src="{% static 'images/icons/date_color.svg' %}" style="padding: 0.5rem;"
+                                     alt=""><span class="title-large">Date & Number Format</span>
+                            </button>
+                        </h2>
+                        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <form method="post" action="/set-date-format/">
+                                    {% csrf_token %}
+                                    <input value="{{ branch_info.id }}" name="branch_id" hidden>
+                                    <div style="display: flex; justify-content: space-between">
+                                        <div class="form-floating input-control mb-4" id="input-control"
+                                             style="width: 32%">
+                                            <select class="form-select" id="date_format" name="date_format" required>
+                                                <option selected
+                                                        value="{{ format_info.date_format }}">{{ format_info.date_format }}</option>
+                                                <option value="dd-mm-yyyy">dd-mm-yyyy</option>
+                                                <option value="mm-dd-yyyy">mm-dd-yyyy</option>
+                                                <option value="yyyy-dd-mm">yyyy-dd-mm</option>
+                                                <option value="yyyy-mm-dd">yyyy-mm-dd</option>
+                                            </select>
+                                            <label class="floating-input-placeholder d-flex align-items-center"
+                                                   for="date_format">Date Format*</label>
+                                        </div>
+                                        <div class="form-floating input-control mb-4" id="input-control"
+                                             style="width: 32%">
+                                            <select class="form-select" id="time_format" name="time_format" required>
+                                                <option selected
+                                                        value="{{ format_info.time_format }}">{{ format_info.time_format }}</option>
+                                                <option value="hh:mm:ss">hh:mm:ss</option>
+                                                <option value="mm:hh:ss">mm:hh:ss</option>
+                                                <option value="ss:mm:hh">ss:mm:hh</option>
+                                                <option value="ss:hh:mm">ss:hh:mm</option>
+                                            </select>
+                                            <label class="floating-input-placeholder d-flex align-items-center"
+                                                   for="time_format">Time Format*</label>
+                                        </div>
+                                        <div class="form-floating input-control mb-4" id="input-control"
+                                             style="width: 32%">
+                                            <input type="number" class="form-control " id="currency_precision"
+                                                   name="currency_precision"
+                                                   value="{{ format_info.currency_precision }}"
+                                                   placeholder="Currency Precision" required
+                                                   step="1" min="2" max="5">
+                                            <label class="floating-input-placeholder d-flex align-items-center"
+                                                   for="currency_precision">Currency Precision</label>
+                                        </div>
+                                    </div>
+                                    {#                                <div style="display: flex; justify-content: space-between">#}
+                                    {#                                    <div class="form-floating input-control mb-4" id="input-control" style="width: 49%">#}
+                                    {#                                        <input type="time" class="form-control " id="f_name" name=""#}
+                                    {#                                               placeholder="First Name" required>#}
+                                    {#                                        <label class="floating-input-placeholder d-flex align-items-center"#}
+                                    {#                                               for="feedback_subject">Time Format*</label>#}
+                                    {#                                    </div>#}
+                                    {#                                    <div class="form-floating input-control mb-4" id="input-control" style="width: 49%">#}
+                                    {#                                        <input type="number" class="form-control " id="currency_precision" name=""#}
+                                    {#                                               placeholder="Currency Precision" required#}
+                                    {#                                               step="any" min="0" max="10">#}
+                                    {#                                        <label class="floating-input-placeholder d-flex align-items-center"#}
+                                    {#                                               for="currency_precision">Currency Precision</label>#}
+                                    {#                                    </div>#}
+                                    {#                                </div>#}
+                                    <div style="display: flex; justify-content: space-between">
+                                        <div class="form-floating input-control mb-4" id="input-control"
+                                             style="width: 49%">
+                                            <select class="form-select" id="number_format" name="number_format"
+                                                    required>
+                                                <option selected
+                                                        value="{{ format_info.number_format }}">{{ format_info.number_format }}</option>
+                                                <option value="#,###. ##">#,###. ##</option>
+                                                <option value="##, #.###">##, #.###</option>
+                                                <option value="###.#, ##">###.#, ##</option>
+                                                <option value="###.##, #">###.##, #</option>
+                                            </select>
+                                            <label class="floating-input-placeholder d-flex align-items-center"
+                                                   for="number_format">Number Format*</label>
+                                        </div>
+                                        <div class="form-floating input-control mb-4" id="input-control"
+                                             style="width: 49%">
+                                            <select class="form-select" id="day_of_week" name="day_of_week" required>
+                                                <option selected
+                                                        value="{{ format_info.begin_week }}">{{ format_info.begin_week }}</option>
+                                                <option value="Sunday">Sunday</option>
+                                                <option value="Monday">Monday</option>
+                                                <option value="Tuesday">Tuesday</option>
+                                                <option value="Wednesday">Wednesday</option>
+                                                <option value="Thursday">Thursday</option>
+                                                <option value="Friday">Friday</option>
+                                                <option value="Saturday">Saturday</option>
+                                            </select>
+                                            <label class="floating-input-placeholder d-flex align-items-center"
+                                                   for="day_of_week">First day of the week</label>
+                                        </div>
+                                    </div>
+                                    <button type="submit"
+                                            class="btn mmm-primary-btn float-end d-flex align-items-center mb-2"
+                                            style="width: unset;">Save
+                                    </button>
+                                    {#                                        <img style="margin-right: 0.5rem" src="{% static 'images/icons/save-color.svg' %}" alt="">#}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {#Date and Number field end#}
+
+                    {#Localization field#}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSeven">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                <img src="{% static 'images/icons/local-color.svg' %}" style="padding: 0.5rem;"
+                                     alt=""><span class="title-large">Localization</span>
+                            </button>
+                        </h2>
+                        <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <form method="post" action="/update-localization/">
+                                    {% csrf_token %}
+                                    <input value="{{ branch_info.id }}" name="branch_id" hidden>
+                                    <div style="display: flex; justify-content: space-between">
+
+                                        <div class="form-floating input-control mb-4" id="input-control"
+                                             style="width: 49%">
+                                            <select class="form-select" id="country_name" name="country_name">
+                                                <option selected
+                                                        value="{{ localization_info.country }}">{{ localization_info.country }}</option>
+                                                {% for name in country_name %}
+                                                    <option value="{{ name }}">{{ name }}</option>
+                                                {% endfor %}
+                                                <!-- Add more countries as needed -->
+                                            </select>
+                                            <label class="floating-input-placeholder d-flex align-items-center"
+                                                   for="country_name">Country</label>
+                                        </div>
+
+                                        <div class="form-floating input-control mb-4" id="input-control"
+                                             style="width: 49%">
+                                            <select class="form-select" id="time_zone" name="time_zone">
+                                                <option selected
+                                                        value="{{ localization_info.time_zone }}">{{ localization_info.time_zone }}</option>
+                                                {% for zone in time_zone %}
+                                                    <option value="{{ zone }}">{{ zone }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            <label class="floating-input-placeholder d-flex align-items-center"
+                                                   for="time_zone">Time Zone</label>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: flex; justify-content: space-between">
+                                        <div class="form-floating input-control mb-4" id="input-control"
+                                             style="width: 49%">
+                                            <select class="form-select" id="language" name="language" disabled>
+                                                <option selected value="en">EN</option>
+                                                <option value="es">Spanish</option>
+                                                <option value="fr">French</option>
+                                            </select>
+                                            <label class="floating-input-placeholder d-flex align-items-center"
+                                                   for="language">Language</label>
+                                        </div>
+
+                                        <div class="form-floating input-control mb-4" id="input-control"
+                                             style="width: 49%">
+                                            <select class="form-select" id="currency" name="currency">
+                                                <option selected
+                                                        value="{{ localization_info.currency }}">{{ localization_info.currency }}</option>
+                                                {% for currency in currency_list %}
+                                                    <option value="{{ currency }}">{{ currency }}</option>
+                                                {% endfor %}
+                                                <!-- and so on for all time zones -->
+                                            </select>
+                                            <label class="floating-input-placeholder d-flex align-items-center"
+                                                   for="currency">Currency</label>
+                                        </div>
+                                    </div>
+                                    <button type="submit"
+                                            class="btn mmm-primary-btn float-end d-flex align-items-center mb-2"
+                                            style="width:unset;">
+                                        {#                                        <img style="margin-right: 0.5rem" src="{% static 'images/icons/save-color.svg' %}" alt="">#}
+                                        Save
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {#Localization field end#}
+
+                    {#system update field#}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingEight">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                <img src="{% static 'images/icons/system_color.svg' %}" style="padding: 0.5rem;"
+                                     alt=""><span class="title-large">System Update</span>
+                            </button>
+                        </h2>
+                        <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <input value="{{ branch_info.id }}" name="branch_id" id="default_branch_id" hidden>
+                                <div class="form-check d-flex align-items-center">
+                                    <input class="form-check-input" type="checkbox" value="" id="system_update_checkbox"
+                                           onclick="handleCheckboxChange('system_update_checkbox')"
+                                           {% if user_system_settings.system_update %}checked{% else %}{% endif %}>
+                                    <label class="form-check-label" for="system_update_checkbox">
+                                        <span class="body-large" style="margin-left: 0.5rem">Disable system update notification</span>
+                                    </label>
+                                </div>
+                                <div class="form-check d-flex align-items-center">
+                                    <input class="form-check-input" type="checkbox" value="" id="change_log_checkbox"
+                                           onclick="handleCheckboxChange('change_log_checkbox')"
+                                           {% if user_system_settings.change_log %}checked{% else %}{% endif %}>
+                                    <label class="form-check-label" for="change_log_checkbox">
+                                        <span class="body-large" style="margin-left: 0.5rem">Disable change log notification</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {#system update field end#}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+{#Modal#}
+<div class="modal fade" id="add_items" tabindex="-1" aria-labelledby="add_itemsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            {#            <div class="modal-header">#}
+            {#                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>#}
+            {#                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+            {#            </div>#}
+            <div class="modal-body">
+                <p class="plan-title title-large" id="exampleModalLabel" style="margin-bottom: 1rem">Add Items</p>
+                <div class="row">
+                    <div class="col-12">
+                        <form method="post" action="/add-item/" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {#Form#}
+                            {#Name#}
+                            <div class="form-floating input-control" id="input-control">
+                                <input type="text" class="form-control " id="item_name" name="item_name"
+                                       placeholder="Name" required>
+                                <label class="floating-input-placeholder" for="item_name">Name<span
+                                        style="color:black">*</span></label>
+                                <div class="error"></div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between">
+                                <div class="form-floating input-control" id="input-control" style="width: 29%;">
+                                    <input type="text" class="form-control " id="new_item_price" name="item_price"
+                                           placeholder="Price" title="Please enter a valid number" required>
+                                    <label class="floating-input-placeholder" for="item_price" >Price<span
+                                            style="color:black">*</span></label>
+                                    <div class="error"></div>
+                                </div>
+                                <div class="form-floating input-control" id="input-control" style="width: 69%;">
+                                    <input type="file" class="form-control " id="item_file_image" name="item_file_image"
+                                           placeholder="Item Image" accept=".png, .jpg, .jpeg">
+                                    <label class="floating-input-placeholder" for="item_file_image">Item Image</label>
+                                    <div class="error"></div>
+                                </div>
+                            </div>
+                            {#Video Link#}
+                            <div class="form-floating input-control" id="input-control">
+                                <input type="text" class="form-control " id="item_vid_link" name="item_vid_link"
+                                       placeholder="Youtube Video link">
+                                <label class="floating-input-placeholder" for="item_vid_link">Youtube Video link<span
+                                        style="color:black"></span></label>
+                                <div class="error"></div>
+                            </div>
+
+                            {#email and phone#}
+                            <div class="form-floating input-control" id="input-control">
+                                <input type="text" class="form-control " id="item_category" name="item_category"
+                                       placeholder="Category" required>
+                                <label class="floating-input-placeholder" for="item_category">Category<span
+                                        style="color:black">*</span></label>
+                                <div class="error"></div>
+                            </div>
+                            {#Nid#}
+                            <div class="form-floating input-control" id="input-control">
+                            <textarea type="text" class="form-control" style="height: 5rem" id="item_description"
+                                      name="item_description"
+                                      placeholder="Description"></textarea>
+                                <label class="floating-input-placeholder" for="item_description">Description</label>
+                                <div class="error"></div>
+                            </div>
+                            <button type="submit" class="btn mmm-round-btn float-end body-large">Add</button>
+                            {#Form end#}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

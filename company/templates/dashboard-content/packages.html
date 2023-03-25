@@ -1,0 +1,137 @@
+{% load static %}
+<div class="col-8 items-details hide mb-5 mt-5" id="packages">
+    <img class="mt-3 make-my-menu-logo" src="{% static 'images/icons/Logo1.svg' %}" alt="">
+    <p class="menu-header-title">Packages</p>
+    <form method="post" action="/change-package/">
+        {% csrf_token %}
+    <p style="color: red">{% if user_info.designation != 'Owner' %}You are not authorized to change plans, contact your company owner.{% endif %}</p>
+        <div class="row d-flex justify-content-evenly">
+            <div class="col-5 qr-card text-center package-card-width">
+
+                <input style="font-size: 1.6rem" class="form-check-input radio-button1 float-end mt-5" onclick="buttonEnable({{ subscription.subscription_level }} , 1)" type="radio" value="1"
+                       name="selected-package" id="selected-package"
+                       {% if subscription.subscription_level == 1 %}checked{% else %}{% endif %}>
+                <p class="plan-price" style="text-align: left;margin-bottom: 0.7rem;margin-top: 3rem;">
+                    $<span>Free</span>
+                </p>
+                <p class="package-title" style="text-align: left;">Easy Menu</p>
+                <p class="package-subtitle" style="text-align: left;">It is a long established fact that a reader will
+                    be
+                    distracted by the readable content of a page when looking at its layout. The point of using
+                    Lorem</p>
+                <ul class="plans-packages">
+                    <li class="package-item">Unlimited QR-Code Generation</li>
+                    <li class="package-item" style="color: var(--secondary-text-color);">Custom QR-Code</li>
+                    <li class="package-item" style="color: var(--secondary-text-color);">Branch Facilities</li>
+                    <li class="package-item" style="color: var(--secondary-text-color);">Analytics</li>
+                    <li class="package-item" style="color: var(--secondary-text-color);">AI Booster</li>
+                </ul>
+            </div>
+
+            <div class="col-5 qr-card text-center package-card-width" >
+                <input style="font-size: 1.6rem" class="form-check-input radio-button2 float-end mt-5" onclick="buttonEnable({{ subscription.subscription_level }} ,2)" type="radio" value="2"
+                       name="selected-package" id="selected-package"
+                       {% if subscription.subscription_level == 2 %}checked{% else %}{% endif %}>
+                {% if subscription.subscription_level == 1 %}
+                    <img class="float-start mt-2" src="{% static 'images/icons/recomended.svg' %}">{% else %}{% endif %}
+                <p class="plan-price" style="text-align: left;margin-bottom: 0.7rem;margin-top: 3rem;">
+                    $<span>7.99</span>
+                </p>
+                <p class="package-title" style="text-align: left;">Creator Pro</p>
+                <p class="package-subtitle" style="text-align: left;">It is a long established fact that a reader will
+                    be
+                    distracted by the readable content of a page when looking at its layout. The point of using
+                    Lorem</p>
+                <ul class="plans-packages">
+                    <li class="package-item">Unlimited QR-Code Generation</li>
+                    <li class="package-item">Custom QR-Code</li>
+                    <li class="package-item" style="color: var(--secondary-text-color);">Branch Facilities</li>
+                    <li class="package-item" style="color: var(--secondary-text-color);">Analytics</li>
+                    <li class="package-item" style="color: var(--secondary-text-color);">AI Booster</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-evenly mt-3">
+            <div class="col-5 qr-card text-center package-card-width" >
+                <input style="font-size: 1.6rem" class="form-check-input float-end mt-5" type="radio" onclick="buttonEnable({{ subscription.subscription_level }} ,3)" value="3"
+                       name="selected-package" id="selected-package"
+                       {% if subscription.subscription_level == 3 %}checked{% else %}{% endif %}>
+                {% if subscription.subscription_level == 2 %}
+                    <img class="float-start mt-2" src="{% static 'images/icons/recomended.svg' %}">{% else %}{% endif %}
+                <p class="plan-price" style="text-align: left;margin-bottom: 0.7rem;margin-top: 3rem;">
+                    $<span>19.99</span>
+                </p>
+                <p class="package-title" style="text-align: left;">Business Booster</p>
+                <p class="package-subtitle" style="text-align: left;">It is a long established fact that a reader will
+                    be
+                    distracted by the readable content of a page when looking at its layout. The point of using
+                    Lorem</p>
+                <ul class="plans-packages">
+                    <li class="package-item">Unlimited QR-Code Generation</li>
+                    <li class="package-item">Custom QR-Code</li>
+                    <li class="package-item">Branch Facilities</li>
+                    <li class="package-item">Analytics</li>
+                    <li class="package-item" style="color: var(--secondary-text-color);">AI Booster</li>
+                </ul>
+            </div>
+
+
+            <div class="col-5 qr-card text-center package-card-width" >
+                <input style="font-size: 1.6rem" class="form-check-input float-end mt-5" onclick="buttonEnable({{ subscription.subscription_level }} , 4)" type="radio" value="4"
+                       name="selected-package" id="selected-package"
+                       {% if subscription.subscription_level == 4 %}checked{% else %}{% endif %}>
+                {% if subscription.subscription_level == 3 %}
+                    <img class="float-start mt-2" src="{% static 'images/icons/recomended.svg' %}">{% else %}{% endif %}
+                <p class="plan-price" style="text-align: left;margin-bottom: 0.7rem;margin-top: 3rem;">
+                    $<span>49.99</span>
+                </p>
+                <p class="package-title" style="text-align: left;">Enterprise Excel</p>
+                <p class="package-subtitle" style="text-align: left;">It is a long established fact that a reader will
+                    be
+                    distracted by the readable content of a page when looking at its layout. The point of using
+                    Lorem</p>
+                <ul class="plans-packages">
+                    <li class="package-item">Unlimited QR-Code Generation</li>
+                    <li class="package-item">Custom QR-Code</li>
+                    <li class="package-item">Branch Facilities</li>
+                    <li class="package-item">Analytics</li>
+                    <li class="package-item">AI Booster</li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <div class="row d-flex justify-content-evenly mt-3">
+            <div class="col-5 qr-card text-center package-card-width" >
+                <input style="font-size: 1.6rem" class="form-check-input float-end mt-5" onclick="buttonEnable({{ subscription.subscription_level }} ,5)" type="radio" value="5"
+                       name="selected-package" id="selected-package"
+                       {% if subscription.subscription_level == 5 %}checked{% else %}{% endif %}>
+                {% if subscription.subscription_level == 4 %}
+                    <img class="float-start mt-2" src="{% static 'images/icons/recomended.svg' %}">{% else %}{% endif %}
+                <p class="plan-price" style="text-align: left;margin-bottom: 0.7rem;margin-top: 3rem;">
+                    <span>Get Price</span>
+                </p>
+                <p class="package-title" style="text-align: left;">Custom Builder</p>
+                <p class="package-subtitle" style="text-align: left;">It is a long established fact that a reader will
+                    be
+                    distracted by the readable content of a page when looking at its layout. The point of using
+                    Lorem</p>
+                <ul class="plans-packages">
+                    <li class="package-item">Unlimited QR-Code Generation</li>
+                    <li class="package-item">Custom QR-Code</li>
+                    <li class="package-item">Branch Facilities</li>
+                    <li class="package-item">Analytics</li>
+                    <li class="package-item">AI Booster</li>
+                </ul>
+            </div>
+
+            <div class="col-5 package-card-width" >
+
+            </div>
+        </div>
+
+        <button type="submit" id="package_confirm_button" class="btn mmm-primary-btn float-end" style="width: unset" disabled>Confirm</button>
+    </form>
+</div>

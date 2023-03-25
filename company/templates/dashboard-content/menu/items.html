@@ -1,0 +1,71 @@
+{% load static %}
+<div class="col-lg-8 col-md-12 items-details hide mt-5" id="items">
+    {#Top image#}
+    <img class="mt-3 make-my-menu-logo" src="{% static 'images/icons/Logo1.svg' %}" alt="">
+    <form method="post" action="/delete-item/">
+        {% csrf_token %}
+        <div class="row mb-4">
+            <div class="col-3">
+                <P class="menu-header-title title-large" style="margin-bottom: 0;">Item</P>
+            </div>
+            <div class="col-9 d-flex justify-content-end align-items-end quick-action">
+                <!--Action dropdown-->
+                <div class="dropdown" style="margin-right: 10px">
+                    <button class="btn btn-secondary dropdown-toggle action-button" type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <span class="body-large">Actions</span>
+                    </button>
+                    <ul class="dropdown-menu body-medium">
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#add_items"
+                               href="#">Create</a></li>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#item_import_modal"
+                               href="#">Import</a></li>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#item_download_modal"
+                               href="#">Download</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="myprintDiv('item_table_id');">Print</a></li>
+                        {#                        <li><a class="dropdown-item" href="/image-to-excel/">Image to XLS</a></li>#}
+                    </ul>
+                </div>
+                <!--Action dropdown-->
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle action-button" type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        {#                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#update_multiple_items" >Quick Update</a></li>#}
+                        <li><a class="dropdown-item" href="#">
+                            <button style="all:unset;cursor:pointer;">Delete</button>
+                        </a></li>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                               data-bs-target="#item_update_modal">
+                            <button style="all:unset; cursor:pointer;">Quick Updates</button>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {#Table#}
+        <div class="container" style="height: 42rem;overflow: auto">
+            {% if item_list|length != 0 %}
+                {% include 'tables/item_table.html' %}
+            {% endif %}
+            {% if item_list|length == 0 %}
+                <div class="row d-flex p-2 mb-5" style="gap:20px">
+                    <div class="col qr-card text-center p-3 pt-3">
+                        <div>
+                            <img style="cursor: pointer;"
+                                 src="{% static 'images/icons/cross-colorful.svg' %}" class="pt-3 pb-3"
+                                 alt=""
+                                 data-bs-toggle="modal"
+                                 data-bs-target="#add_items">
+                        </div>
+                        <p class="title-large mt-2">Please add item for this Menu</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </form>
+</div>

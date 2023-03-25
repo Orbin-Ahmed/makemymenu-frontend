@@ -1,0 +1,104 @@
+{% load static %}
+<form method="post" action="/delete-menu-item/{{ my_menu_id }}/{{ bid }}/">
+    {% csrf_token %}
+    <div class="row d-flex justify-content-center">
+        <div class="col-lg-8 col-md-12 items-details">
+            <div class="row mb-4">
+                <div class="col-lg-4 col-md-12">
+                    <P class="menu-header-title" style="margin-bottom: 0;">
+                        <a href="/dashboard/" style="all: unset;cursor: pointer;margin-right: 1rem">
+                            <img src="{% static 'images/icons/arrow_choto.svg' %}" alt="">
+                        </a>
+                        <span class="headline_medium">Menu Details</span>
+                    </P>
+                </div>
+                <div class="col-12 d-flex justify-content-end align-items-end quick-action">
+                    <button type="button" style="all: unset;cursor: pointer;" data-bs-toggle="offcanvas"
+                            data-bs-target="#menu_canvas"><img
+                            src="{% static 'images/icons/addmenu_clear.svg' %}" alt="" width="40px"></button>
+                    <button style="all: unset;cursor: pointer;" type="submit"
+                            onclick="location.href='/delete-menu-item/{{ my_menu_id }}/{{ bid }}/'"><img
+                            src="{% static 'images/icons/Delete_clear.svg' %}" alt="" width="40px"></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-evenly">
+        <div class="col-lg-8 col-md-11 mt-3">
+            <p class="menu-details-title title-large">Items</p>
+            <div style="max-height: 15rem;overflow-y: auto;overflow-x: clip;">
+                {% include 'tables/menu_details_table.html' %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-evenly">
+        <div class="col-lg-8 col-md-11 mt-3">
+            <p class="menu-details-title title-large">Combo</p>
+            <div style="max-height: 15rem;overflow-y: auto;overflow-x: clip;">
+                {% include 'tables/menu_details_combo_table.html' %}
+            </div>
+        </div>
+    </div>
+</form>
+{#Offcanvas#}
+<div class="offcanvas offcanvas-end" tabindex="-1" id="sides_canvas" aria-labelledby="sides_canvasLabel"
+     data-bs-scroll="true">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Sides List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="row d-flex align-items-baseline">
+            <div class="col-3">
+                <img style="margin-right: 0.5rem;" src="{% static 'images/rice.svg' %}" alt="">
+            </div>
+            <div class="col-4">
+                <p>Pad Thai</p>
+            </div>
+            <div class="col-5">
+                <input class="form-check-input float-end" type="checkbox" value="" id="item1">
+            </div>
+        </div>
+        <p class="mmm-border-bottom"></p>
+        <div class="row d-flex align-items-baseline">
+            <div class="col-3">
+                <img style="margin-right: 0.5rem;" src="{% static 'images/rice.svg' %}" alt="">
+            </div>
+            <div class="col-4">
+                <p>Pad Thai</p>
+            </div>
+            <div class="col-5">
+                <input class="form-check-input float-end" type="checkbox" value="" id="item1">
+            </div>
+        </div>
+        <p class="mmm-border-bottom"></p>
+        <div class="row d-flex align-items-baseline">
+            <div class="col-3">
+                <img style="margin-right: 0.5rem;" src="{% static 'images/rice.svg' %}" alt="">
+            </div>
+            <div class="col-4">
+                <p>Pad Thai</p>
+            </div>
+            <div class="col-5">
+                <input class="form-check-input float-end" type="checkbox" value="" id="item1">
+            </div>
+        </div>
+        <p class="mmm-border-bottom"></p>
+        <div class="row d-flex align-items-baseline">
+            <div class="col-3">
+                <img style="margin-right: 0.5rem;" src="{% static 'images/rice.svg' %}" alt="">
+            </div>
+            <div class="col-4">
+                <p>Pad Thai</p>
+            </div>
+            <div class="col-5">
+                <input class="form-check-input float-end" type="checkbox" value="" id="item1">
+            </div>
+        </div>
+        <p class="mmm-border-bottom"></p>
+        <button class="mmm-tertiary-btn float-end" style="padding: 0.5rem 1.5rem;background-color: var(--white);">Add
+        </button>
+    </div>
+</div>

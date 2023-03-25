@@ -1,0 +1,51 @@
+<!-- Modal -->
+{% load static %}
+<div class="modal fade" id="item_download_modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="row">
+                                <p class="text-start">To download all of your items in one go, please select the file
+                                    format you
+                                    prefer:</p>
+
+                                <div class="col">
+                                    <div class="form-floating input-control" id="input-control">
+                                        <input type="text" class="form-control " id="item_download_file_name"
+                                               name="item_download_file_name"
+                                               placeholder="e.g my file">
+                                        <label class="floating-input-placeholder" for="item_download_modal">File
+                                            Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="form-floating input-control" id="input-control">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="floatingSelect"
+                                                    aria-label="Floating label select example">
+{#                                                <option selected value="0">Xls</option>#}
+                                                <option selected value="1">CSV</option>
+                                            </select>
+                                            <label for="floatingSelect">Format</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="downloadTableAsCSV('item_table_id','item_download_file_name');" type="button"
+                            class="btn mmm-round-btn float-center float-end mt-4"
+                            id="item_download_modal" data-bs-dismiss="modal" aria-label="Close" style="width: 30%">
+                        Download
+                    </button>
+               </form>     {#Form end#}
+            </div>
+        </div>
+
+    </div>
+</div>

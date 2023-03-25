@@ -1,0 +1,55 @@
+{% load static %}
+<div class="offcanvas offcanvas-end" tabindex="-1" id="create_item_canvas" aria-labelledby="offcanvasRightLabel"
+     data-bs-scroll="true">
+    <div class="offcanvas-header">
+        <p class="offcanvas-title menu-header-title headline_medium" id="offcanvasRightLabel"
+            style="margin-top: 0;color: var(--primary-text-color);">Add Item</p>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <form method="post" action="/combo-details-update/{{ combo_list.id }}/{{ bid }}/">
+            {% csrf_token %}
+            <p class="sides-value title-large" >Items</p>
+            <div class="form-floating input-control mb-4" id="input-control">
+                <input type="text" class="form-control " id="search_item_menu_canvas" name="search_item_menu_canvas"
+                       placeholder="Search">
+                <label class="floating-input-placeholder" for="search_item_menu_canvas">Search</label>
+            </div>
+            <div style="max-height: 45rem;overflow-y: auto;overflow-x: clip;" id="item_menu_list_container">
+                {% if new_item_list|length == 0 %}
+                    <p class="body-large" style="color: #B00020">You do not have any item, Please add some item in the item
+                        tab.</p>{% endif %}
+                <input value="{% for data in item_list %}{{ data.id }},{% endfor %}" hidden id="item_total_list">
+                {% for data in new_item_list %}
+                    <div class="row d-flex align-items-baseline justify-content-evenly items_row">
+                        <div class="col-2">
+                            <img style="margin-right: 0.5rem;width: 25px" src="
+
+
+                                    {% if data.image %}{{ data.image }}{% else %}{% static 'images/foodPlaceholder.png' %}{% endif %}"
+                                 alt="">
+                        </div>
+                        <div class="col-5 items_name">
+                            <p>{{ data.name }}</p>
+                        </div>
+                        <div class="col-2">
+                            <p>{% if data.discount %}{{ data.discount }}{% else %}{{ data.price }}{% endif %}</p>
+                        </div>
+
+                        <div class="col-2">
+                            <input onclick="item_combo_add_button(false)" class="form-check-input float-end"
+                                   type="checkbox"
+                                   value="{{ data.id }}"
+                                   id="combo_checkbox_{{ data.id }}"
+                                   name="combo_items_checkbox">
+                        </div>
+                    <p class="mmm-border-bottom"></p>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" id="combo_canvas_add_button" class="mmm-tertiary-btn float-end mt-3 body-large"
+                    style="padding: 0.5rem 1.5rem;background-color: var(--white);width: unset">Add
+            </button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create Branch</title>
+    {% include 'root/css.html' %}
+</head>
+<body>
+<div class="container-fluid">
+    <div class="sign-in-icon">
+        <a href="/dashboard/"><img src="{% static 'images/icons/Logo1.svg' %}" alt="logo"></a>
+    </div>
+    <div class="row d-flex justify-content-center text-center" style="margin-top: 4rem">
+        <P style="color: red">{{ error }}</P>
+        <div class="col-md-4">
+            <p style="color: red">{{ error }}</p>
+            {#    Form#}
+            <form method="post" action="/create-branch/">
+                {% csrf_token %}
+                <p class="welcome-title">Create Branch</p>
+                <p class="text mb-5" style="color: var(--black)">Please enter all the required information to create your
+                    company’s branch.</p>
+                {#Name#}
+                <div style="display: flex; justify-content: space-between">
+                    <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                        <input type="text" class="form-control " id="branch_name" name="branch_name"
+                               placeholder="Name" required>
+                        <label class="floating-input-placeholder" for="branch_name">Name<span
+                                style="color:black">*</span></label>
+                        <div class="error"></div>
+                    </div>
+                    <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                        <input type="text" class="form-control" id="branch_title" name="branch_title"
+                               placeholder="Title" required>
+                        <label class="floating-input-placeholder" for="branch_title">Title<span
+                                style="color:black">*</span></label>
+                        <div class="error"></div>
+                    </div>
+                </div>
+                {#Branch Manager Email#}
+                <div class="form-floating input-control" id="input-control">
+                    <input type="email" class="form-control " id="branch_email" name="branch_email"
+                           placeholder="e.g. branch@mail.com" required>
+                    <label class="floating-input-placeholder" for="branch_email">Email<span
+                            style="color:black">*</span></label>
+                    <div class="error"></div>
+                </div>
+                {#address #}
+                <div class="form-floating input-control" id="input-control">
+                    <input type="text" class="form-control " id="branch_address" name="branch_address"
+                           placeholder="Address" required>
+                    <label class="floating-input-placeholder" for="branch_address">Address<span
+                            style="color:black">*</span></label>
+                    <div class="error"></div>
+                </div>
+                {#phone and email#}
+                    <div class="form-floating input-control" id="input-control">
+                        <input type="text" class="form-control " id="phone-number" name="branch_phone"
+                               placeholder="Phone" required>
+                        <label class="floating-input-placeholder" for="branch_phone">Phone<span
+                                style="color:black">*</span></label>
+                        <div class="error"></div>
+                    </div>
+                    <div class="form-floating input-control" id="input-control">
+                        <input type="text" class="form-control" id="branch-manager-email" name="branch_manager_email"
+                               placeholder="e.g. manager@mail.com" required>
+                        <label class="floating-input-placeholder" for="branch_email">Branch Manager Email<span
+                                style="color:black">*</span></label>
+                        <div class="error"></div>
+                    </div>
+                {#checkbox#}
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" value="1" id="no-branch-manager" name="no-branch-manager">
+                    <label class="form-check-label float-start" for="flexCheckDefault">
+                        I don't have any branch manager yet
+                    </label>
+                </div>
+                <button type="submit" class="btn mmm-primary-btn"><span>Next</span></button>
+            </form>
+            {#Form end#}
+        </div>
+    </div>
+</div>
+{% include 'footer/footer.html' %}
+{% include 'root/js.html' %}
+<script>
+    // Check if the parameter is present in the URL
+    if (window.location.search.indexOf('error=') > -1) {
+        // Remove the parameter from the URL
+        let url = window.location.href.split('?')[0];
+        window.history.replaceState({}, '', url);
+    }
+</script>
+</body>
+</html>

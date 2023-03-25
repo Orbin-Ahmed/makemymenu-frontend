@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign Up</title>
+    {% include 'root/css.html' %}
+</head>
+<body>
+<div class="container-fluid">
+    <div class="sign-in-icon">
+        <a href="/dashboard/"><img src="{% static 'images/icons/Logo1.svg' %}" alt="logo"></a>
+    </div>
+    <div class="row d-flex justify-content-center text-center">
+        <P style="color: red">{{ error }}</P>
+        <div class="col-md-4">
+            {#    Form#}
+            <div>
+                <p class="display-large">Create your account</p>
+                <form novalidate method="post" onsubmit=" return additionalSignupValidate()">
+                    {% csrf_token %}
+                    <div class="form-floating input-control" id="input-control" style="width: 100%;">
+                        <input type="email" class="form-control " id="additional_signUp_email" name="additional_signUp_email"
+                               placeholder="Email" value="{{ email }}" disabled>
+                        <label class="floating-input-placeholder" for="additional_signUp_email">Email<span
+                                style="color:black">*</span></label>
+                        <div class="error"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between">
+                        <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                            <input type="text" class="form-control " id="additional_first_name" name="additional_first_name"
+                                   placeholder="First Name" required>
+                            <label class="floating-input-placeholder" for="additional_first_name">First Name<span
+                                    style="color:black">*</span></label>
+                            <div class="error"></div>
+                        </div>
+                        <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                            <input type="text" class="form-control " id="additional_last_name" name="additional_last_name"
+                                   placeholder="Last Name" required>
+                            <label class="floating-input-placeholder" for="additional_last_name">Last Name<span
+                                    style="color:black">*</span></label>
+                            <div class="error"></div>
+                        </div>
+                    </div>
+                    {#email and phone#}
+                    <div style="display: flex; justify-content: space-between">
+                        <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                        <input type="password" class="form-control " id="additional_signUp_password" name="additional_signUp_password"
+                               placeholder="Password" required>
+                        <label class="floating-input-placeholder" for="additional_signUp_password">Password<span
+                                style="color:black">*</span></label>
+                        <div class="error"></div>
+                    </div>
+                        <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                            <input type="text" class="form-control" id="additional_phone" name="additional_phone"
+                                   placeholder="Phone No." required>
+                            <label class="floating-input-placeholder" for="additional_phone">Phone No.<span
+                                    style="color:black">*</span></label>
+                            <div class="error"></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn mmm-primary-btn mt-3"><span class="body-large">Next</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'footer/footer.html' %}
+{% include 'root/js.html' %}
+<script>
+    // Check if the parameter is present in the URL
+    if (window.location.search.indexOf('error=') > -1) {
+        // Remove the parameter from the URL
+        let url = window.location.href.split('?')[0];
+        window.history.replaceState({}, '', url);
+    }
+</script>
+</body>
+</html>

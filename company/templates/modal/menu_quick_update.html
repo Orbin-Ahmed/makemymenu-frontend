@@ -1,0 +1,41 @@
+<!-- Modal -->
+{% load static %}
+<div class="modal fade" id="menu_update_modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form method="post" action="/insert-items/" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="row gap-4">
+                                <h4 class="text-start">Quick Updates</h4>
+                                <div class="col-12">
+
+                                    <div class="form-floating input-control" id="input-control">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="floatingSelect" name="menu_status_update"
+                                                    aria-label="Floating label select example">
+{#                                                <option selected value="0">Xls</option>#}
+                                                <option selected value="1">Available</option>
+                                                <option selected value="1">Unavailable</option>
+                                            </select>
+                                            <label for="menu_status_update">Status</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="" type="submit" class="btn mmm-round-btn float-center float-end mt-4"
+                            id="item_download_modal" data-bs-dismiss="modal" aria-label="Close" style="width: 30%">
+                        Submit
+                    </button>
+                    {#Form end#}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

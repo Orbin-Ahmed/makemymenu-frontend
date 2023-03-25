@@ -1,0 +1,108 @@
+{% load static %}
+<div class="offcanvas offcanvas-end" tabindex="-1" id="create_combo_canvas" aria-labelledby="offcanvasRightLabel"
+     data-bs-scroll="true">
+    <div class="offcanvas-header">
+        <p class="offcanvas-title headline_medium" id="offcanvasRightLabel"
+           style="margin-top: 0;color: var(--primary-text-color);">Add Group </p>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <form method="post" action="/add-combo/" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-floating input-control mb-3" id="input-control">
+                <input type="text" class="form-control " id="combo_name" name="combo_name"
+                       placeholder="Combo name" required>
+                <label class="floating-input-placeholder" for="combo_name">Group name<span
+                        style="color:black">*</span></label>
+
+            </div>
+
+            <div class="form-floating input-control mb-3" id="input-control">
+                <input type="text" class="form-control " id="combo_description" name="combo_description"
+                       placeholder="Description">
+                <label class="floating-input-placeholder" for="combo_description">Description</label>
+            </div>
+
+            <div class="form-floating input-control mb-3" id="input-control">
+                <input type="text" class="form-control " id="combo_video" name="combo_video"
+                       placeholder="Youtube Video link">
+                <label class="floating-input-placeholder" for="combo_video">Youtube Video link</label>
+            </div>
+
+            <div class="form-floating input-control mb-3" id="input-control">
+                <input type="file" class="form-control " id="combo_image" name="combo_image"
+                       placeholder="Image">
+                <label class="floating-input-placeholder" for="combo_image">Choose image</label>
+            </div>
+
+            <div style="display: flex; justify-content: space-between">
+                <div class="form-floating input-control mb-3" id="input-control" style="width: 49%">
+                    <input type="text" class="form-control " id="combo_category" name="combo_category"
+                           placeholder="Category" required>
+                    <label class="floating-input-placeholder" for="combo_category">Category<span
+                            style="color:black">*</span></label>
+                </div>
+
+                <div class="form-floating input-control mb-3" id="input-control" style="width: 49%">
+                    <input type="text" class="form-control " id="new_combo_price" name="combo_price"
+                           placeholder="Combo price" title="Please enter a valid number" required>
+                    <label class="floating-input-placeholder" for="combo_price">Group Price<span
+                            style="color:black">*</span></label>
+                </div>
+            </div>
+            <div class="row d-flex align-items-baseline justify-content-evenly items_row">
+                <div class="col-6 items_name">
+                    <p class="sides-value mt-3 title-large">Items</p>
+                </div>
+                <div class="col-5">
+                    <input onclick="select_all('combo_items_checkbox', 'select_all_combo_item');item_combo_add_button(false);"  class="form-check-input checkbox-item float-end"
+                           type="checkbox" id="select_all_combo_item">
+                </div>
+            </div>
+
+            <div class="form-floating input-control mb-4" id="input-control">
+                <input type="text" class="form-control " id="search_item_canvas" name="search_item_canvas"
+                       placeholder="Search">
+                <label class="floating-input-placeholder" for="search_item_canvas">Search</label>
+            </div>
+            <div style="max-height: 28rem;overflow-y: auto;overflow-x: clip;" id="item_list_container">
+                {% if item_list|length == 0 %}
+                    <p class="body-large" style="color: #B00020">You do not have any item, Please add some item
+                        in the
+                        item
+                        tab.</p>{% endif %}
+                <input value="{% for data in item_list %}{{ data.id }},{% endfor %}" hidden
+                       id="item_total_list">
+                {% for data in item_list %}
+                    <div class="row d-flex align-items-baseline justify-content-evenly items_row">
+                        <div class="col-2">
+                            <img style="margin-right: 0.5rem;width: 25px" src="
+                                    {% if data.image %}{{ data.image }}{% else %}{% static 'images/foodPlaceholder.png' %}{% endif %}"
+                                 alt="">
+                        </div>
+                        <div class="col-5 items_name">
+                            <p>{{ data.name }}</p>
+                        </div>
+                        <div class="col-2">
+                            <p>{% if data.discount %}{{ data.discount }}{% else %}
+                                {{ data.price }}{% endif %}</p>
+                        </div>
+
+                        <div class="col-2">
+                            <input onclick="item_combo_add_button(false)" class="form-check-input float-end"
+                                   type="checkbox"
+                                   value="{{ data.id }}"
+                                   id="combo_checkbox_{{ data.id }}"
+                                   name="combo_items_checkbox">
+                        </div>
+                        <p class="mmm-border-bottom"></p>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" id="combo_canvas_add_button" class="mmm-tertiary-btn float-end body-large mt-2"
+                    style="padding: 0.5rem 1.5rem;background-color: var(--white);width: unset" disabled>Add
+            </button>
+        </form>
+    </div>
+</div>

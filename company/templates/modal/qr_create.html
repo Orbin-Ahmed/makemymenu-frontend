@@ -1,0 +1,109 @@
+{#Qr modal#}
+{% load static %}
+<div class="modal fade" id="qr_modal" tabindex="-1" aria-labelledby="qr_modalLabel" aria-hidden="true"
+     data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="row">
+                    {% csrf_token %}
+                    <div class="col-6 p-0 d-grid">
+                        <img src="" alt="">
+                        <div id="qrcode">
+                        </div>
+                        <p class="qr-code-title title-large" style="float: unset;margin: 0.5rem 0">QR-Code</p>
+                        <p class="text body-medium">Content is directly encoded in the image. If you want to be able to update it
+                            later or use scan tracking</p>
+                    </div>
+                    {% if subscription.subscription_level >= 3 %}
+                    <div class="col-6">
+                        <div>
+                            <button style="all:unset;cursor: pointer;" class="qr-download mt-3 mb-3"
+                                    onclick="document.getElementById('logo-input').click()"><img
+                                    src="{% static 'images/icons/Customize.svg' %}"
+                                    alt=""> Add Logo
+                            </button>
+                            <button style="all: unset;cursor: pointer;" class="qr-download mb-3"
+                                    onclick="document.getElementById('color-picker').click()"><img
+                                    src="{% static 'images/icons/Customize (1).svg' %}" alt=""> Add
+                                Color
+                            </button>
+                            <input class="form-control" type="color" id="color-picker" value="#000000"
+                                   style="display: none;">
+                            <input type="file" id="logo-input" accept=".jpg, .jpeg, .png" style="display: none;">
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <button type="button" onclick="generateQRCode_2();" class="btn btn-secondary qr-button body-large">
+                    Generate
+                </button>
+                <button type="button" onclick="postCanvas();" class="btn btn-secondary float-end qr-button body-large"
+                        data-bs-dismiss="modal" id="qr-download-btn">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{#QR wifi modal#}
+<div class="modal fade" id="qr_wifi_modal" tabindex="-1" aria-labelledby="qr_modalLabel" aria-hidden="true"
+     data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="row">
+                    {% csrf_token %}
+                    <div class="col-6">
+                        <img src="" alt="">
+                        <div id="qrcode_1">
+                        </div>
+                        <p class="qr-code-title title-large" style="float: unset;margin: 0.5rem 0">QR-Code</p>
+                        <p class="text body-medium">Content is directly encoded in the image. If you want to be able to update it
+                            later or use scan tracking</p>
+                    </div>
+                    <div class="col-6">
+                        <div>
+                            <div class="form-floating input-control" id="input-control">
+                                <input type="text" class="form-control " id="wifi_name_qr" name="wifi_name_qr"
+                                       placeholder="Wifi Name" required>
+                                <label class="floating-input-placeholder" for="wifi_name_qr">Wifi Name</label>
+                                <div class="error"></div>
+                            </div>
+                            <div class="form-floating input-control" id="input-control">
+                                <input type="text" class="form-control " id="wifi_password_qr" name="wifi_password_qr"
+                                       placeholder="Wifi Password" required>
+                                <label class="floating-input-placeholder" for="wifi_password_qr">Wifi Password</label>
+                                <div class="error"></div>
+                            </div>
+                            {% if subscription.subscription_level >= 3 %}
+                            <button style="all:unset;cursor: pointer;" class="qr-download mt-3 mb-3"
+                                    onclick="document.getElementById('logo-input_1').click()"><img
+                                    src="{% static 'images/icons/Customize.svg' %}"
+                                    alt=""> Add Logo
+                            </button>
+                            <button style="all: unset;cursor: pointer;" class="qr-download mb-3"
+                                    onclick="document.getElementById('color-picker_1').click()"><img
+                                    src="{% static 'images/icons/Customize (1).svg' %}" alt=""> Add
+                                Color
+                            </button>
+                            <input class="form-control" type="color" id="color-picker_1" value="#000000"
+                                   style="display: none;">
+                            <input type="file" id="logo-input_1" accept=".jpg, .jpeg, .png" style="display: none;">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <button type="button" onclick="generateQRCode_4();" class="btn btn-secondary qr-button body-large">
+                    Generate
+                </button>
+                <button type="button" class="btn btn-secondary float-end qr-button body-large" data-bs-dismiss="modal" id="qr-download-btn" onclick="postCanvas_1();">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

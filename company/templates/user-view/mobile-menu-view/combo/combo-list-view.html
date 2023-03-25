@@ -1,0 +1,47 @@
+<!--List view item 1-->
+{% load static %}
+<!--List view item 2(video)-->
+<div id="combo_container" style="padding: 0">
+    {% for data in menu_details.group_category %}
+        {% for group in data.items %}
+            <a style="all: unset;cursor: pointer;" href="/menu/combo-details/{{ group.id }}/{{ menu_branch_id }}/">
+                <div class="row mobile-item-card p-0 combo_class">
+                    <div class="col-3 p-0" style="position: relative;">
+                        <img
+                             src="{% if group.image %}https://makemymenu.app{{ group.image }}{% else %}{% static 'images/foodPlaceholder.png' %}{% endif %}"
+                             alt=""
+                             style="border-radius:10px 0 0 10px;width: 100%;height: 100%;" class="img-fluid">
+                        {% if group.video_link != "" and group.video_link %}
+                            <a data-bs-target="#combo_list_video" data-bs-toggle="modal"
+                               onclick="insert_item_video_link('{{ group.video_link }}','iframe_video_link_group_list');">
+                                <img width="100%"
+                                     class="video-play-button img-fluid"
+                                     src="{% static 'images/icons/play-button.svg' %}"
+                                     alt=""
+                                     style="border-radius:10px 0 0 10px">
+                            </a>{% endif %}
+                    </div>
+                    <input class="group_category" value="{{ group.category }}" hidden>
+                    <div class="col-8 d-grid text-start p-2">
+                        <div class="phone-menu-title">
+                            <p class="body-large" style="color: var(--title)">{{ group.name }}</p>
+                            <div class="d-flex align-items-center my-3">
+                                {% if group.discount %}
+                                    <p style="text-decoration: line-through;font-size: 10px;margin-right: 5px;color:var(--price-cross)"
+                                       class="text-end price-small">{{ localization_info.currency }} {{ group.price }}</p>
+                                {% endif %}
+                                <p class="text-end price-large">{{ localization_info.currency }}
+                                    {% if group.discount %}{{ group.discount }}{% else %}
+                                        {{ group.price }}{% endif %}</p>
+                            </div>
+                            <p class="mobile-body-dark max-lines description-color">
+                                {% if group.description == 'None' or not group.description %}{% else %}
+                                    {{ group.description }}{% endif %}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% include 'user-view/mobile-menu-view/modal/video_modal_2.html' %}
+        {% endfor %}
+    {% endfor %}
+</div>

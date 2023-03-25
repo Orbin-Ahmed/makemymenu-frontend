@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Customer View</title>
+    {% include 'root/css.html' %}
+    {% load static %}
+</head>
+<body>
+<div class="container-fluid text-center" style="background-color: var(--background);">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-auto mt-4 mb-4">
+            <img src="{% static 'images/icons/Logo1.svg' %}">
+        </div>
+        <div class="row d-flex justify-content-center text-center">
+            <form class="form-inline my-3 my-lg-0">
+                <div class="input-group">
+                    <input class="form-control phone mr-sm-2" type="search" placeholder="Search menu"
+                           aria-label="Search">
+                    <button class="btn btn-outline-secondary mobile-view-search-button" type="submit"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="row d-flex justify-content-start">
+            <div class="col-12 col-md-6">
+                <p class="main_menu_phone mt-4">Main menu</p>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-evenly mt-3 card-d">
+            <div class="col-2">
+                <p><img src="{% static '/images/icons/phone_food_1.svg' %}" class="mt-4"></p>
+            </div>
+            <div class="col-6">
+                <p class="beef mt-4">Philly Cheesesteak</p>
+                <p class="beef_subtext mt-4">Grilled Salmon with Lemon Butter Sauce, Creamy ,Garlic Mashed Potatoes,
+                    Roasted Asparagus</p>
+            </div>
+            <div class="col-2">
+                <p class="rate_beef_past mt-4 text-muted">$767.50</p>
+            </div>
+            <div class="col-2">
+                <p class="rate_beef mt-4">$400.50</p>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-evenly mt-3 card-d">
+        <div class="col-2">
+            <p><img src="{% static '/images/icons/phone_food_2.svg' %}" class="mt-4"></p>
+        </div>
+        <div class="col-6">
+            <p class="beef mt-4">Margherita Pizza</p>
+            <p class="beef_subtext mt-4">Grilled Salmon with Lemon Butter Sauce, Creamy ,Garlic Mashed Potatoes, Roasted
+                Asparagus</p>
+        </div>
+        <div class="col-2">
+            <p class="rate_beef_past mt-4 text-muted">$601.13</p>
+        </div>
+        <div class="col-2">
+            <p class="rate_beef mt-4">$300.13</p>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-evenly mt-3 card-d">
+        <div class="col-2">
+            <p><img src="{% static '/images/icons/phone_food_3.svg' %}" class="mt-4"></p>
+        </div>
+        <div class="col-6">
+            <p class="beef mt-4">Caesar Salad</p>
+            <p class="beef_subtext mt-4">Grilled Salmon with Lemon Butter Sauce, Creamy ,Garlic Mashed Potatoes, Roasted
+                Asparagus</p>
+        </div>
+        <div class="col-2">
+            <p class="rate_beef_past mt-4 text-muted">$473.85</p>
+        </div>
+        <div class="col-2">
+            <p class="rate_beef mt-4">$100.85</p>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-start">
+        <div class="col-12 col-md-6">
+            <p class="main_menu_phone mt-4" style="padding: 1rem;">Appetizers</p>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-evenly mt-3 card-d">
+        <div class="col-2">
+            <p><img src="{% static '/images/icons/phone_food_4.svg' %}" class="mt-4"></p>
+        </div>
+        <div class="col-6">
+            <p class="beef mt-4">Sushi Roll</p>
+            <p class="beef_subtext mt-4">Grilled Salmon with Lemon Butter Sauce, Creamy ,Garlic Mashed Potatoes, Roasted
+                Asparagus</p>
+        </div>
+        <div class="col-2">
+            <p class="rate_beef_past mt-4 text-muted">$589.99</p>
+        </div>
+        <div class="col-2">
+            <p class="rate_beef mt-4">$300.99</p>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-evenly mt-3 card-d">
+        <div class="col-2">
+            <p><img src="{% static '/images/icons/phone_food_5.svg' %}" class="mt-4"></p>
+        </div>
+        <div class="col-6">
+            <p class="beef mt-4">Shrimp and Grits</p>
+            <p class="beef_subtext mt-4">Grilled Salmon with Lemon Butter Sauce, Creamy ,Garlic Mashed Potatoes, Roasted
+                Asparagus</p>
+        </div>
+        <div class="col-2">
+            <p class="rate_beef_past mt-4 text-muted">$782.01</p>
+        </div>
+        <div class="col-2">
+            <p class="rate_beef mt-4">$400.01</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

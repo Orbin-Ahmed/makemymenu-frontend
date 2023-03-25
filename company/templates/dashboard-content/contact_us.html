@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact Us</title>
+    {% include 'root/css.html' %}
+    {% load static %}
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row d-flex justify-content-start mt-2 p-3">
+        <div class="col-4">
+            <a href="/dashboard/" style="all: unset; cursor: pointer"><img class="mt-3" src="{% static 'images/icons/Logo1.svg' %}" alt="" style="padding:2rem"></a>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-6 card-d " style="padding: 3rem;">
+                <p class="menu-header-title text-center mt-3">Contact Us</p>
+                <form method="post" action="/contact-us/">
+                    {% csrf_token %}
+                    <div class="mt-3" style="display: flex; justify-content: space-between">
+                        <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                            <input type="text" class="form-control " id="f_name" name="contact_name"
+                                   placeholder="Name" required>
+                            <label class="floating-input-placeholder" for="contact_name">Name</label>
+                        </div>
+                        <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                            <input type="email" class="form-control " id="l_name" name="contact_email"
+                                   placeholder="Last Name" required>
+                            <label class="floating-input-placeholder" for="contact_email">Email</label>
+                        </div>
+
+                    </div>
+                    <div class="mt-3">
+                        <div class="form-floating input-control" id="input-control">
+                            <input type="text" class="form-control " id="f_name" name="contact_subject"
+                                   placeholder="e.g. Need More Design" required>
+                            <label class="floating-input-placeholder" for="contact_mmm">Subject</label>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div class="form-floating input-control" id="input-control">
+                                        <textarea class="form-control " id="f_name" name="contact_message"
+                                                  placeholder="e.g. Write your feedback" style="height: 13.125rem;"
+                                                  required></textarea>
+                            <label class="floating-input-placeholder" for="contact_message">Message</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn mmm-round-btn float-end mt-3 mb-3" style="width:unset;">Send
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

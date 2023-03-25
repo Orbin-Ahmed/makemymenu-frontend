@@ -1,0 +1,66 @@
+{#company modal#}
+<div class="modal fade" id="edit_company" tabindex="-1" aria-labelledby="add_itemsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="menu-header-title" style="margin-top: 2rem;">Company</p>
+                <div class="row d-flex justify-content-center">
+                    <form method="post" action="/company-update/{{ company_info.id }}/" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="col-12">
+                            {#                Form#}
+                            {#    Name#}
+                            {#                            <div style="display: flex; justify-content: space-between">#}
+                            {#                                <div class="form-floating input-control" id="input-control" style="width: 49%;">#}
+                            {#                                    <input type="text" class="form-control " id="company_name" name="company_name" value="{{ company_info.name }}"#}
+                            {#                                           placeholder="Company Name" required>#}
+                            {#                                    <label class="floating-input-placeholder" for="company_name">Company Name<span#}
+                            {#                                            style="color:black">*</span></label>#}
+                            {#                                    <div class="error"></div>#}
+                            {#                                </div>#}
+                            {#                                <div class="form-floating input-control" id="input-control" style="width: 49%;">#}
+                            {#                                    <input type="text" class="form-control " id="company_phone" name="company_phone" value="{{ company_info.phone_no }}"#}
+                            {#                                           placeholder="Phone no." pattern="[0-9]{11,11}" required>#}
+                            {#                                    <label class="floating-input-placeholder" for="company_phone">Phone no.</label>#}
+                            {#                                    <div class="error"></div>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {#    email and phone#}
+                            {#                            <div class="form-floating input-control" id="input-control" style="width: 49%;">#}
+                            {#                                <input type="email" class="form-control " id="signUp_email" name="signUp_email"#}
+                            {#                                       placeholder="Email" required>#}
+                            {#                                <label class="floating-input-placeholder" for="signUp_email">Email<span#}
+                            {#                                        style="color:black">*</span></label>#}
+                            {#                                <div class="error"></div>#}
+                            {#                            </div>#}
+                            <div class="form-floating input-control" id="input-control">
+                                <input type="text" class="form-control" id="trade_license" name="trade_license"
+                                       placeholder="Trade License.">
+                                <label class="floating-input-placeholder" for="trade_license">Trade License.</label>
+                                <div class="error"></div>
+                            </div>
+
+                            <div class="form-floating input-control" id="input-control">
+                                <input type="file" class="form-control" id="company_logo" name="company_logo"
+                                       placeholder="Logo">
+                                <label class="floating-input-placeholder" for="company_logo">Logo</label>
+                                <div class="error"></div>
+                            </div>
+                            {#    Nid#}
+                            {#                        <div class="form-floating input-control" id="input-control">#}
+                            {#                            <input type="text" class="form-control " id="floatingInput2" name="signIn_password"#}
+                            {#                                   placeholder="Trade license" required>#}
+                            {#                            <label class="floating-input-placeholder" for="floatingInput">Trade license<span#}
+                            {#                                    style="color:black">*</span></label>#}
+                            {#                            <div class="error"></div>#}
+                            {#                        </div>#}
+                            <button style="width: unset;" type="submit" class="btn mmm-round-btn float-end" data-dismiss="modal">Submit
+                            </button>
+                            {#    Form end#}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

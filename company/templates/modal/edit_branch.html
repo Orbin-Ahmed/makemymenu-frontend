@@ -1,0 +1,73 @@
+<!-- Modal -->
+{% load static %}
+<div class="modal fade" id="edit_branches" tabindex="-1" aria-labelledby="add_branchesLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            {#                        <div class="modal-header">#}
+            {#                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>#}
+            {#                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+            {#                        </div>#}
+            <div class="modal-body">
+                <div class="d-flex justify-content-between mb-4">
+                    <p class="plan-title p-0 m-0" id="exampleModalLabel">Edit Branch</p>
+                    {% if branch_count > 1 %}<img style="cursor: pointer;" src="{% static '/images/icons/delete-nigga.svg' %}" alt="" onclick="delete_branch_id('edit_branch_id');">{% endif %}
+                </div>
+
+                <form novalidate method="post" action="/update-branch/" onsubmit=" return branchValidation()">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            {#Form#}
+                            <input name="edit_branch_id" id="edit_branch_id" value="" hidden>
+                            {#Name#}
+                            <div style="display: flex; justify-content: space-between">
+                                <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                                    <input type="text" class="form-control " id="branch_update_name"
+                                           name="branch_update_name"
+                                           placeholder="Branch Name" value="" required>
+                                    <label class="floating-input-placeholder" for="branch_update_name">Branch Name<span
+                                            style="color:black">*</span></label>
+                                    <div class="error"></div>
+                                </div>
+                                <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                                    <input type="text" class="form-control " id="branch_update_address"
+                                           name="branch_update_address"
+                                           placeholder="Address" value="" required>
+                                    <label class="floating-input-placeholder" for="branch_update_address">Address<span
+                                            style="color:black">*</span></label>
+                                    <div class="error"></div>
+                                </div>
+                            </div>
+                            {#email and phone#}
+                            <div style="display: flex; justify-content: space-between">
+                                <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                                    <input type="text" class="form-control " id="branch_update_title"
+                                           name="branch_update_title"
+                                           placeholder="Title" value="" required>
+                                    <label class="floating-input-placeholder" for="branch_update_title">Title<span
+                                            style="color:black">*</span></label>
+                                    <div class="error"></div>
+                                </div>
+                                <div class="form-floating input-control" id="input-control" style="width: 49%;">
+                                    <input type="text" class="form-control" id="branch_update_phone"
+                                           name="branch_update_phone"
+                                           placeholder="Phone No." value="" pattern="[0-9]{11,11}" required>
+                                    <label class="floating-input-placeholder" for="branch_update_phone">Phone No.<span
+                                            style="color:black">*</span></label>
+                                    <div class="error"></div>
+                                </div>
+                            </div>
+                            {#Nid#}
+                            <button type="submit" class="btn mmm-round-btn float-end" style="width: unset">Update</button>
+                            {#Form end#}
+                        </div>
+                    </div>
+                </form>
+                {#            <div class="modal-footer">#}
+                {#                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
+                {#                <button type="button" class="btn btn-primary">Save changes</button>#}
+                {#            </div>#}
+            </div>
+        </div>
+    </div>
+</div>

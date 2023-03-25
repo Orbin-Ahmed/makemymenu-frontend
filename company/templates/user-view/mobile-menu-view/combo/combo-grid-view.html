@@ -1,0 +1,92 @@
+{% load static %}
+{% load mathfilters %}
+<!-- combo -->
+<div class="row d-flex justify-content-around gap-3" id="combo_container_1" style="padding: 0">
+    <!-- combo grid view item 1-->
+    {% for data in menu_details.group_category %}
+        {% for group in data.items %}
+            {% if forloop.counter0|mod:2 == 0 %}
+                <div class="col-5 mobile-item-card combo_class">
+                    <a style="all: unset;cursor: pointer" href="/menu/combo-details/{{ group.id }}/{{ menu_branch_id }}/">
+                        <div class="row">
+                            <div class="p-0" style="position: relative;">
+                                <img width="100%" class="img-fluid"
+                                     src="{% if group.image %}https://makemymenu.app{{ group.image }}{% else %}{% static 'images/foodPlaceholder.png' %}{% endif %}"
+                                     alt=""
+                                     style="border-radius: 10px 10px 0 0; padding: 0;">
+                                {% if group.video_link %}
+                                    <a data-bs-target="#combo_grid_video" data-bs-toggle="modal"
+                                       onclick="insert_item_video_link('{{ group.video_link }}', 'iframe_video_link_group_grid');">
+                                        <img
+                                                width="100%"
+                                                class="video-play-button-grid"
+                                                src="{% static 'images/icons/play-button-grid.svg' %}"
+                                                alt=""
+                                                style="border-radius:10px 0 0 10px"></a>{% endif %}
+                            </div>
+                        </div>
+                        <input class="group_category" value="{{ group.category }}" hidden>
+                        <div class="row p-3 gap-3">
+                            <div class="phone-menu-title">
+                                <p class="body-large mb-2" style="color: var(--title)">{{ group.name }}</p>
+                                <p class="mobile-body-dark max-lines description-color">
+                                    {% if group.description == 'None' or not group.description %}{% else %}
+                                        {{ group.description }}{% endif %} </p>
+                            </div>
+                            <div class="card-price">
+                                <span class="price-large mb-2" style="color: var(--mmm-primary)">{{ localization_info.currency }} {% if group.discount %}
+                                    {{ group.discount }}{% else %}{{ group.price }}{% endif %}</span>
+                                {% if group.discount %}
+                                    <span class="price-small"
+                                          style="color:var(--paragraph-ash); text-decoration:line-through">{{ localization_info.currency }}
+                                    {{ group.price }}</span>{% endif %}
+                            </div>
+                        </div>
+                    </a>
+                    {% include 'user-view/mobile-menu-view/modal/video_modal_3.html' %}
+                </div>
+            {% else %}
+                <!-- combo grid view item 2-->
+                <div class="col-5 mobile-item-card combo_class">
+                    <a style="all: unset;cursor: pointer" href="/menu/combo-details/{{ group.id }}/{{ menu_branch_id }}/">
+                        <div class="row">
+                            <div class="p-0" style="position: relative;">
+                                <img width="100%"
+                                     src="{% if group.image %}https://makemymenu.app{{ group.image }}{% else %}{% static 'images/foodPlaceholder.png' %}{% endif %}"
+                                     alt=""
+                                     style="border-radius: 20px 20px 0 0; padding: 0;">
+                                {% if group.video_link %}
+                                    <a data-bs-target="#combo_grid_video" data-bs-toggle="modal"
+                                       onclick="insert_item_video_link('{{ group.video_link }}', 'iframe_video_link_group_grid');">
+                                        <img
+                                                width="100%"
+                                                class="video-play-button-grid"
+                                                src="{% static 'images/icons/play-button-grid.svg' %}"
+                                                alt=""
+                                                style="border-radius:10px 0 0 10px"></a>{% endif %}
+                            </div>
+                        </div>
+                        <input class="group_category" value="{{ group.category }}" hidden>
+                        <div class="row p-3 gap-3">
+                            <div class="phone-menu-title">
+                                <p class="body-large mb-2" style="color: var(--title)">{{ group.name }}</p>
+                                <p class="mobile-body-dark max-lines description-color">
+                                    {% if group.description == 'None' or not group.description %}{% else %}
+                                        {{ group.description }}{% endif %} </p>
+                            </div>
+                            <div class="card-price">
+                                <span class="price-large mb-2" style="color: var(--mmm-primary)">{{ localization_info.currency }} {% if group.discount %}
+                                    {{ group.discount }}{% else %}{{ group.price }}{% endif %}</span>
+                                {% if group.discount %}
+                                    <span class="price-small"
+                                          style="color:var(--paragraph-ash); text-decoration:line-through">{{ localization_info.currency }}
+                                    {{ group.price }}</span>{% endif %}
+                            </div>
+                        </div>
+                    </a>
+                    {% include 'user-view/mobile-menu-view/modal/video_modal_3.html' %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+</div>
